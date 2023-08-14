@@ -2,19 +2,20 @@
 {% load static %}
 {% block head %}
   <link rel="stylesheet" href="{% static 'css/auth.css' %}">
-  <title>Sakyum | signup</title>
+  <title>Encme | signup</title>
 {% endblock head %}
 
 {% block link %}
-  <a href="{% url 'login' %}">Login</a>
+  <a href="{% url 'auth:login' %}">Login</a>
 {% endblock link %}
 
 
 {% block form %}
-  <form action="#" method="post">
+  <form method="post">
+    {% csrf_token %}
     <h1>Create an account</h1>
     <p>Join the community everywhere every time!</p>
-    <input type="text" name="first_name" placeholder="First name" class="input" maxlength="70" required>
+    <input type="text" name="first_name" placeholder="First name" class="input" maxlength="70" autofocus required>
     <input type="text" name="last_name" placeholder="Last name" class="input" maxlength="70" required>
     <span>Gender:</span>
     <div class="radio">
@@ -64,6 +65,6 @@
       </div>
     {% endif %}
     <button type="submit">Sign Up</button>
-    <p>Already have an account? <a href="{% url 'login' %}">Login</a></p>
+    <p>Already have an account? <a href="{% url 'auth:login' %}">Login</a></p>
   </form>
 {% endblock form %}

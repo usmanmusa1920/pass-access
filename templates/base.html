@@ -9,7 +9,7 @@
   <link rel="stylesheet" href="{% static 'base.css' %}">
   <script src="{% static 'js/base.js' %}"></script>
   <title>
-    Sakyum | 
+    Encme | 
     {% block title %}
       <!-- inheritance -->
     {% endblock title %}
@@ -74,11 +74,11 @@
           <p><a href="#">About</a></P>
 
           {% if request.user.is_authenticated %}
-            <p><a href="#">Admin</a></P>
-            <p><a href="#">Logout</a></P>
+            <p><a href="admin">Admin</a></P>
+            <p><a href="{% url 'auth:logout' %}">Logout</a></P>
           {% else %}
-            <p><a href="#">Login</a></P>
-            <p><a href="#">Sign Up</a></P>
+            <p><a href="{% url 'auth:login' %}">Login</a></P>
+            <p><a href="{% url 'auth:signup' %}">Sign Up</a></P>
           {% endif %}
         </div>
         <br>
@@ -92,7 +92,7 @@
 
         <div class="foot">
           <small>Get 
-            <a href="#">help</a> from sakyum community or start live <a href="#">chat</a> with our people
+            <a href="#">help</a> from encme community or start live <a href="#">chat</a> with our people
           </small>
           <p>2007 - {{the_year}}</p>
         </div>

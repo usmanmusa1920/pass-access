@@ -4,22 +4,7 @@ cryptography==41.0.3
 Django==4.2.4
 django-countries==7.5.1
 django-phonenumber-field==7.1.0
-django-phonenumbers==1.0.1
 phonenumbers==8.13.18
 pycparser==2.21
 sqlparse==0.4.4
 typing_extensions==4.7.1
-
-
-# asgiref==3.5.2
-backports.zoneinfo==0.2.1
-# cffi==1.15.1
-# cryptography==37.0.4
-cryptograpy==0.0.0
-# Django==4.1
-# django-countries==7.3.2
-# django-phonenumber-field==6.3.0
-# phonenumbers==8.12.53
-# pycparser==2.21
-# sqlparse==0.4.2
-# typing-extensions==4.3.0
