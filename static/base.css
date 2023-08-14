@@ -1,0 +1,489 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body, div, span, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+abbr, address, cite, code,
+del, dfn, em, img, ins, kbd, q, samp,
+small, strong, sub, sup, var,
+b, i,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section, summary,
+time, mark, audio, video {
+  outline:0;
+  vertical-align:baseline;
+  background:transparent;
+}
+
+body{
+  background-color: lightgray;
+  overflow-x: hidden;
+  overflow-y: auto;
+  font-size: 15px;
+  font-family: "Roboto","Lucida Grande","DejaVu Sans","Bitstream Vera Sans", Times 'Segoe UI', Tahoma, Verdana, sans-serif, serif,Verdana,Arial,sans-serif;
+}
+
+.container{
+  width: 100%;
+  display: flex;
+}
+
+.nav_panel{
+  background: rgba(34, 48, 59, 0.809);
+  width: 20%;
+  height: 100vh;
+  padding: 15px 10px 10px 0px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+@media only screen and (max-width: 700px){
+  .nav_panel{
+    display: none;
+    align-items: stretch;
+    justify-content: center;
+    padding: 15px 10px 10px 10px;
+  }
+}
+
+.search_form{
+  background: rgb(231, 224, 224);
+  position: fixed;
+  top: 0;
+  height: 10vh;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-left: 5px;
+  padding-right: 5px;
+  width: calc(100% - 80%);
+}
+
+@media only screen and (max-width: 700px){
+  .search_form{
+    padding: 0;
+    background: transparent;
+  }
+}
+
+.search_form input{
+  border: none;
+  outline: 0;
+  padding: 5px;
+  background: white;
+  height: 30px;
+  width: 60%;
+}
+
+@media only screen and (max-width: 700px){
+  .search_form input{
+    width: auto;
+  }
+}
+
+.search_form button{
+  border: none;
+  background: grey;
+  color: white;
+  height: 30px;
+  padding: 0 5px;
+  width: 40%;
+}
+
+@media only screen and (max-width: 700px){
+  .search_form button{
+    width: auto;
+  }
+}
+
+#hide_menu_t{
+  display: none;
+}
+
+@media only screen and (max-width: 700px){
+  #hide_menu_t{
+    display: block;
+    width: 25px;
+    height: 25px;
+    padding: 5px;
+    margin-left: 5px;
+    background: white;
+    border: none;
+    border-radius: 50%;
+  }
+}
+
+.side{
+  overflow-y: auto;
+  overflow-x: hidden;
+  margin-top: 10.5vh;
+  padding: 0 3px;
+}
+
+.category{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin-left: 10px;
+}
+
+.category h1{
+  color: white;
+}
+
+.category p{
+  margin-top: 7px;
+  margin-bottom: 7px;
+  display: flex;
+}
+
+.category p:hover{
+  margin-top: 7px;
+  margin-bottom: 7px;
+  display: flex;
+  flex-direction: column;
+}
+
+.category p a{
+  color: white;
+  transition-delay: 0.5s;
+  width: fit-content;
+  text-decoration: none;
+}
+
+.category p a:hover{
+  text-decoration: underline;
+  padding: 7px;
+  transition-timing-function: linear;
+  transition: width 1s, height 1s;
+}
+
+.category p span{
+  background: grey;
+  color: white;
+  border-radius: 10px;
+  width: 30px;
+  margin-left: 10px;
+  padding: 0 3px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.foot{
+  width: 100%;
+  padding: 3px;
+}
+
+.foot a{
+  color: black;
+}
+
+.main{
+  background: rgb(231, 224, 224);
+  width: 80%;
+  height: 100vh;
+  overflow: hidden;
+  display: block;
+  z-index: 30;
+}
+
+@media only screen and (max-width: 700px){
+  .main{
+    width: 100%;
+  }
+}
+
+.header{
+  background: rgb(3, 3, 45);
+  position: fixed;
+  top: 0;
+  height: 10vh;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: calc(100% - 20%);
+  padding: 0 50px;
+}
+
+@media only screen and (max-width: 700px){
+  .header{
+    width: 100%;
+    padding: 0 5px;
+  }
+}
+
+.l_header{
+  width: 20%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.l_header img{
+  width: 25px;
+  height: 25px;
+  margin-right: 5px;
+  background: white;
+}
+
+#hide_menu{
+  display: none;
+}
+
+.l_header a{
+  color: white;
+  text-decoration: none;
+}
+
+.r_header{
+  width: 70%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.r_header span{
+  width: 30px;
+  height: 30px;
+  padding: 5px;
+  border-radius: 50%;
+  background: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.r_header a{
+  color: white;
+  margin-left: 5px;
+  text-decoration: none;
+}
+
+@media only screen and (max-width: 700px){
+  .r_header a{
+    display: none;
+  }
+}
+
+.main_inn{
+  width: 100%;
+  height: calc(100vh - 10.5vh);
+  background: lightgrey;
+  margin-top: 10.5vh;
+  padding: 10px 50px;
+  overflow: auto;
+}
+
+@media only screen and (max-width: 700px){
+  .main_inn{
+    padding: 5px 5px;
+  }
+}
+
+.t_s{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 3px;
+  background: whitesmoke;
+}
+
+.t_s p{
+  font-size: 2rem;
+}
+
+.t_s form a{
+  font-weight: bold;
+  color: black;
+}
+
+.t_s form button{
+  border: none;
+  background: grey;
+  color: white;
+  height: 20px;
+  padding: 0 5px;
+}
+
+.box{
+  width: 100%;
+  margin-top: 10px;
+  background: white;
+}
+
+.box_head{
+  width: 100%;
+  padding: 12px;
+  background: rgb(231, 224, 224);
+}
+
+.box_head input{
+  border: none;
+  outline: 0;
+  padding: 5px;
+  background: white;
+  height: 30px;
+}
+
+.box_head button{
+  border: none;
+  background: grey;
+  color: white;
+  height: 30px;
+  padding: 0 5px;
+}
+
+.trusted_user{
+  width: calc(100% - 24px);
+  margin: 12px;
+  padding: 12px;
+  background: lightgrey;
+}
+
+.peace{
+  color: green;
+}
+
+.grey{
+  color: rgba(34, 48, 59, 0.809);
+  font-weight: bold;
+}
+
+.danger{
+  color: red;
+}
+
+.box_inn{
+  margin: 12px;
+}
+
+.box_inn input{
+  border: none;
+  outline: none;
+  height: 30px;
+  padding: 5px;
+  background: lightgrey;
+}
+
+#select{
+  border-top: solid lightgrey 1px;
+  border-bottom: solid lightgrey 1px;
+  border-left: none;
+  border-right: none;
+  outline: none;
+  padding: 5px;
+  width: 40%;
+}
+
+.box_border{
+  padding: 10px;
+  border: solid lightgrey 1px;
+  background: whitesmoke;
+}
+
+.alert_col_info{
+  color: green;
+}
+
+.alert_info{
+  padding: 10px;
+  background: lightgreen;
+}
+
+.alert_col_success{
+  color: green;
+}
+
+.alert_success{
+  padding: 10px;
+  background: lightgreen;
+}
+
+.alert_col_warning{
+  color: red;
+}
+
+.alert_warning{
+  padding: 10px;
+  background: pink;
+}
+
+.box_center{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 20px 0;
+  padding: 10px;
+  background: white;
+}
+
+.box_inn textarea{
+  border: none;
+  outline: none;
+  resize: none;
+  padding: 5px;
+  background: lightgrey;
+}
+
+@media only screen and (max-width: 700px){
+  .box_inn textarea{
+    width: 90%;
+  }
+}
+
+.box_inn button{
+  background: green;
+  color: white;
+  border: none;
+  height: 30px;
+  padding: 0 20px;
+  margin: 5px;
+}
+
+.box_bot{
+  width: 100%;
+  padding: 12px;
+  color: white;
+  background: rgba(34, 48, 59, 0.809);
+}
+
+.danger_round{
+  background: white;
+  color: red;
+  text-decoration: none;
+  padding: 0 5px;
+}
+
+/* 
+  Here we hide all the platforms div(s) of new_item_1.html page,
+  we hide the `selected_platform_span` that will display the platform we select,
+  we hide the error span of validating `selected_category_error` value,
+  we hide the error span of validating `selected_platform_error` value, and
+
+  ------------- FOR PASSCODE VALIDATION -------------
+  we hide the error span of validating `selected_passcode_error` value.
+  we hide the error span of validating `selected_passcode_success` value,
+  we hide the custome platform field `custom_platform_span`.
+ */
+#plat_social, #plat_cloud, #plat_card, #plat_other, #hidden_field, .selected_platform_span, .selected_category_error, .selected_platform_error, .selected_passcode_error, .selected_passcode_success, .custom_platform_span{
+  display: none;
+}
+
+.rad{
+  display: flex;
+  align-items: center;
+}
+
+.rad input{
+  margin-right: 3px;
+}

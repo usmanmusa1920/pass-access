@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+  item info
+{% endblock title %}
+
+
+{% block main %}
+  <div class="box">
+    {{p}}
+    {% for result in searches %}
+      <div class="trusted_user">
+        <h4>{{result.first_name}} {{result.last_name}}</h4>
+        <a href="#" class="peace">Add trusted user</a>
+      </div>
+    {% endfor %}
+  </div>
+{% endblock main %}

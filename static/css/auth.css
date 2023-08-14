@@ -1,0 +1,84 @@
+.p{
+  text-align: center;
+  padding: 0 200px;
+  font-size: 3rem;
+  /* font-size: 20px; */
+  font-weight: lighter;
+  background: white;
+}
+
+.form form{
+  width: 50%;
+  min-height: 70vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: lightgrey;
+  border-radius: 7px;
+  margin: 30px 0;
+  padding: 10px 0;
+  overflow: scroll;
+}
+
+.form form span{
+  width: 70%;
+  text-align: start;
+}
+
+.input{
+  width: 70%;
+  height: 30px;
+  padding: 0 10px;
+  margin: 8px 0;
+  outline: none;
+  border: none;
+  border-bottom: 3px darkgrey solid;
+  border-radius: 3px;
+  background: white;
+}
+
+.input:focus{
+  border-bottom: 3px grey solid;
+  /* width: 72%;
+  height: 33px; */
+}
+
+.input:hover{
+  border-bottom: 3px white solid;
+  width: 72%;
+  height: 33px;
+}
+
+.radio{
+  display: flex;
+  /* justify-content: flex-start; */
+  width: 70%;
+}
+
+.radio input, .calender input{
+  border: none;
+  outline: none;
+  padding: 5px;
+  margin: 3px;
+}
+
+.calender{
+  display: flex;
+  width: 70%;
+}
+
+.form form button{
+  background: black;
+  color: white;
+  padding: 10px 0;
+  width: 50%;
+}
+
+.form form p{
+  margin-top: 10px;
+}
+
+.form form p a{
+  color: green;
+  font-size: 18px;
+}

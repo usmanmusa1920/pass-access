@@ -1,0 +1,49 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="shortcut icon" href="{% static 'img/favicon.ico' %}" type="image/x-icon">
+  <link rel="stylesheet" href="{% static 'css/base_2.css' %}">
+  {% block head %}
+    <!-- content tags -->
+  {% endblock head %}
+  <title>Sakyum</title
+</head>
+<body>
+  <div class="container">
+
+    <div class="header">
+      <div class="head">
+        <h1><a href="{% url 'secureapp:home' %}">Sakyum</a></h1>
+        <div class="div">
+          {% block link %}
+            <!-- links -->
+          {% endblock link %}
+          <a href="#">About</a>
+          <a href="#">Privacy</a>
+        </div>
+      </div>
+    </div>
+    
+    {% block main %}
+      <!-- main content -->
+    {% endblock main %}
+
+    <div class="form">
+      {% block form %}
+        <!-- form content -->
+      {% endblock form %}
+    </div>
+
+    <div class="foot">
+      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugit ipsum eius deserunt minima. Provident quae, ratione sit tempore magnam tempora possimus, explicabo quasi pariatur, mollitia enim! Eum temporibus ab accusamus.</p>
+      <br>
+      <p>Alright reserved &copy; 2007 - {{the_year}}</p>
+    </div>
+
+  </div>
+</body>
+</html>

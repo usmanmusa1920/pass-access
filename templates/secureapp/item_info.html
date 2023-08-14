@@ -1,0 +1,250 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+  item info
+{% endblock title %}
+
+
+{% block main %}
+  <div class="t_s">
+    <p>&copy; {{item_unveil_info.platform}}</p>
+    <form action="#">
+      <a href="#">upgrade</a>
+      <button type="submit">Edit</button>
+    </form>
+  </div>
+
+  <div class="box">
+    <form method="get" action="{% url 'secureapp:search_trusted' item_unveil_info.id %}" class="box_head">
+      <small class="danger">Stay away from public when viewing information.</small>
+      <small>Add a trusted user by searching his/her id or username</small>
+      <br>
+      <input type="search" name="search_trusted" placeholder="Search a trusted user">
+      <button type="submit">search</button>
+    </form>{{p}}
+    {% for result in searches %}
+      <div class="trusted_user">
+        <h4>{{result.first_name}} {{result.last_name}}</h4>
+        <a href="#" class="peace">Add trusted user</a>
+      </div>
+    {% endfor %}
+    <div class="trusted_user">
+      <h4>Usman Musa</h4>
+      <a href="#" class="peace">Add trusted user</a>
+    </div>
+
+    <div class="box_center">
+      <div class="box_border">
+        <p class="alert_warning">We can't find trusted user with that data</p>
+      </div>
+    </div>
+
+    <div class="box_inn">
+      <p>Label:</p>
+      <p class="box_border">{{item_unveil_info.i_label}}</p>
+      <br>
+      <p>Visibility:</p>
+      <p class="box_border">
+        <a href="#" class="grey">{{item_unveil_info.visibility}} gist</a>
+        <br>
+        <b>Visibility: </b>{{item_unveil_info.visibility}} access
+      </p>
+      <br>
+      <p>Category and platform</p>
+      <p class="box_border">
+        <b>Category:</b>
+        {{item_unveil_info.category}}
+        <br>
+        <b>Platform:</b>
+        {{item_unveil_info.platform}}
+
+        <!-- handling custom platform view -->
+        {% if item_unveil_info.custom_platform == None %}
+          <!-- pass -->
+        {% elif item_unveil_info.custom_platform == '' %}
+          <!-- pass -->
+        {% else %}
+          <br>
+          <b>Custom platform:</b>
+          {{item_unveil_info.custom_platform}}
+        {% endif %}
+      </p>
+      <br>
+
+
+      <!-- for social media 
+        we slice each item publick key from index 11 to end `<item_public_key>|slice:'12:'`
+      -->
+      <div class="box_border">
+        <p>Your social media data will be visible here!</p>
+        {% if item_unveil_info.i_username != None %}
+          {% if item_unveil_info.i_username != "" %}
+            <p>Username:</p>
+            <input type="text" name="" placeholder="Refresh the page to see username" value="{{item_unveil_info.i_username|slice:'12:'}}">
+            <input type="text" name="" placeholder="Refresh the page to see username" value="{{decrypt_i_username}}">
+            <button type="button">Show</button>
+          {% endif %}
+        {% endif %}
+
+        {% if item_unveil_info.i_email != None %}
+          {% if item_unveil_info.i_email != "" %}
+            <p>Email:</p>
+            <input type="email" name="" placeholder="Refresh the page to see email" value="{{item_unveil_info.i_email|slice:'12:'}}">
+            <input type="text" name="" placeholder="Refresh the page to see username" value="{{decrypt_i_email}}">
+            <button type="button">Show</button>
+          {% endif %}
+        {% endif %}
+
+        {% if item_unveil_info.i_password != None %}
+          {% if item_unveil_info.i_password != "" %}
+            <p>Password:</p>
+            <input type="text" name="" placeholder="Refresh the page to see password" value="{{item_unveil_info.i_password|slice:'12:'}}">
+            <input type="text" name="" placeholder="Refresh the page to see username" value="{{decrypt_i_password}}">
+            <button type="button">Show</button>
+          {% endif %}
+        {% endif %}
+      </div>
+
+
+
+      <!-- for card -->
+      <br>
+      <div class="box_border">
+        <p>Your cards data will be visible here!</p>
+        {% if item_unveil_info.i_card_no != None %}
+          {% if item_unveil_info.i_card_no != "" %}
+            <p>Card number:</p>
+            <input type="tel" name="" placeholder="Refresh the page to see card number" value="{{item_unveil_info.i_card_no|slice:'12:'}}">
+            <input type="text" name="" placeholder="Refresh the page to see username" value="{{decrypt_i_card_no}}">
+            <button type="button">Show</button>
+          {% endif %}
+        {% endif %}
+
+        {% if item_unveil_info.i_card_valid_range != None %}
+          {% if item_unveil_info.i_card_valid_range != "" %}
+            <p>Valid date:</p>
+            <input type="text" name="" placeholder="Refresh the page to see valid date" value="{{item_unveil_info.i_card_valid_range|slice:'12:'}}">
+            <input type="text" name="" placeholder="Refresh the page to see username" value="{{decrypt_i_card_valid_range}}">
+            <button type="button">Show</button>
+            <br>
+          {% endif %}
+        {% endif %}
+
+        {% if item_unveil_info.i_card_ccv != None %}
+          {% if item_unveil_info.i_card_ccv != "" %}
+            <p>cvv:</p>
+            <input type="text" name="" placeholder="Refresh the page to see ccv" value="{{item_unveil_info.i_card_ccv|slice:'12:'}}">
+            <input type="text" name="" placeholder="Refresh the page to see username" value="{{decrypt_i_card_ccv}}">
+            <button type="button">Show</button>
+            <br>
+          {% endif %}
+        {% endif %}
+
+        {% if item_unveil_info.i_card_pin != None %}
+          {% if item_unveil_info.i_card_pin != "" %}
+            <p>Pin:</p>
+            <input type="text" name="" placeholder="Refresh the page to see pin" value="{{item_unveil_info.i_card_pin|slice:'12:'}}">
+            <input type="text" name="" placeholder="Refresh the page to see username" value="{{decrypt_i_card_pin}}">
+            <button type="button">Show</button>
+          {% endif %}
+        {% endif %}
+      </div>
+
+
+
+      <!-- for cloud -->
+      <br>
+      <div class="box_border">
+        <p>Your cloud data will be visible here!</p>
+        {% if item_unveil_info.i_ssh_key_pub != None %}
+          {% if item_unveil_info.i_ssh_key_pub != "" %}
+            <p>ssh key public:</p>
+            <textarea name="" placeholder="Refresh the page to see ssh public key" cols="40" rows="5">{{item_unveil_info.i_ssh_key_pub|slice:'12:'}}</textarea>
+            <input type="text" name="" placeholder="Refresh the page to see passphrase" value="{{decrypt_i_ssh_key_pub}}">
+            <br>
+            <hr>
+          {% endif %}
+        {% endif %}
+
+        {% if item_unveil_info.i_ssh_key_prt != None %}
+          {% if item_unveil_info.i_ssh_key_prt != "" %}
+            <p>ssh key private:</p>
+            <textarea name="" placeholder="Refresh the page to see ssh private key" cols="40" rows="5">{{item_unveil_info.i_ssh_key_prt|slice:'12:'}}</textarea>
+            <input type="text" name="" placeholder="Refresh the page to see passphrase" value="{{decrypt_i_ssh_key_prt}}">
+            <br>
+            <hr>
+          {% endif %}
+        {% endif %}
+
+        {% if item_unveil_info.i_passphrase != None %}
+          {% if item_unveil_info.i_passphrase != "" %}
+            <p>Passphrase:</p>
+            <textarea name="" placeholder="Refresh the page to see passphrase" cols="40" rows="5">{{item_unveil_info.i_passphrase|slice:'12:'}}</textarea>
+            <input type="text" name="" placeholder="Refresh the page to see passphrase" value="{{decrypt_i_passphrase}}">
+            <br>
+            <hr>
+          {% endif %}
+        {% endif %}
+
+        {% if item_unveil_info.i_api != None %}
+          {% if item_unveil_info.i_api != "" %}
+            <p>API token:</p>
+            <small class="">The API might be for example github, twitter api and other platform api's</small>
+            <br>
+            <textarea name="" placeholder="Refresh the page to see api token" cols="40" rows="5">{{item_unveil_info.i_api|slice:'12:'}}</textarea>
+            <input type="text" name="" placeholder="Refresh the page to see passphrase" value="{{decrypt_i_api}}">
+          {% endif %}
+        {% endif %}
+      </div>
+      <br>
+
+
+      <!-- history review -->
+      <p class="box_border">
+        <a href="#" class="grey">History logs</a>
+        <br>
+        <br>
+        <b>Last review:</b> 28 august, 2022
+        <br>
+        <br>
+        <b>Last modified:</b> {{item_unveil_info.date_modified|date:"d M, Y"}}
+        <br>
+        <b>Date created:</b> {{item_unveil_info.date_created|date:"d M, Y"}}
+      </p>
+      <br>
+    </div>
+
+    <div class="box_bot">
+      <p>If you want to discard (delete) this item information click here <a href="#" class="danger_round">Discard</a></p>
+    </div>
+  </div>
+
+  <div class="box">
+    <div class="box_head">
+      <h1>Trusted users</h1>
+      <small>These are your team (trusted user) that have access to this item</small>
+    </div>
+
+    {% if item_unveil_info.trusted_user.all.count > 0 %}
+      {% for trust in item_unveil_info.trusted_user.all %}
+        <div class="trusted_user">
+          <h4>{{trust.first_name}} {{trust.last_name}}</h4>
+          <a href="{% url 'secureapp:remove_trusted' item_unveil_info.id trust.id   %}" class="danger">Remove trusted user ({{trust.username}})</a>
+        </div>
+      {% endfor %}
+    {% else %}
+
+      <div class="box_center">
+        <div class="box_border">
+          <p class="alert_warning">No trusted added yet in this {{item_unveil_info.visibility}} item</p>
+        </div>
+      </div>
+    {% endif %}
+
+    <div class="box_bot">
+      <p>You can remove all trusted user by just one click <a href="#" class="danger_round">Remove all trusted user</a></p>
+      <small>Note: removing trusted users may not give them access to this sensitive information</small>
+    </div>
+  </div>
+{% endblock main %}

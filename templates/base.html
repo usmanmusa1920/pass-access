@@ -1,0 +1,141 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="shortcut icon" href="{% static 'img/favicon.ico' %}" type="image/x-icon">
+  <link rel="stylesheet" href="{% static 'base.css' %}">
+  <script src="{% static 'js/base.js' %}"></script>
+  <title>
+    Sakyum | 
+    {% block title %}
+      <!-- inheritance -->
+    {% endblock title %}
+  </title>
+</head>
+<body>
+
+  <!-- first
+  Login
+  signup
+  landing
+  home
+  new item
+  edit Item
+  delete Item
+  Setup SecurePass (default)
+  edit SecurePass (default)
+
+  MFA & security question
+  password manager(generate strong password)
+
+  upgrade (update) salt
+  settings --- (visibility, info)
+  edit
+  
+  auth page or pop-up (for confirm delete)
+  end -->
+
+  <div class="container">
+    <div class="nav_panel">
+      <form class="search_form">
+        <input type="search" name="" placeholder="Search here">
+        <button type="submit">search</button>
+        <img src="{% static 'img/hide_menu.png' %}" id="hide_menu_t" alt="" onclick="hideMenu()">
+      </form>
+
+      <div class="side">
+        <div class="category">
+          <h1>Category</h1>
+          <p><a href="{% url 'secureapp:home' %}">Dashboard</a></P>
+          <p><a href="{% url 'secureapp:new_item' %}">New item</a></P>
+            <p><a href="{% url 'secureapp:set_secure' %}">Set secure</a></P>
+            <p><a href="{% url 'secureapp:update_secure' %}">Update secure</a></P>
+          {% if request.user.securepass.p_passcode == None %}
+            <p><a href="{% url 'secureapp:set_secure' %}">Finish setting passcode</a></P>
+          {% else %}
+              <!-- pass -->
+          {% endif %}
+        </div>
+        <br>
+
+        {% block item %}
+            <!-- items -->
+        {% endblock item %}
+        <br>
+        <div class="category">
+          <h1>Auth</h1>
+          <p><a href="#">Secure Notes</a> <span>4</span></P>
+          <p><a href="#">Trusted memberships</a><span>3</span></P>
+          <p><a href="#">Trusted people</a><span>7</span></P>
+          <p><a href="#">Contact Us</a></P>
+          <p><a href="#">About</a></P>
+
+          {% if request.user.is_authenticated %}
+            <p><a href="#">Admin</a></P>
+            <p><a href="#">Logout</a></P>
+          {% else %}
+            <p><a href="#">Login</a></P>
+            <p><a href="#">Sign Up</a></P>
+          {% endif %}
+        </div>
+        <br>
+
+        <div class="category">
+          <h1>Trusted access</h1>
+          <p><a href="#">Hamza Musa</a></P>
+          <p><a href="#">Aliyu Samaila</a></P>
+        </div>
+        <br>
+
+        <div class="foot">
+          <small>Get 
+            <a href="#">help</a> from sakyum community or start live <a href="#">chat</a> with our people
+          </small>
+          <p>2007 - {{the_year}}</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="main">
+      <div class="header">
+        <div class="l_header">
+          <img src="{% static 'img/show_menu.png' %}" id="show_menu" alt="" onclick="showMenu()">
+          <img src="{% static 'img/show_menu.png' %}" id="hide_menu" alt="" onclick="hideMenu()">
+          <a href="{% url 'secureapp:home' %}"><h1>process</h1></a>
+        </div>
+
+        <div class="r_header">
+          <span>{{request.user.first_name|slice:':1'}}{{request.user.last_name|slice:':1'}}</span>
+          <a href="#">{{request.user.first_name}} {{request.user.last_name}}</a>
+          <a>|</a>
+          <a href="#">Notification</a>
+        </div>
+      </div>
+
+      <div class="main_inn">
+        {% if messages %}
+          {% for flash_msg in messages %}
+            <div class="box">
+              <div class="box_inn">
+                <br>
+                <div class="alert_{{flash_msg.tags}}">
+                  <p class="alert_col_{{flash_msg.tags}}">{{flash_msg}}</p>
+                </div>
+                <br>
+              </div>
+            </div>
+          {% endfor %}
+        {% endif %}
+
+        {% block main %}
+          <!-- inheritance -->
+        {% endblock main %}
+      </div>
+    </div>
+
+  </div>
+</body>
+</html>

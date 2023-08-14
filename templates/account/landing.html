@@ -1,0 +1,32 @@
+{% extends 'secureapp/base_2.html' %}
+{% load static %}
+{% block head %}
+  <link rel="stylesheet" href="{% static 'css/landing.css' %}">
+{% endblock head %}
+
+
+{% block link %}
+  <a href="{% url 'secureapp:signup' %}">Sign up</a>
+  <a href="{% url 'login' %}">Login</a>
+{% endblock link %}
+
+
+{% block main %}
+  <div class="header">
+    <h2 class="p">Bringing you about privacy concern</h2>
+    <p class="pp">Manage all your sensitive information in one place <strong>"Sakyum"</strong></p>
+    <br>
+    <div class="header_banner">
+      <h1>Welcome to sakyum</h1>
+      <p>Bringing you about privacy concern</p>
+    </div>
+  </div>
+  <h5 class="p">Lorem ipsum dolor sit amet consectetur adipisicing elit. Eos quas incidunt provident dolore aliquam. Ipsum sint consequuntur animi doloribus sit in. Unde mollitia est, quam eligendi animi maiores dolore reprehenderit.</h5>
+  <div class="main">
+    <div class="two">
+      <img src="{% static 'css/img/mfa_passwords.webp' %}" alt="">
+      <img src="{% static 'css/img/what-is-dynamic-password-controller-how-it-work-730x411-blog.jpg' %}" alt="">
+      <img src="{% static 'css/img/password-protection-hero-image.jpg' %}" alt="">
+    </div>
+  </div>
+{% endblock main %}

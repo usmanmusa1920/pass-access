@@ -1,0 +1,4 @@
+/* making the form to be in middle in login page */
+.form form{
+  justify-content: center;
+}

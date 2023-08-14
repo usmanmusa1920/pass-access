@@ -1,0 +1,142 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+ new item 1
+{% endblock title %}
+
+{% block main %}
+  <div class="t_s">
+    <p>New item</p>
+  </div>
+
+  <form method="post" class="box">
+    {% csrf_token %}
+    <div class="box_head">
+      <small class="danger">Stay away from public when saving new information</small>
+    </div>
+
+    <div class="box_inn">
+      <div class="box_border">
+
+        <!-- label -->
+        <p><b>Label</b></p>
+        <input type="text" name="i_label" placeholder="Label" required>
+        <br>
+        <br>
+        <small>label make it easier when searching, or when people try to add you as a trusted user</small>
+        <br>
+        
+        <!-- visibility -->
+        <p>Select visibility:</p>
+        <select name="visibility" id="select">
+          <option value="private">Private</option>
+          <option value="team">Team</option>
+          <option value="organisation">Organisation</option>
+        </select>
+      </div>
+      <br>
+
+      <!-- select category here -->
+      <div class="box_border">
+        <p><b>Select category</b></p>
+        {% for site_item in site_categories %}
+
+          <!-- doing some check here because of the javascript function we want to fire
+          are not all thesame, each start with the category value name -->
+
+          <!-- for social media -->
+          {% if site_item.category_value == 'social media' %}
+            <span class="rad"><input type="radio" value="{{site_item.category_value}}" name="category" id="sel_1" onclick="social_fun(this)">{{site_item.category_key}} <br></span>
+
+          <!-- for credit card -->
+          {% elif site_item.category_value == 'credit card' %}
+            <span class="rad"><input type="radio" value="{{site_item.category_value}}" name="category" id="sel_1" onclick="card_fun(this)">{{site_item.category_key}} <br></span>
+
+          <!-- for others (cloud, and other) -->
+          {% else %}
+            <span class="rad"><input type="radio" value="{{site_item.category_value}}" name="category" id="sel_1" onclick="{{site_item.category_value}}_fun(this)">{{site_item.category_key}} <br></span>
+          {% endif %}
+        {% endfor %}
+        <br>
+        <!-- showing our selected category value here -->
+        You select: <input type="text" name="selected_category" class="selected_category" placeholder="Don't write just select" oninput="validateCategoryValue(this)" required>
+
+        <br>
+        <small class="selected_category_error">Don't write just select from the above list of categories</small>
+      </div>
+      <br>
+
+      <!-- for social platform -->
+      <div class="box_border" id="plat_social" style="height: 100px; overflow-y: scroll">
+        <p><b>Select platform</b></p>
+        {% for site_item in site_platform %}
+          {% if site_item.category.category_value == 'social media' %}
+            <span class="rad"><input type="radio" value="{{site_item.platform_value}}" name="platform" id="sel_4" onclick="plat_select_fun(this)">{{site_item.platform_key}} <br></span>
+          {% endif %}
+        {% endfor %}
+        <span class="rad"><input type="radio" value="custom" name="platform" id="sel_4" onclick="plat_select_fun(this)">Custom <br></span>
+        <br>
+      </div>
+      
+      <!-- for card platform -->
+      <div class="box_border" id="plat_card" style="height: 100px; overflow-y: scroll">
+        <p><b>Select platform</b></p>
+        {% for site_item in site_platform %}
+          {% if site_item.category.category_value == 'credit card' %}
+            <span class="rad"><input type="radio" value="{{site_item.platform_value}}" name="platform" id="sel_4" onclick="plat_select_fun(this)">{{site_item.platform_key}} <br></span>
+          {% endif %}
+        {% endfor %}
+        <span class="rad"><input type="radio" value="custom" name="platform" id="sel_4" onclick="plat_select_fun(this)">Custom <br></span>
+        <br>
+      </div>
+      
+      <!-- for cloud platform -->
+      <div class="box_border" id="plat_cloud" style="height: 100px; overflow-y: scroll">
+        <p><b>Select platform</b></p>
+        {% for site_item in site_platform %}
+          {% if site_item.category.category_value == 'cloud' %}
+            <span class="rad"><input type="radio" value="{{site_item.platform_value}}" name="platform" id="sel_4" onclick="plat_select_fun(this)">{{site_item.platform_key}} <br></span>
+          {% endif %}
+        {% endfor %}
+        <span class="rad"><input type="radio" value="custom" name="platform" id="sel_4" onclick="plat_select_fun(this)">Custom <br></span>
+        <br>
+      </div>
+      
+      <!-- for other platform -->
+      <div class="box_border" id="plat_other" style="height: 100px; overflow-y: scroll">
+        <p><b>Select platform</b></p>
+        {% for site_item in site_platform %}
+          {% if site_item.category.category_value == 'other' %}
+            <span class="rad"><input type="radio" value="{{site_item.platform_value}}" name="platform" id="sel_4" onclick="plat_select_fun(this)">{{site_item.platform_key}} <br></span>
+          {% endif %}
+        {% endfor %}
+        <span class="rad"><input type="radio" value="custom" name="platform" id="sel_4" onclick="plat_select_fun(this)">Custom <br></span>
+        <br>
+      </div>
+      <br>
+      <span class="selected_platform_span">
+        <!-- showing our selected platform value here -->
+        Platform selected: <input type="text" name="selected_platform" class="selected_platform" placeholder="Don't write just select"  oninput="validatePlatformValue(this)" required>
+
+        <!-- the custom platform will be inputed by end user -->
+        <span class="custom_platform_span">
+          <!-- empty -->
+        </span>
+
+        <br>
+        <small class="selected_platform_error">Don't write just select from the above list of platforms</small>
+      </span>
+      <br>
+      
+      <p class="box_border">Make sure all the data of your new item you just entered above are correct, if yes click the create button below. Also you can edit your item after you create them.</p>
+      <br>
+
+      <div>
+        <button type="submit"><h1>proceed</h1></button>
+      </div>
+      <br>
+      
+    </div>
+  </form>
+{% endblock main %}

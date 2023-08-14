@@ -1,0 +1,75 @@
+.p{
+  text-align: center;
+  padding: 0 200px;
+  font-size: 3rem;
+  /* font-size: 20px; */
+  font-weight: lighter;
+}
+
+.pp{
+  text-align: center;
+  padding: 0 200px;
+  font-family: cursive;
+  font-style: italic;
+  font-size: 20px;
+  font-weight: lighter;
+}
+
+.header_banner{
+  width: 100%;
+  min-height: 50vh;
+  height: 70vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  /* margin-top: 11.5vh; */
+  background: url('./img/mfa_passwords.webp')  no-repeat center center/cover;
+  /* background: url('./img/password-protection-hero-image.jpg')  no-repeat center center/cover; */
+  /* background: url('./img/what-is-dynamic-password-controller-how-it-work-730x411-blog.jpg')  no-repeat center center/cover; */
+  /* animation attrib */
+  animation-name: myanimation;
+  animation-duration: 7s;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
+}
+
+.header_banner h1{
+  color: white;
+  font-size: 4rem;
+  font-style: italic;
+  font-family: fantasy;
+}
+
+.header_banner p{
+  text-align: center;
+  color: white;
+  /* font-size: 2rem; */
+  font-weight: lighter;
+  font-style: italic;
+  font-family: fantasy;
+}
+
+.main{
+  width: 100%;
+  background: white;
+}
+
+.two{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 10px 0;
+  background: grey;
+}
+
+.two img{
+  width: 500px;
+  height: auto;
+}
+
+.form{
+  display: none;
+}

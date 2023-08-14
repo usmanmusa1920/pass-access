@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+  set secure passcode
+{% endblock title %}
+
+
+{% block main %}
+  <div class="t_s">
+    <p>Setup your secure passcode</p>
+  </div>
+
+  <form method="post" class="box">
+    {% csrf_token %}
+    <br>
+    <div class="box_inn">
+      <p class="box_border">
+        <small class="peace">Stay away from public when Setting up your passcode</small>
+      </p>
+      <br>
+      <p class="box_border">Passcode is a code that will be ask every time you want to get access into each an every secret item page you saved, e.g if you want to copy your facebook username or password that you set, for login into facebook, this is the code that you will be ask for. Make sure to remember it.</p>
+    </div>
+
+    <div class="box_inn">
+      <div class="box_border">
+        <p class="alert_info">
+          Passcode are case-sensitive. Use a strong passcode with a combination of characters, <br> upper and lower letters, along side with numbers to make it strong, like: <b>p@s$w0r01.1</b>
+        </p>
+        <br>
+        <input type="email" name="verify_email" placeholder="Enter your email" required>
+        <br>
+        <br>
+        <input type="password" name="passcode_ingredient" class="passcode_ingredient" placeholder="Enter passcode" minlength="8" required>
+        <br>
+        <br>
+        <input type="password" name="verify_passcode" placeholder="Verify passcode" minlength="8" oninput="validatePasscodeValue_set(this)" required>
+        <br>
+        <small class="selected_passcode_error">Two passcode fields mis-match</small>
+        <small class="selected_passcode_success">Your two passcode fields match</small>
+      </div>
+      <br>
+      
+      <p class="alert_warning">Make sure to remember your passcode for frequently use. Also you can change your passcode later.</p>
+      <br>
+      <div>
+        <button type="submit"><h1>Create</h1></button>
+      </div>
+      <br>
+        
+    </div>
+  </form>
+{% endblock main %}

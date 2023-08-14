@@ -1,0 +1,179 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+ new item
+{% endblock title %}
+
+{% block main %}
+  <div class="t_s">
+    <p>Almost 75% to finish</p>
+  </div>
+
+  <form action="{% url 'secureapp:new_item_fields' %}" method="post" class="box">
+    {% csrf_token %}
+    <div class="box_head">
+      <small class="danger">Stay away from public when saving new information</small>
+    </div>
+
+    <div class="box_inn">
+      <p>Almost there to finish setting up your item information</p>
+      <p class="box_border">
+        <b>Label: </b>{{item_label}} <input type="text" name="i_label" id="hidden_field" value="{{item_label}}">
+        <br>
+        <b>Visibility: </b>{{item_visibility}} access<input type="text" name="visibility" id="hidden_field" value="{{item_visibility}}">
+        <br>
+        <b>Category: </b>{{item_category}} <input type="text" name="category" id="hidden_field" value="{{item_category}}">
+        <br>
+        <b>Platform: </b>{{item_platform}} <input type="text" name="platform" id="hidden_field" value="{{item_platform}}">
+        {% if item_custom_platform == None %}
+          <!-- pass -->
+        {% else %}
+          <br>
+          <b>Custom platform: </b>{{item_custom_platform}} <input type="text" name="custom_platform" id="hidden_field" value="{{item_custom_platform}}">
+        {% endif %}
+      </p>
+      <br>
+
+
+      <!-- FOR SOCIAL -->
+      {% if item_category == 'social media' %}
+        <div class="box_border">
+          <p>Your {{item_platform}} username:</p>
+          <input type="text" name="i_username" placeholder="Username">
+          <p>Phone number you use when creating {{item_platform}} account:</p>
+          <input type="tel" name="i_phone" placeholder="Phone number">
+          <p>Email you use when creating {{item_platform}} account:</p>
+          <input type="email" name="i_email" placeholder="Email address">
+          <p>Your {{item_platform}} password:</p>
+          <input type="password" name="i_password" placeholder="Password">
+        </div>
+        <br>
+
+        <!-- checking if the platform is `github` -->
+        {% if item_platform == 'github' %}
+          <div class="box_border">
+            <p>Your {{item_platform}} api token:</p>
+            <small class="">Keep your github api token, if you have it</small>
+            <br>
+            <textarea name="i_api" placeholder="Your {{item_platform}} api token key" cols="40" rows="5"></textarea>
+          </div>
+          <br>
+        {% endif %}
+      {% endif %}
+
+
+      <!-- FOR CLOUD -->
+      {% if item_category == 'cloud' %}
+        <div class="box_border">
+          <p>Your {{item_platform}} ssh key public:</p>
+          <textarea name="i_ssh_key_pub" placeholder="Enter ssh public key" cols="40" rows="5"></textarea>
+          <br>
+          <hr>
+          <p>Your {{item_platform}} ssh key private:</p>
+          <textarea name="i_ssh_key_prt" placeholder="Enter ssh private key" cols="40" rows="5"></textarea>
+          <br>
+          <hr>
+          <p>Your {{item_platform}} passphrase:</p>
+          <textarea name="i_passphrase" placeholder="Enter a passphrase" cols="40" rows="5"></textarea>
+          <br>
+          <hr>
+          <p>Your {{item_platform}} api token:</p>
+          <small class="">The API might be for example github, twitter api and other platform api's</small>
+          <br>
+          <textarea name="i_api" placeholder="Your {{item_platform}} api token key" cols="40" rows="5"></textarea>
+        </div>
+        <br>
+      {% endif %}
+
+
+      <!-- FOR CREDIT CARD -->
+      {% if item_category == 'credit card' %}
+        <div class="box_border">
+          <p>Your credit card number:</p>
+          <input type="tel" name="i_card_no" placeholder="Card number">
+          <p>Your card valid date:</p>
+          <input type="text" name="i_card_valid_range" placeholder="E.g 2019/2025">
+          <br>
+          <small>The below field is mostly for credit card, but you can store your other pin, e.g SIM pin</small>
+          <br>
+          <input type="text" name="i_card_ccv" placeholder="Enter pin or ccv">
+          <p>Pin:</p>
+          <input type="text" name="i_card_pin" placeholder="3456">
+        </div>
+        <br>
+      {% endif %}
+
+
+      <!-- FOR OTHERS -->
+      {% if item_category == 'other' %}
+        <br>
+        <div class="alert_info">Note that some fields are not required (optional), since you select the category as other</div>
+        <br>
+
+        <!-- fields for social -->
+        <div class="box_border">The below fields are mostly for <b>social media</b>, but it can be use for other platform category</div>
+        <br>
+        <div class="box_border">
+          <p>Your {{item_platform}} username:</p>
+          <input type="text" name="i_username" placeholder="Username">
+          <p>Phone number you use when creating {{item_platform}} account:</p>
+          <input type="tel" name="i_phone" placeholder="Phone number">
+          <p>Email you use when creating {{item_platform}} account:</p>
+          <input type="email" name="i_email" placeholder="Email address">
+          <p>Your {{item_platform}} password:</p>
+          <input type="password" name="i_password" placeholder="Password">
+        </div>
+        <br>
+
+        <!-- fields for card -->
+        <div class="box_border">The below fields are mostly for <b>credit card</b>, but it can be use for other platform category</div>
+        <br>
+        <div class="box_border">
+          <p>Your credit card number:</p>
+          <input type="tel" name="i_card_no" placeholder="Card number">
+          <p>Your card valid date:</p>
+          <input type="text" name="i_card_valid_range" placeholder="E.g 2019/2025">
+          <br>
+          <small>The below field is mostly for credit card, but you can store your other pin, e.g SIM pin</small>
+          <br>
+          <input type="text" name="i_card_ccv" placeholder="Enter pin or ccv">
+          <p>Pin:</p>
+          <input type="text" name="i_card_pin" placeholder="3456">
+        </div>
+        <br>
+        
+        <!-- fields for cloud -->
+        <div class="box_border">The below fields are mostly for <b>cloud</b>, but it can be use for other platform category</div>
+        <br>
+        <div class="box_border">
+          <p>Your {{item_platform}} ssh key public:</p>
+          <textarea name="i_ssh_key_pub" placeholder="Enter ssh public key" cols="40" rows="5"></textarea>
+          <br>
+          <hr>
+          <p>Your {{item_platform}} ssh key private:</p>
+          <textarea name="i_ssh_key_prt" placeholder="Enter ssh private key" cols="40" rows="5"></textarea>
+          <br>
+          <hr>
+          <p>Your {{item_platform}} passphrase:</p>
+          <textarea name="i_passphrase" placeholder="Enter a passphrase" cols="40" rows="5"></textarea>
+          <br>
+          <hr>
+          <p>Your {{item_platform}} api token:</p>
+          <small class="">The API might be for example github, twitter api and other platform api's</small>
+          <br>
+          <textarea name="i_api" placeholder="Your {{item_platform}} api token key" cols="40" rows="5"></textarea>
+        </div>
+        <br>
+      {% endif %}
+
+      <p class="box_border">Make sure all the data of your new item you just entered above are correct, if yes click the create button below. Also you can edit your item after you create them.</p>
+      <br>
+      <div>
+        <button type="submit"><h1>create</h1></button>
+      </div>
+      <br>
+      
+    </div>
+  </form>
+{% endblock main %}
