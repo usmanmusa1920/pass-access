@@ -22,8 +22,8 @@
           {% block link %}
             <!-- links -->
           {% endblock link %}
-          <a href="#">About</a>
-          <a href="#">Privacy</a>
+          <a href="#" class="h_link">About</a>
+          <a href="#" class="h_link">Privacy</a>
         </div>
       </div>
     </div>
@@ -39,9 +39,15 @@
     </div>
 
     <div class="foot">
-      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugit ipsum eius deserunt minima. Provident quae, ratione sit tempore magnam tempora possimus, explicabo quasi pariatur, mollitia enim! Eum temporibus ab accusamus.</p>
+      <h1>Encme</h1>
       <br>
-      <p>Alright reserved &copy; 2007 - {{the_year}}</p>
+      <p>A password and sensitive information manager, that encrypt and save them for a user, which can be decrypt by the use when ever need to be. A security application that secure sensitive informations.</p>
+      &nbsp; <li><a href="{% url 'auth:login' %}">Login</a></li>
+      &nbsp; <li><a href="{% url 'auth:signup' %}">Sign Up</a></li>
+      &nbsp; <li><a href="#">About</a></li>
+      &nbsp; <li><a href="#">Privacy</a></li>
+      <br>
+      <p>Alright reserved &copy; 2022 - {{the_year}}</p>
     </div>
 
   </div>

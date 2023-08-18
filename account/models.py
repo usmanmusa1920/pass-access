@@ -15,10 +15,6 @@ class UserAccountManager(BaseUserManager):
 
         It help if you want to make a user not to be active when creating him, by making the `is_activ=False`:
             e.g:
-                User.objects.create_superuser(first_name='Ali', is_active=False)
-
-                or
-
                 User.objects.create_user(first_name='Ali', is_active=False)
         """
         if not first_name:
@@ -54,10 +50,6 @@ class UserAccountManager(BaseUserManager):
         It help if you want to make a user not to be active when creating him, by making the `is_activ=False`:
             e.g:
                 User.objects.create_superuser(first_name='Ali', is_active=False)
-
-                or
-
-                User.objects.create_user(first_name='Ali', is_active=False)
         """
         user = self.create_user(
             first_name=first_name,

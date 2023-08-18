@@ -41,6 +41,18 @@ body{
   background-color: rgb(3, 3, 60);
 }
 
+@media only screen and (max-width: 700px){
+  .head{
+    padding: 15px;
+  }
+}
+
+@media only screen and (max-width: 1050px){
+  .head{
+    padding: 15px;
+  }
+}
+
 .head h1 a{
   color: white;
   text-decoration: none;
@@ -51,10 +63,36 @@ body{
   align-items: center;
 }
 
-.head div a{
+.h_link, .h_link_sm{
   color: white;
   font-size: 18px;
   margin-left: 10px;
+}
+
+.h_link_sm{
+  display: none;
+}
+
+@media only screen and (max-width: 700px){
+  .h_link{
+    margin-left: 3px;
+    display: none;
+  }
+  .h_link_sm{
+    display: block;
+    font-size: 20px;
+  }
+}
+
+@media only screen and (max-width: 1050px){
+  .h_link{
+    margin-left: 3px;
+    display: none;
+  }
+  .h_link_sm{
+    display: block;
+    font-size: 20px;
+  }
 }
 
 .form{
@@ -69,5 +107,25 @@ body{
 
 .foot{
   width: 100%;
-  padding: 100px;
+  padding: 50px 150px;
+  color: white;
+  background: rgb(50, 50, 63);
+}
+
+@media only screen and (max-width: 700px){
+  .foot{
+    width: 100%;
+    padding: 10px 50px;
+  }
+}
+
+@media only screen and (max-width: 1050px){
+  .foot{
+    width: 100%;
+    padding: 10px 50px;
+  }
+}
+
+.foot a{
+  color: white;
 }

@@ -7,7 +7,8 @@
 {% endblock head %}
 
 {% block link %}
-  <a href="{% url 'auth:signup' %}">Sign up</a>
+  <a href="{% url 'auth:signup' %}" class="h_link">Sign up</a>
+  <a href="{% url 'auth:signup' %}" class="h_link_sm">Sign up</a>
 {% endblock link %}
 
 
@@ -15,7 +16,7 @@
   <form method="post">
     {% csrf_token %}
     <h1>Login to your account</h1>
-    <p>Join the community everywhere every time!</p>
+    <p>Security application that secure sensitive informations!</p>
     <span>Email:</span>
     <input type="email" name="username" placeholder="Email addres" class="input" autofocus required>
     {% if form.email.errors %}

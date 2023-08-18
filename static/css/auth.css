@@ -20,6 +20,18 @@
   overflow: scroll;
 }
 
+@media only screen and (max-width: 700px){
+  .form form{
+    width: 95%;
+  }
+}
+
+@media only screen and (max-width: 1050px){
+  .form form{
+    width: 95%;
+  }
+}
+
 .form form span{
   width: 70%;
   text-align: start;
@@ -35,6 +47,18 @@
   border-bottom: 3px darkgrey solid;
   border-radius: 3px;
   background: white;
+}
+
+@media only screen and (max-width: 700px){
+  .input{
+    width: 90%;
+  }
+}
+
+@media only screen and (max-width: 1050px){
+  .input{
+    width: 90%;
+  }
 }
 
 .input:focus{
