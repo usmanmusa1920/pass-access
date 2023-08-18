@@ -1,0 +1,89 @@
+{% extends 'secureapp/base_2.html' %}
+{% load static %}
+{% block head %}
+  <link rel="stylesheet" href="{% static 'css/auth.css' %}">
+  <title>Encme | update profile</title>
+{% endblock head %}
+
+{% block link %}
+  <a href="{% url 'auth:login' %}" class="h_link">Login</a>
+  <a href="{% url 'auth:login' %}" class="h_link_sm">Login</a>
+{% endblock link %}
+
+
+{% block form %}
+  <form method="post">
+    {% csrf_token %}
+    <h1>Update profile</h1>
+    <p>Update your profile informations!</p>
+
+    <!-- first name -->
+    {% if form.first_name.value == None or form.first_name.value == '' %}
+      <input type="text" name="first_name" placeholder="First name" class="input" maxlength="70" required>
+    {% else %}
+      <input type="text" name="first_name" placeholder="First name" value="{{form.instance.first_name}}" class="input" maxlength="70" required>
+    {% endif %}
+
+    <!-- last name -->
+    {% if form.last_name.value == None or form.last_name.value == '' %}
+      <input type="text" name="last_name" placeholder="Last name" class="input" maxlength="70" required>
+    {% else %}
+      <input type="text" name="last_name" placeholder="Last name" value="{{form.instance.last_name}}" class="input" maxlength="70" required>
+    {% endif %}
+    
+    <!-- gender -->
+    <span>Gender:</span>
+    <div class="radio">
+      {% if form.instance.gender == 'male' %}
+        <input type="radio" name="gender" value="female" required> Female
+        <input type="radio" name="gender" value="male" checked required> Male
+      {% elif form.instance.gender == 'female' %}
+        <input type="radio" name="gender" value="female" checked required> Female
+        <input type="radio" name="gender" value="male"  required> Male
+      {% else %}
+        <input type="radio" name="gender" value="female" required> Female
+        <input type="radio" name="gender" value="male"  required> Male
+      {% endif %}
+    </div>
+
+    <!-- date of birth -->
+    <span>Date of birth:</span>
+    <div class="calender">
+      <input type="date" name="date_of_birth" required>
+    </div>
+    {% if form.date_of_birth.errors %}
+      <div class="err_danger">
+        <small>{{form.date_of_birth.errors}}</small>
+      </div>
+    {% endif %}
+
+    <!-- username -->
+    {% if form.username.value == None or form.username.value == '' %}
+      <input type="text" name="username" placeholder="Username" class="input" required>
+    {% else %}
+      <input type="text" name="username" placeholder="Username" value="{{form.instance.username}}" class="input" required>
+    {% endif %}
+    {% if form.username.errors %}
+      <div class="err_danger">
+        <small>{{form.username.errors}}</small>
+      </div>
+    {% endif %}
+
+    <!-- phone number -->
+    {% if form.phone_number.value == None or form.phone_number.value == '' %}
+      <input type="text" name="phone_number" placeholder="Phone number (e.g +12125552368)" class="input" required>
+    {% else %}
+      <input type="text" name="phone_number" placeholder="Phone number (e.g +12125552368)" value="{{form.instance.phone_number}}" class="input" required>
+    {% endif %}
+    {% if form.phone_number.errors %}
+      <div class="err_danger">
+        <small>{{form.phone_number.errors}}</small>
+      </div>
+    {% endif %}
+
+    <!-- country -->
+    {{form.country}}
+    <button type="submit">Update</button>
+    <p>Back to <a href="{% url 'secureapp:home' %}">Home</a></p>
+  </form>
+{% endblock form %}

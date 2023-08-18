@@ -75,6 +75,8 @@
 
           {% if request.user.is_authenticated %}
             <p><a href="admin">Admin</a></P>
+            <p><a href="{% url 'auth:update_profile' %}">Update profile</a></P>
+              <p><a href="{% url 'auth:change_password' %}">Change password</a></P>
             <p><a href="{% url 'auth:logout' %}">Logout</a></P>
           {% else %}
             <p><a href="{% url 'auth:login' %}">Login</a></P>
@@ -104,7 +106,7 @@
         <div class="l_header">
           <img src="{% static 'img/show_menu.png' %}" id="show_menu" alt="" onclick="showMenu()">
           <img src="{% static 'img/show_menu.png' %}" id="hide_menu" alt="" onclick="hideMenu()">
-          <a href="{% url 'secureapp:home' %}"><h1>process</h1></a>
+          <a href="{% url 'secureapp:home' %}"><h1>Encme</h1></a>
         </div>
 
         <div class="r_header">

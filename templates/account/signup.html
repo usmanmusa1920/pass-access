@@ -16,51 +16,70 @@
     {% csrf_token %}
     <h1>Create an account</h1>
     <p>Security application that secure sensitive informations!</p>
+
+    <!-- first and last name -->
     <input type="text" name="first_name" placeholder="First name" class="input" maxlength="70" autofocus required>
     <input type="text" name="last_name" placeholder="Last name" class="input" maxlength="70" required>
+
+    <!-- gender -->
     <span>Gender:</span>
     <div class="radio">
       <input type="radio" name="gender" value="female" required> Female
       <input type="radio" name="gender" value="male" required> Male
     </div>
+
+    <!-- date of birth -->
     <span>Date of birth:</span>
     <div class="calender">
       <input type="date" name="date_of_birth" required>
     </div>
     {% if form.date_of_birth.errors %}
-      <div class="alert-warning">
+      <div class="err_danger">
         <small>{{form.date_of_birth.errors}}</small>
       </div>
     {% endif %}
+
+    <!-- username -->
     <input type="text" name="username" placeholder="Username" class="input" required>
     {% if form.username.errors %}
-      <div class="alert-warning">
+      <div class="err_danger">
         <small>{{form.username.errors}}</small>
       </div>
     {% endif %}
+
+    <!-- email -->
     <input type="email" name="email" placeholder="Email addres" class="input" required>
     {% if form.email.errors %}
-      <div class="alert-warning">
+      <div class="err_danger">
         <small>{{form.email.errors}}</small>
       </div>
     {% endif %}
+
+    <!-- phone number -->
     <input type="tel" name="phone_number" placeholder="Phone number (e.g +12125552368)" class="input" required>
-    <div class="select">
-      {{form.country}}
-    </div>
+    {% if form.phone_number.errors %}
+      <div class="err_danger">
+        <small>{{form.phone_number.errors}}</small>
+      </div>
+    {% endif %}
+
+    <!-- country -->
+    {{form.country}}
+
+    <!-- password -->
     <input type="password" name="password1" placeholder="Password" minlength="8" class="input" required>
     {% if form.password1.errors %}
-      <div class="alert-warning">
+      <div class="err_danger">
         <small>{{form.password1.errors}}</small>
       </div>
     {% endif %}
     <input type="password" name="password2" placeholder="Password again" minlength="8" class="input" required>
     {% if form.password2.errors %}
-      <div class="alert-warning">
+      <div class="err_danger">
         <small>{{form.password2.errors}}</small>
       </div>
       <div class="warn">
-        <small>
+        <small class="err_danger">
           Password should not be similar to your account information, with a min-length of 8 character and avoid using numeric password entirely. Include symbols to make it strong like (?/@.^*) etc.
         </small>
       </div>

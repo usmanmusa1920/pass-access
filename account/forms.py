@@ -16,13 +16,11 @@ class SignupForm(UserCreationForm):
     """signup form class"""
     class Meta:
         model = User
-        fields = ['first_name', 'last_name', 'gender', 'date_of_birth',
-                  'username', 'email', 'phone_number', 'country', 'password1', 'password2']
+        fields = ['first_name', 'last_name', 'gender', 'date_of_birth', 'username', 'email', 'phone_number', 'country', 'password1', 'password2']
 
 
 class UpdateForm(forms.ModelForm):
     """update form class"""
     class Meta:
         model = User
-        fields = ['first_name', 'last_name', 'gender', 'date_of_birth',
-                  'username', 'email', 'phone_number', 'country']
+        fields = ['first_name', 'last_name', 'gender', 'date_of_birth', 'username', 'phone_number', 'country']

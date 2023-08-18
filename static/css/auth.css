@@ -2,13 +2,12 @@
   text-align: center;
   padding: 0 200px;
   font-size: 3rem;
-  /* font-size: 20px; */
   font-weight: lighter;
   background: white;
 }
 
 .form form{
-  width: 50%;
+  width: 40%;
   min-height: 70vh;
   display: flex;
   flex-direction: column;
@@ -22,14 +21,19 @@
 
 @media only screen and (max-width: 700px){
   .form form{
-    width: 95%;
+    width: 90%;
   }
 }
 
 @media only screen and (max-width: 1050px){
   .form form{
-    width: 95%;
+    width: 90%;
   }
+}
+
+.form p{
+  margin: 0 5px;
+  text-align: center;
 }
 
 .form form span{
@@ -37,46 +41,75 @@
   text-align: start;
 }
 
-.input{
-  width: 70%;
-  height: 30px;
-  padding: 0 10px;
-  margin: 8px 0;
-  outline: none;
-  border: none;
-  border-bottom: 3px darkgrey solid;
-  border-radius: 3px;
-  background: white;
-}
-
 @media only screen and (max-width: 700px){
-  .input{
+  .form form span{
     width: 90%;
   }
 }
 
 @media only screen and (max-width: 1050px){
-  .input{
+  .form form span{
     width: 90%;
   }
 }
 
-.input:focus{
-  border-bottom: 3px grey solid;
-  /* width: 72%;
-  height: 33px; */
+.input, #id_country{
+  width: 70%;
+  height: 33px;
+  padding: 0 10px;
+  margin: 8px 0;
+  outline: none;
+  border: none;
+  border-radius: 3px;
+  background: white;
 }
 
-.input:hover{
-  border-bottom: 3px white solid;
+@media only screen and (max-width: 700px){
+  .input, #id_country{
+    width: 90%;
+  }
+}
+
+@media only screen and (max-width: 1050px){
+  .input, #id_country{
+    width: 90%;
+  }
+}
+
+.input:focus, .input:hover{
   width: 72%;
   height: 33px;
 }
 
-.radio{
+@media only screen and (max-width: 700px){
+  .input:focus, .input:hover{
+    width: 92%;
+    height: 33px;
+  }
+}
+
+@media only screen and (max-width: 1050px){
+  .input:focus, .input:hover{
+    width: 92%;
+    height: 33px;
+  }
+}
+
+.radio, .calender{
   display: flex;
-  /* justify-content: flex-start; */
   width: 70%;
+}
+
+@media only screen and (max-width: 700px){
+  .radio, .calender{
+    width: 90%;
+  }
+}
+
+@media only screen and (max-width: 1050px){
+  .radio, .calender{
+    width: 90%;
+  }
 }
 
 .radio input, .calender input{
@@ -84,11 +117,6 @@
   outline: none;
   padding: 5px;
   margin: 3px;
-}
-
-.calender{
-  display: flex;
-  width: 70%;
 }
 
 .form form button{

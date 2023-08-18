@@ -24,7 +24,7 @@ def check_user_pascode_set(view):
     def wrapper(request, *args, **kwargs):
         if request.user.securepass.passcode_ingredient == "" or request.user.securepass.passcode_ingredient == None or request.user.passcode_hash == "" or request.user.passcode_hash == None:
             flash_msg.warning(
-                request, f'NoooooooYou must finish setting up your account passcode, before you store any item')
+                request, f'You must finish setting up your account passcode, before you store any item')
             return redirect('secureapp:set_secure')
         # else:
         #     return redirect('secureapp:new_item')
@@ -46,14 +46,6 @@ def home(request):
         'the_year': the_year,
     }
     return render(request, 'account/landing.html', context)
-
-
-def signup(request):
-    the_year = datetime.today().year
-    context = {
-        'the_year': the_year,
-    }
-    return render(request, 'account/signup.html', context)
 
 
 def searchTrustedUser(request, item_id):

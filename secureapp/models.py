@@ -6,7 +6,6 @@ from django.contrib.auth import get_user_model
 User = get_user_model()
 
 
-
 class Categories(models.Model):
     timestamp = models.DateTimeField(default=timezone.now)
     category_key = models.CharField(max_length=255)

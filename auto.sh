@@ -25,6 +25,6 @@ user_no_1 = User.objects.create_superuser(
 user_no_1.save()
 
 exit()
-rm dump.json
-python manage.py dumpdata --format json --indent 4 > dump.json
+# rm dump.json
+# python manage.py dumpdata --format json --indent 4 > dump.json
 python manage.py runserver

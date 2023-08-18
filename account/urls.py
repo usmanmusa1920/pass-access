@@ -1,5 +1,5 @@
 from django.urls import path, include
-from .views import (LoginCustom, LogoutCustom, change_password, signup)
+from .views import (LoginCustom, LogoutCustom, change_password, signup, update_profile)
 
 
 app_name = 'auth'
@@ -14,12 +14,10 @@ urlpatterns = [
     # change password
     path(
         'change/password/', change_password, name='change_password'),
-
     # register new administrator
     path(
         'signup/', signup, name='signup'),
-
-    # # administrator update profile info...
-    # path(
-    #     'administrator/profile/update', Update.administrator_info, name='administrator_update_info'),
+    # administrator update profile info...
+    path(
+        'update/profile/', update_profile, name='update_profile'),
 ]
