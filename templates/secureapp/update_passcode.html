@@ -29,15 +29,17 @@
         <input type="email" name="verify_email" placeholder="Enter your email" required>
         <br>
         <br>
-        <input type="password" name="old_passcode" class="old_passcode" placeholder="Enter old passcode" minlength="8" required>
+        <input type="password" name="old_passcode" placeholder="Enter old passcode" minlength="8" required>
         <br>
         <br>
-        <input type="password" name="passcode_ingredient" placeholder="Enter new passcode" minlength="8" oninput="validatePasscodeValue_update(this)" required>
+        <input type="password" name="passcode_ingredient" class="passcode_ingredient" placeholder="Enter new passcode" minlength="8" required>
+        <br>
+        <br>
+        <input type="password" name="verify_passcode" placeholder="Verify new passcode" minlength="8" oninput="validatePasscodeValue(this)" required>
         <br>
         <small class="selected_passcode_error">Two passcode fields mis-match</small>
         <small class="selected_passcode_success">Your two passcode fields match</small>
         <br>
-        <input type="password" name="verify_passcode" placeholder="Verify new passcode" minlength="8" required>
         {{form.errors}}
       </div>
       <br>

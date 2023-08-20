@@ -1,10 +1,11 @@
 from django.db import models
+from django.conf import settings
 from django.utils import timezone
+from django_countries.fields import CountryField
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
 from phonenumber_field.modelfields import PhoneNumberField
-from django_countries.fields import CountryField
 
-from django.conf import settings
+
 User = settings.AUTH_USER_MODEL
 
 
@@ -78,7 +79,18 @@ class UserAccount(AbstractBaseUser):
     email = models.EmailField(max_length=255, unique=True)
     phone_number = PhoneNumberField(max_length=100, unique=False)
     country = CountryField(max_length=100, blank_label='Select your country',)
-    date_joined = models.DateTimeField(default=timezone.now)
+    date_joined = models.DateTimeField(default=timezone.now) # date_joined (not editable)
+    last_modified = models.DateTimeField(auto_now=True) # last modified (not editable)
+
+    """
+    `date_joined` above is not editable, also
+    `last_modified` above is not editable too! but,
+
+    the default `last_login` for users is editable, like wise
+    the `pub_date` below is editable
+
+    pub_date = models.DateTimeField(default=timezone.now) # (editable)
+    """
 
     # user passcode hash
     passcode_hash = models.TextField(blank=True, null=True)
@@ -108,3 +120,13 @@ class UserAccount(AbstractBaseUser):
 
     def has_module_perms(self, app_label):
         return True
+    
+    
+class PassCode(models.Model):
+    """passcode table for storing users passcode"""
+    owner = models.OneToOneField(User, on_delete=models.CASCADE)
+    passcode_ingredient = models.TextField(blank=True, null=True)
+    date_modified = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return f'{self.owner.username}\'s secure passcode'

@@ -1,36 +1,26 @@
 from django import forms
 from django.contrib.auth import get_user_model
-from .models import SecurePass, SecureItemInfo, ItemSecretIngredient, ItemSecret
+from .models import SecureItemInfo
+from account.models import PassCode
 
 
 User = get_user_model()
 
 
-class SecurePassForm(forms.ModelForm):
-    """Setting up passcode form for the first time"""
+class PassCodeForm(forms.ModelForm):
+    """Setting up passcode for the first time, and renewing passcode form"""
 
     """
     the below field is not available in the model, it is just for comparing two fields,
     to make sure they match before we save into database
     """
-    verify_email = forms.EmailField()
-    verify_passcode = forms.CharField()
-
-    class Meta:
-        model = SecurePass
-        fields = ['passcode_ingredient']
-        
-
-class UpdateSecurePasscode(forms.ModelForm):
-    """Renewing passcode form"""
-
     verify_email = forms.EmailField()
     """
     the below field is not available in the model, it is just for comparing two fields,
     (old passcode in database, and the old passcode that a user claim),
-    to make sure they match before we save into database
+    to make sure they match before we save into database. It is use only when user is updating his/her passcode, that is why it is not `required=False`
     """
-    old_passcode = forms.CharField()
+    old_passcode = forms.CharField(required=False)
     """
     the below field is not available in the model, it is just for comparing two fields,
     (new_passcode, and new_passcode_again) to make sure they match before we save into database
@@ -38,12 +28,12 @@ class UpdateSecurePasscode(forms.ModelForm):
     verify_passcode = forms.CharField()
 
     class Meta:
-        model = SecurePass
+        model = PassCode
         fields = ['passcode_ingredient']
         
 
-class AccounFormForPasscode(forms.ModelForm):
-    """this is use along side with the (SecurePassForm and UpdateSecurePasscode) form, for passcode renew"""
+class AccountPassCodeForm(forms.ModelForm):
+    """this is use along side with the (PassCodeForm and UpdatePassCodeForm) form, for passcode renew"""
 
     class Meta:
         model = User
@@ -73,19 +63,3 @@ class SecureItemInfoForm_2(forms.ModelForm):
     class Meta:
         model = SecureItemInfo
         fields = ['the_key', 'custom_platform', 'i_username', 'i_phone', 'i_email', 'i_password', 'i_passphrase', 'i_api', 'i_ssh_key_pub', 'i_ssh_key_prt', 'i_card_no', 'i_card_valid_range', 'i_card_ccv', 'i_card_pin']
-        
-
-class InfoSecretForm(forms.ModelForm):
-    """ # """
-
-    class Meta:
-        model = ItemSecret
-        fields = ['the_hash', 'the_private']
-        
-        
-class InfoIngredientForm(forms.ModelForm):
-    """ # """
-
-    class Meta:
-        model = ItemSecretIngredient
-        fields = ['ingredient']

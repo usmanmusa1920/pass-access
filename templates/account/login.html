@@ -7,8 +7,8 @@
 {% endblock head %}
 
 {% block link %}
-  <a href="{% url 'auth:signup' %}" class="h_link">Sign up</a>
-  <a href="{% url 'auth:signup' %}" class="h_link_sm">Sign up</a>
+  <a href="{% url 'auth:signup' %}" class="h_link">Sign Up</a>
+  <a href="{% url 'auth:signup' %}" class="h_link_sm">Sign Up</a>
 {% endblock link %}
 
 
@@ -41,6 +41,6 @@
       {{form.error}}
     {% endif %}
     <button type="submit">Login</button>
-    <p>Don't have an account? <a href="{% url 'auth:signup' %}">Signup</a></p>
+    <p>Don't have an account? <a href="{% url 'auth:signup' %}">Sign Up</a></p>
   </form>
 {% endblock form %}

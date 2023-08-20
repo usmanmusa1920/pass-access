@@ -1,6 +1,6 @@
 from django.urls import path
 from .views import (
-    home, setSecurePasscode, updateSecurePasscode, itemInfo, addTrustedUser, removeTrustedUser, searchTrustedUser, newItem, newItemFields
+    home, setPassCode, UpdatePassCode, itemInfo, addTrustedUser, removeTrustedUser, searchTrustedUser, newItem, newItemFields
 )
 
 
@@ -9,9 +9,9 @@ app_name = 'secureapp'
 urlpatterns = [
     path('', home, name='home'),
     path(
-        'set/secure/', setSecurePasscode, name='set_secure'),
+        'set/passcode/', setPassCode, name='set_passcode'),
     path(
-        'update/secure/', updateSecurePasscode, name='update_secure'),
+        'update/passcode/', UpdatePassCode, name='update_passcode'),
     path(
         'item/info/<int:item_id>/', itemInfo, name='item_info'),
     path(

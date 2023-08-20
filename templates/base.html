@@ -51,12 +51,10 @@
           <h1>Category</h1>
           <p><a href="{% url 'secureapp:home' %}">Dashboard</a></P>
           <p><a href="{% url 'secureapp:new_item' %}">New item</a></P>
-            <p><a href="{% url 'secureapp:set_secure' %}">Set secure</a></P>
-            <p><a href="{% url 'secureapp:update_secure' %}">Update secure</a></P>
-          {% if request.user.securepass.p_passcode == None %}
-            <p><a href="{% url 'secureapp:set_secure' %}">Finish setting passcode</a></P>
-          {% else %}
-              <!-- pass -->
+            <p><a href="{% url 'secureapp:set_passcode' %}">Set secure</a></P>
+            <p><a href="{% url 'secureapp:update_passcode' %}">Update secure</a></P>
+          {% if request.user.passcode.passcode_ingredient == None or request.user.passcode.passcode_ingredient == '' %}
+            <p><a href="{% url 'secureapp:set_passcode' %}">Finish setting passcode</a></P>
           {% endif %}
         </div>
         <br>
@@ -96,7 +94,7 @@
           <small>Get 
             <a href="#">help</a> from encme community or start live <a href="#">chat</a> with our people
           </small>
-          <p>2007 - {{the_year}}</p>
+          <p>2022 - {{the_year}}</p>
         </div>
       </div>
     </div>

@@ -1,12 +1,13 @@
 from django.db import models
 from django.utils import timezone
 from django.contrib.auth import get_user_model
+from account.models import PassCode
 
 
 User = get_user_model()
 
 
-class Categories(models.Model):
+class Category(models.Model):
     timestamp = models.DateTimeField(default=timezone.now)
     category_key = models.CharField(max_length=255)
     category_value = models.CharField(max_length=255)
@@ -15,24 +16,14 @@ class Categories(models.Model):
         return f"This category is \'{self.category_key}\'"
     
 
-class Platforms(models.Model):
+class Platform(models.Model):
+    category = models.ForeignKey(Category, on_delete=models.CASCADE)
     timestamp = models.DateTimeField(default=timezone.now)
     platform_key = models.CharField(max_length=255)
     platform_value = models.CharField(max_length=255)
-    category = models.ForeignKey(Categories, on_delete=models.CASCADE)
 
     def __str__(self):
         return f"This platform is \'{self.platform_key}\'"
-    
-
-class SecurePass(models.Model):
-    """passcode table for storing users passcode"""
-    owner = models.OneToOneField(User, on_delete=models.CASCADE)
-    passcode_ingredient = models.TextField(blank=True, null=True)
-    date_modified = models.DateTimeField(auto_now=True)
-
-    def __str__(self):
-        return f'{self.owner.username}\'s secure passcode'
     
 
 class SecureItemInfo(models.Model):
@@ -44,7 +35,7 @@ class SecureItemInfo(models.Model):
     custom_platform = models.CharField(max_length=100, blank=True, null=True)
     visibility = models.CharField(max_length=100, default='private')
 
-    i_owner = models.ForeignKey(SecurePass, on_delete=models.CASCADE)
+    i_owner = models.ForeignKey(PassCode, on_delete=models.CASCADE)
     trusted_user = models.ManyToManyField(User, blank=True)
     i_label = models.CharField(max_length=255, blank=False, null=False)
 

@@ -26,7 +26,7 @@
         <b>Category: </b>{{item_category}} <input type="text" name="category" id="hidden_field" value="{{item_category}}">
         <br>
         <b>Platform: </b>{{item_platform}} <input type="text" name="platform" id="hidden_field" value="{{item_platform}}">
-        {% if item_custom_platform == None %}
+        {% if item_custom_platform == None or item_custom_platform == '' %}
           <!-- pass -->
         {% else %}
           <br>
@@ -87,15 +87,15 @@
       {% endif %}
 
 
-      <!-- FOR CREDIT CARD -->
-      {% if item_category == 'credit card' %}
+      <!-- FOR card -->
+      {% if item_category == 'card' %}
         <div class="box_border">
-          <p>Your credit card number:</p>
+          <p>Your card number:</p>
           <input type="tel" name="i_card_no" placeholder="Card number">
           <p>Your card valid date:</p>
           <input type="text" name="i_card_valid_range" placeholder="E.g 2019/2025">
           <br>
-          <small>The below field is mostly for credit card, but you can store your other pin, e.g SIM pin</small>
+          <small>The below field is mostly for card, but you can store your other pin, e.g SIM pin</small>
           <br>
           <input type="text" name="i_card_ccv" placeholder="Enter pin or ccv">
           <p>Pin:</p>
@@ -127,15 +127,15 @@
         <br>
 
         <!-- fields for card -->
-        <div class="box_border">The below fields are mostly for <b>credit card</b>, but it can be use for other platform category</div>
+        <div class="box_border">The below fields are mostly for <b>card</b>, but it can be use for other platform category</div>
         <br>
         <div class="box_border">
-          <p>Your credit card number:</p>
+          <p>Your card number:</p>
           <input type="tel" name="i_card_no" placeholder="Card number">
           <p>Your card valid date:</p>
           <input type="text" name="i_card_valid_range" placeholder="E.g 2019/2025">
           <br>
-          <small>The below field is mostly for credit card, but you can store your other pin, e.g SIM pin</small>
+          <small>The below field is mostly for card, but you can store your other pin, e.g SIM pin</small>
           <br>
           <input type="text" name="i_card_ccv" placeholder="Enter pin or ccv">
           <p>Pin:</p>

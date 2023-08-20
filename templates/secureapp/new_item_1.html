@@ -37,6 +37,8 @@
       </div>
       <br>
 
+      <!-- hiding this field, but the javascript will detect it for validating a category if it exist in our database -->
+      <textarea class="categories" cols="30" rows="10" style="display: none;">{{l_category}}</textarea>
       <!-- select category here -->
       <div class="box_border">
         <p><b>Select category</b></p>
@@ -47,15 +49,15 @@
 
           <!-- for social media -->
           {% if site_item.category_value == 'social media' %}
-            <span class="rad"><input type="radio" value="{{site_item.category_value}}" name="category" id="sel_1" onclick="social_fun(this)">{{site_item.category_key}} <br></span>
+            <span class="rad"><input type="radio" value="{{site_item.category_value}}" name="category" id="sel_1" onclick="social_fun(this)" onfocus="validateCategoryValue(this)" required>{{site_item.category_key}} <br></span>
 
-          <!-- for credit card -->
-          {% elif site_item.category_value == 'credit card' %}
-            <span class="rad"><input type="radio" value="{{site_item.category_value}}" name="category" id="sel_1" onclick="card_fun(this)">{{site_item.category_key}} <br></span>
+          <!-- for card -->
+          {% elif site_item.category_value == 'card' %}
+            <span class="rad"><input type="radio" value="{{site_item.category_value}}" name="category" id="sel_1" onclick="card_fun(this)" onfocus="validateCategoryValue(this)" required>{{site_item.category_key}} <br></span>
 
           <!-- for others (cloud, and other) -->
           {% else %}
-            <span class="rad"><input type="radio" value="{{site_item.category_value}}" name="category" id="sel_1" onclick="{{site_item.category_value}}_fun(this)">{{site_item.category_key}} <br></span>
+            <span class="rad"><input type="radio" value="{{site_item.category_value}}" name="category" id="sel_1" onclick="{{site_item.category_value}}_fun(this)" onfocus="validateCategoryValue(this)" required>{{site_item.category_key}} <br></span>
           {% endif %}
         {% endfor %}
         <br>
@@ -67,15 +69,17 @@
       </div>
       <br>
 
+      <!-- hiding this field, but the javascript will detect it for validating a platfor if it exist in our database -->
+      <textarea class="platforms" cols="30" rows="10" style="display: none;">{{l_platform}}</textarea>
       <!-- for social platform -->
       <div class="box_border" id="plat_social" style="height: 100px; overflow-y: scroll">
         <p><b>Select platform</b></p>
         {% for site_item in site_platform %}
           {% if site_item.category.category_value == 'social media' %}
-            <span class="rad"><input type="radio" value="{{site_item.platform_value}}" name="platform" id="sel_4" onclick="plat_select_fun(this)">{{site_item.platform_key}} <br></span>
+            <span class="rad"><input type="radio" value="{{site_item.platform_value}}" name="platform" id="sel_4" onclick="plat_select_fun(this)" onfocus="validatePlatformValue(this)" required>{{site_item.platform_key}} <br></span>
           {% endif %}
         {% endfor %}
-        <span class="rad"><input type="radio" value="custom" name="platform" id="sel_4" onclick="plat_select_fun(this)">Custom <br></span>
+        <span class="rad"><input type="radio" value="custom" name="platform" id="sel_4" onclick="plat_select_fun(this)" onfocus="validatePlatformValue(this)" required>Custom <br></span>
         <br>
       </div>
       
@@ -83,11 +87,11 @@
       <div class="box_border" id="plat_card" style="height: 100px; overflow-y: scroll">
         <p><b>Select platform</b></p>
         {% for site_item in site_platform %}
-          {% if site_item.category.category_value == 'credit card' %}
-            <span class="rad"><input type="radio" value="{{site_item.platform_value}}" name="platform" id="sel_4" onclick="plat_select_fun(this)">{{site_item.platform_key}} <br></span>
+          {% if site_item.category.category_value == 'card' %}
+            <span class="rad"><input type="radio" value="{{site_item.platform_value}}" name="platform" id="sel_4" onclick="plat_select_fun(this)" onfocus="validatePlatformValue(this)" required>{{site_item.platform_key}} <br></span>
           {% endif %}
         {% endfor %}
-        <span class="rad"><input type="radio" value="custom" name="platform" id="sel_4" onclick="plat_select_fun(this)">Custom <br></span>
+        <span class="rad"><input type="radio" value="custom" name="platform" id="sel_4" onclick="plat_select_fun(this)" onfocus="validatePlatformValue(this)" required>Custom <br></span>
         <br>
       </div>
       
@@ -96,10 +100,10 @@
         <p><b>Select platform</b></p>
         {% for site_item in site_platform %}
           {% if site_item.category.category_value == 'cloud' %}
-            <span class="rad"><input type="radio" value="{{site_item.platform_value}}" name="platform" id="sel_4" onclick="plat_select_fun(this)">{{site_item.platform_key}} <br></span>
+            <span class="rad"><input type="radio" value="{{site_item.platform_value}}" name="platform" id="sel_4" onclick="plat_select_fun(this)" onfocus="validatePlatformValue(this)" required>{{site_item.platform_key}} <br></span>
           {% endif %}
         {% endfor %}
-        <span class="rad"><input type="radio" value="custom" name="platform" id="sel_4" onclick="plat_select_fun(this)">Custom <br></span>
+        <span class="rad"><input type="radio" value="custom" name="platform" id="sel_4" onclick="plat_select_fun(this)" onfocus="validatePlatformValue(this)" required>Custom <br></span>
         <br>
       </div>
       
@@ -108,16 +112,16 @@
         <p><b>Select platform</b></p>
         {% for site_item in site_platform %}
           {% if site_item.category.category_value == 'other' %}
-            <span class="rad"><input type="radio" value="{{site_item.platform_value}}" name="platform" id="sel_4" onclick="plat_select_fun(this)">{{site_item.platform_key}} <br></span>
+            <span class="rad"><input type="radio" value="{{site_item.platform_value}}" name="platform" id="sel_4" onclick="plat_select_fun(this)" onfocus="validatePlatformValue(this)" required>{{site_item.platform_key}} <br></span>
           {% endif %}
         {% endfor %}
-        <span class="rad"><input type="radio" value="custom" name="platform" id="sel_4" onclick="plat_select_fun(this)">Custom <br></span>
+        <span class="rad"><input type="radio" value="custom" name="platform" id="sel_4" onclick="plat_select_fun(this)" onfocus="validatePlatformValue(this)" required>Custom <br></span>
         <br>
       </div>
       <br>
       <span class="selected_platform_span">
         <!-- showing our selected platform value here -->
-        Platform selected: <input type="text" name="selected_platform" class="selected_platform" placeholder="Don't write just select"  oninput="validatePlatformValue(this)" required>
+        Platform selected: <input type="text" name="selected_platform" class="selected_platform" placeholder="Don't write just select" oninput="validatePlatformValue(this)" required>
 
         <!-- the custom platform will be inputed by end user -->
         <span class="custom_platform_span">
