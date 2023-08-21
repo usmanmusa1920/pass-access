@@ -14,7 +14,7 @@ from .forms import (
 )
 from account.models import PassCode
 from toolkit.decorators import check_user_pascode_set, passcode_required
-from toolkit import PasscodeSecurity, InformationSecurity, MixinTrick
+from toolkit import PasscodeSecurity, InformationSecurity, MixinTrick, SliceDetector
 
 
 User = get_user_model()
@@ -98,6 +98,7 @@ def searchTrustedUser(request, item_id):
     return redirect(reverse('secureapp:item_info', kwargs={'item_id': item_id}))
 
 
+# @passcode_required(next_url='secureapp:item_info', item_id=1)
 @login_required
 def itemInfo(request, item_id):
     item_unveil_info = SecureItemInfo.objects.get(id=item_id)  # the item info
@@ -315,25 +316,13 @@ def UpdatePassCode(request):
     """function for updating user passcode"""
     
     user_email = request.user.email
-    
-    """ingredient (salt + iteration + second hash) respectively"""
-    old_ingredient = request.user.passcode.passcode_ingredient
-    
-    """(second hash) from custome user model"""
-    real_hash = request.user.passcode_hash
-    """(second hash) slicing it from old_ingredient"""
-    slice_hash = old_ingredient[-len(real_hash):]
-    
-    """
-    slicing ingredient from old_ingredient, starting from index zero to the actual length of the (real_hash) above
-    """
-    slice_ingre = old_ingredient[: -len(slice_hash)]
-    
-    """slicing iteration from the (slice_ingre) above from index -6 to the end"""
-    slice_iter = slice_ingre[-6:]
-    
-    """slicing salt from the first index of the (slice_ingre) to index -6"""
-    slice_salt = slice_ingre[: -6]
+
+    # getting passcode
+    slc = SliceDetector(request)
+    slice_hash = slc._hash
+    slice_ingre = slc._ingre
+    slice_salt = slc._salt
+    slice_iter = slc._iter
     
     if request.method == 'POST':
         """

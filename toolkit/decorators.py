@@ -23,17 +23,25 @@ def check_user_pascode_set(*args_1, **kwargs_1):
     return decorator
 
 
-def passcode_required(next_url):
+def passcode_required(next_url, *url_args, **url_kwargs):
     """decorator for checking if the user passcode is real"""
     def decorator(view):
         @login_required
         def wrapper(request, *args, **kwargs):
+
+            # replacing next url `/` to `-` to avoid error, because if we live it without converting it, it will be a different route not the passcode validation route
+            next_url_str = redirect(next_url).url.replace('/', '-')
+            
             if request.user.auth_token != None and request.user.auth_token != '':
+
+                # taking the user auth_token, by default it is in string including the bytes characters e.g (b'eyJhyc'), we remove the first `b`, single qoute `'` and last single qoute `'`
                 u_token = request.user.auth_token[2:-1].encode('utf-8')
                 verify = verify_token(u_token)
+
                 if verify:
                     # if session is not expired
                     return view(request, *args, **kwargs)
-            return redirect('auth:validate_passcode', next_url=next_url)
+            return redirect('auth:validate_passcode', next_url=str(next_url_str))
+            # return redirect('auth:validate_passcode', url_args, url_kwargs,next_url=str(next_url_str))
         return wrapper
     return decorator

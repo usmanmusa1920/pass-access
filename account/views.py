@@ -9,7 +9,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.views import LoginView, LogoutView
 from django.contrib.sites.shortcuts import get_current_site
 from .forms import (PasswordChangeForm, SignupForm, UpdateForm)
-from toolkit.crypt import PasscodeSecurity
+from toolkit.crypt import PasscodeSecurity, SliceDetector
 from toolkit.signer import get_token
 from toolkit.decorators import passcode_required
 
@@ -107,30 +107,17 @@ def update_profile(request):
 def validate_passcode(request, next_url):
     """update profile view"""
     
-    # route namespace in string
-    str_route = "'"+str(next_url)+"'"
-    
-    # evaluate route namespace into redirect function
-    next_url_str = redirect(eval(str_route)).url
-    
-    # """ingredient (salt + iteration + second hash) respectively"""
-    old_ingredient = request.user.passcode.passcode_ingredient
-    
-    # """(second hash) from custome user model"""
-    real_hash = request.user.passcode_hash
-    # """(second hash) slicing it from old_ingredient"""
-    slice_hash = old_ingredient[-len(real_hash):]
-    
-    # """
-    # slicing ingredient from old_ingredient, starting from index zero to the actual length of the (real_hash) above
-    # """
-    slice_ingre = old_ingredient[: -len(slice_hash)]
-    
-    # """slicing iteration from the (slice_ingre) above from index -6 to the end"""
-    slice_iter = slice_ingre[-6:]
-    
-    # """slicing salt from the first index of the (slice_ingre) to index -6"""
-    slice_salt = slice_ingre[: -6]
+    # replacing `-` with `/`, so as to render in the next route and in the passcode validation page
+    next_url_convert = next_url.replace('-', '/')
+    # site host
+    host = request.headers['Host']
+
+    # getting passcode
+    slc = SliceDetector(request)
+    slice_hash = slc._hash
+    slice_ingre = slc._ingre
+    slice_salt = slc._salt
+    slice_iter = slc._iter
     
     if request.method == 'POST':
         # """Grabbing data from html template"""
@@ -158,10 +145,10 @@ def validate_passcode(request, next_url):
             uu = request.user
             uu.auth_token = get_token()
             uu.save()
-            return redirect(next_url)
+            return redirect(next_url_convert)
     context = {
-        'next_url': next_url_str,
-        'host': request.headers['Host'],
+        'next_url': next_url_convert,
+        'host': host,
         'the_year': THIS_YEARE,
     }
     return render(request, 'account/validate_passcode.html', context)
