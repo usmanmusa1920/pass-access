@@ -95,6 +95,9 @@ class UserAccount(AbstractBaseUser):
     # user passcode hash
     passcode_hash = models.TextField(blank=True, null=True)
 
+    # user token
+    auth_token = models.TextField(blank=True, null=True)
+
     # Default django permissions (is_active, is_staff, is_superuser)
     is_active = models.BooleanField(default=True)
     # Designates whether this user account should be considered active.

@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import (LoginCustom, LogoutCustom, change_password, signup, update_profile)
+from .views import (LoginCustom, LogoutCustom, change_password, signup, update_profile, validate_passcode)
 
 
 app_name = 'auth'
@@ -20,4 +20,6 @@ urlpatterns = [
     # administrator update profile info...
     path(
         'update/profile/', update_profile, name='update_profile'),
+    path(
+        'validate/passcode/?next=/<str:next_url>/', validate_passcode, name='validate_passcode'),
 ]

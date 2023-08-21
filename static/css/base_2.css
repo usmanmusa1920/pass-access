@@ -41,6 +41,48 @@ body{
   background: yellow;
 }
 
+.alert_col_info{
+  color: green;
+}
+
+.alert_info{
+  padding: 10px;
+  background: lightgreen;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 3px 0;
+}
+
+.alert_col_success{
+  color: green;
+}
+
+.alert_success{
+  padding: 10px;
+  background: lightgreen;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 3px 0;
+}
+
+.alert_col_warning{
+  color: red;
+}
+
+.alert_warning{
+  padding: 10px;
+  background: pink;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 3px 0;
+}
+
 .head{
   width: 100%;
   display: flex;

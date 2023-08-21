@@ -1,14 +1,14 @@
 # -*- coding: utf-8 -*-
-import hashlib
 import base64
 import random
+import hashlib
 from cryptography.fernet import Fernet
 
 # # put this some where safe!
 # key = Fernet.generate_key()
 # f = Fernet(key)
 
-# token_public = f.encrypt(b"My secret message here!")
+# token_public = f.encrypt(b'My secret message here!')
 # token_private = f.decrypt(token_public)
 
 # print(key)
@@ -18,22 +18,20 @@ from cryptography.fernet import Fernet
 
 class PasscodeSecurity:
     """
-    Passcode class for suggesting user passcode iteration, generating salt, and creating secure passcode for every user
-    """
-
-    """
+    Passcode class for generating iteration number, salting, and creating secure passcode for every user along side with second hash.
+    
     A reqular expression that matches any character that
     should never appear in base 64 encodings would be:
     [^A-Za-z0-9+/=]
 
     we follow the base64 pattern of [^A-Za-z0-9+/=] that should never appear in base64, (in regex)
 
-    Usage:
-        pass_cls = PasscodeSecurity()
-        pass_salt = pass_cls.passcode_salt
-        pass_itter = pass_cls.passcode_iteration
-        print(pass_salt)
-        print(pass_cls.get_hash(pass_salt, pass_itter, 'my secure password'))
+    NOTE: usage:
+        >>> pass_cls = PasscodeSecurity()
+        >>> pass_salt = pass_cls.passcode_salt
+        >>> pass_itter = pass_cls.passcode_iteration
+        >>> print(pass_salt)
+        >>> print(pass_cls.get_hash(pass_salt, pass_itter, 'my secure password'))
     """
 
     token_sm_alpha = 'abcdefghijklmnopqrstuvwxyz'
@@ -42,12 +40,11 @@ class PasscodeSecurity:
     token_char = '/+='
     token_sum = token_sm_alpha + token_cap_alpha + token_num
 
-    """
-    We times the above variable (token_sum) by 2 (total length is 124),
-    so that we will randomly select from it without any restriction,
-    since we make the minimum length of the salt to be 32 and the maximum to be 64,
-    and also it will randomly select from that range of (32 - 64)
-    """
+    # We times the above variable (token_sum) by 2 (total length is 124),
+    # so that we will randomly select from it without any restriction,
+    # since we make the minimum length of the salt to be 32 and the maximum to be 64,
+    # and also it will randomly select from that range of (32 - 64)
+
     token_times = token_sum * 2
     token_list = list(token_times)
     random.shuffle(token_list) # shuffling the above list
@@ -85,24 +82,35 @@ class PasscodeSecurity:
         """
         generating our key using this class method, and also the return type of the key is bytes
         """
-        key = hashlib.pbkdf2_hmac(
-            'sha256', # The hash digest algorithm for HMAC
-            passwd.encode('utf-8'), # Convert the password to bytes
-            salt.encode('utf-8'), # Convert the salt to bytes
-            itter, # iteration type is integer
-            dklen=128 # Get a 128 byte key
-        )
+        if type(passwd) == str:
+            # for hashing user passcode
+            key = hashlib.pbkdf2_hmac(
+                'sha256', # The hash digest algorithm for HMAC
+                passwd.encode('utf-8'), # Convert the password to bytes
+                salt.encode('utf-8'), # Convert the salt to bytes
+                itter, # iteration type is integer
+                dklen=128 # Get a 128 byte key
+            )
+        elif type(passwd) == bytes:
+            # for hashing user public and private key
+            key = hashlib.pbkdf2_hmac(
+                'sha256', # The hash digest algorithm for HMAC
+                passwd, # Our password (public key) is already in bytes type
+                salt.encode('utf-8'), # Convert the salt to bytes
+                itter, # iteration type is integer
+                dklen=128 # Get a 128 byte key
+            )
+        else:
+            raise TypeError
         
-        """
-        Base64 encoding convert the binary data (sequence of byte) into text format,
-        to avoid data corruption when transfer via only text channel.
-        It is Privacy enhanced Electronic Mail (PEM).
+        # Base64 encoding convert the binary data (sequence of byte) into text format,
+        # to avoid data corruption when transfer via only text channel.
+        # It is Privacy enhanced Electronic Mail (PEM).
         
-        We use ascii to encode the (key)
-        """
+        # We use ascii to encode the (key)
         
         # encodeing the key, type is string
-        b64_encode = base64.b64encode(key).decode("ascii").strip()
+        b64_encode = base64.b64encode(key).decode('ascii').strip()
         # hashing our b64_encode (the second hash), type is string
         hash_result = hashlib.sha256(str.encode(str(b64_encode))).hexdigest()
         # salt + iteration + hash_result, type is string
@@ -112,54 +120,10 @@ class PasscodeSecurity:
         return [hash_result, secure_ingredient]
     
     def __str__(self):
-        return f"Passcode security class"
+        return f'Passcode security class'
     
 
-class InformationHash(PasscodeSecurity):
-    """
-    Information hash class for hashing user public and private key,
-    also for generating iteratiion number and the salting, along side with second hash
-    """
-    
-    def get_hash(self, salt, itter, passwd):
-        """
-        generating our key using this class method, and also
-        the return type of the key is bytes
-        """
-        key = hashlib.pbkdf2_hmac(
-            'sha256', # The hash digest algorithm for HMAC
-            passwd, # Our password (public key) is already in bytes type
-            salt.encode('utf-8'), # Convert the salt to bytes
-            itter, # iteration type is integer
-            dklen=128 # Get a 128 byte key
-        )
-
-        """
-        Base64 encoding convert the binary data (sequence of byte) into text format,
-        to avoid data corruption when transfer via only text channel.
-        It is Privacy enhanced Electronic Mail (PEM).
-
-        We use ascii to encode the (key)
-        """
-        # encodeing the key, type is string
-        b64_encode = base64.b64encode(key).decode("ascii").strip()
-        # hashing our b64_encode (the second hash), type is string
-        hash_result = hashlib.sha256(str.encode(str(b64_encode))).hexdigest()
-        # salt + iteration + hash_result, type is string
-        secure_ingredient = '%s%d%s' % (salt, itter, hash_result)
-        
-        print("\nThe salt is:  ", salt, sep='')
-        print("The itteration is:  ", itter, sep='')
-        print("This is the hashlib:  ", hash_result, sep='')
-        print("\nThis is the key:\n", key, "\n", sep='')
-        
-        return [hash_result, secure_ingredient] # return types of the list is string all
-    
-    def __str__(self):
-        return f"Information hash class"
-    
-
-class InformationSecurity(InformationHash):
+class InformationSecurity(PasscodeSecurity):
     """Information security class"""
 
     # put this some where safe! (the key),type is <class 'bytes'>
@@ -178,7 +142,7 @@ class InformationSecurity(InformationHash):
     def encrypt_info(self, info_tion, info_f_cls):
         """encrypting information"""
 
-        """encoding data from text to byte"""
+        # encoding data from text to byte
         data_byte = info_tion.encode('utf-8')
         token_public = info_f_cls.encrypt(data_byte)
         return token_public # return type is <class 'bytes'>
@@ -188,7 +152,7 @@ class InformationSecurity(InformationHash):
         t_base_ = Fernet(key)
 
         token_public = t_base_.decrypt(info_data)
-        """decoding the token_publick from byte to text"""
+        # decoding the token_publick from byte to text
         data_text = token_public.decode()
         return data_text # return type is <class 'str'>
     
@@ -204,22 +168,20 @@ class InformationSecurity(InformationHash):
         the_list = list(the_pass)
         random.shuffle(the_list) # shuffling the list
 
-        """
-        salting our passcode with this class method
+        # """
+        # salting our passcode with this class method
 
-        By using the random sample method, where we make:
-            population = the_list
-            k = random.randrange(205, 357, 7)
-        """
-        rand_key = "".join(random.sample(the_list, random.randrange(205, 357, 7)))
-
+        # By using the random sample method, where we make:
+        #     population = the_list
+        #     k = random.randrange(205, 357, 7)
+        # """
+        rand_key = ''.join(random.sample(the_list, random.randrange(205, 357, 7)))
         return rand_key # return type is str
     
     @property
     def fast_iteration(self):
         """
-
-            *** WE WILL USE THREADING AND MULTIPROCESSING, IN ADVANCE ***
+        We will use threading and multiprocessing in advance
 
         Generating a random iteration. The iterations is not static,
         it is dynamic (every item's iteration is randomly choosen),
@@ -232,7 +194,7 @@ class InformationSecurity(InformationHash):
         return itter # return type is integer
     
     def __str__(self):
-        return f"Information encrypt and decrypt"
+        return f'Information encrypt and decrypt'
     
 
 class MixinTrick:
@@ -248,10 +210,10 @@ class MixinTrick:
         d_1_graph = iteration_times - random.randrange(1, 10, 2)
         data_1 = str(d_1_graph) + INS_salt + INS_private.decode() + INS_hash
 
-        # [(itter * 2) + random.randint(1, 9)] + hash + (itter * 2) + "".join(random.sample(select_from_me, 1))
-        select_from_me = "internetcommunicationsecurity"
+        # [(itter * 2) + random.randint(1, 9)] + hash + (itter * 2) + ''.join(random.sample(select_from_me, 1))
+        select_from_me = 'internetcommunicationsecurity'
         d_2_graph = iteration_times + random.randint(1, 9)
-        data_2 = str(d_2_graph) + INS_hash + str(iteration_times) + "".join(random.sample(select_from_me, 1))
+        data_2 = str(d_2_graph) + INS_hash + str(iteration_times) + ''.join(random.sample(select_from_me, 1))
 
         # [(itter - random.randint(1, 10)) * 2] + private + hash + gen_salt
         d_3_graph = int(INS_iteration) - random.randint(1, 10)
@@ -295,9 +257,3 @@ class MixinTrick:
         real_private_key = p1[:-p2]
 
         return [real_gen_salt, real_iteration, real_hash, real_private_key]
-    
-    
-# a = InformationHash()
-# sl = a.passcode_salt
-# it = a.passcode_iteration
-# print(a.get_hash(sl, it, b'my secure password'))

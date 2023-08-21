@@ -36,6 +36,8 @@
   edit
   
   auth page or pop-up (for confirm delete)
+
+  password generator
   end -->
 
   <div class="container">
@@ -50,7 +52,7 @@
         <div class="category">
           <h1>Category</h1>
           <p><a href="{% url 'secureapp:home' %}">Dashboard</a></P>
-          <p><a href="{% url 'secureapp:new_item' %}">New item</a></P>
+            <p><a href="{% url 'secureapp:new_item' %}">New item</a></P>
             <p><a href="{% url 'secureapp:set_passcode' %}">Set secure</a></P>
             <p><a href="{% url 'secureapp:update_passcode' %}">Update secure</a></P>
           {% if request.user.passcode.passcode_ingredient == None or request.user.passcode.passcode_ingredient == '' %}

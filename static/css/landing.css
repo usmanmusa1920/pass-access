@@ -98,8 +98,25 @@
 }
 
 .two img{
-  width: 500px;
-  height: auto;
+  width: 100%;
+  min-height: 50vh;
+  height: 70vh;
+}
+
+@media only screen and (max-width: 700px){
+  .two img{
+    width: 500px;
+    min-height: auto;
+    height: auto;
+  }
+}
+
+@media only screen and (max-width: 1050px){
+  .two img{
+    width: 500px;
+    min-height: auto;
+    height: auto;
+  }
 }
 
 .form{

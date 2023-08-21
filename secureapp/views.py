@@ -13,7 +13,7 @@ from .forms import (
     PassCodeForm, AccountPassCodeForm, SecureItemInfoForm_1, SecureItemInfoForm_2
 )
 from account.models import PassCode
-from toolkit.decorators import check_user_pascode_set
+from toolkit.decorators import check_user_pascode_set, passcode_required
 from toolkit import PasscodeSecurity, InformationSecurity, MixinTrick
 
 
@@ -45,14 +45,12 @@ def searchTrustedUser(request, item_id):
     try:
         # This is a filter that filter user matching a giving query.
         search_result = User.objects.filter(
-
             Q(first_name__exact=search_panel) | Q(first_name__iexact=search_panel) | Q(first_name__startswith=search_panel) | Q(first_name__istartswith=search_panel) | Q(first_name__contains=search_panel) | Q(first_name__icontains=search_panel) | Q(first_name__endswith=search_panel) | Q(first_name__iendswith=search_panel) |
 
             Q(last_name__exact=search_panel) | Q(last_name__iexact=search_panel) | Q(last_name__startswith=search_panel) | Q(last_name__istartswith=search_panel) | Q(last_name__contains=search_panel) | Q(last_name__icontains=search_panel) | Q(last_name__endswith=search_panel) | Q(last_name__iendswith=search_panel) |
 
             Q(username__exact=search_panel) | Q(username__iexact=search_panel) | Q(username__startswith=search_panel) | Q(username__istartswith=search_panel) | Q(username__contains=search_panel) | Q(
                 username__icontains=search_panel) | Q(username__endswith=search_panel) | Q(username__iendswith=search_panel) | Q(phone_number=search_panel) | Q(email=search_panel)
-
         ).order_by('-date_joined')
     except:
         # This is a filter that filter user matching a giving query.
@@ -70,15 +68,15 @@ def searchTrustedUser(request, item_id):
     # s_user = User.objects.get(id=user_id)
     # flash_msg.warning(request, f'You added {u_t.first_name} as trusted user in your item ({i_id.custom_platform})')
     return redirect(reverse('secureapp:item_info', kwargs={'item_id': item_id}))
-    # return render(request, 'secureapp/se.html', context)
-
+    # return render(request, 'secureapp/add_trusted_user.html', context)
+    
 
 @login_required
 def addTrustedUser(request, item_id, user_id):
     u_t = User.objects.get(id=user_id)
     i_id = SecureItemInfo.objects.get(id=item_id)
     i_id.trusted_user.add(u_t)
-
+    
     flash_msg.success(
         request, f'You added {u_t.first_name} as trusted user in your item ({i_id.custom_platform})')
     return redirect(reverse('secureapp:item_info', kwargs={'item_id': item_id}))
@@ -89,7 +87,7 @@ def removeTrustedUser(request, item_id, user_id):
     u_t = User.objects.get(id=user_id)
     i_id = SecureItemInfo.objects.get(id=item_id)
     i_id.trusted_user.remove(u_t)
-
+    
     flash_msg.warning(
         request, f'You remove {u_t.first_name} as trusted user in your item ({i_id.custom_platform})')
     return redirect(reverse('secureapp:item_info', kwargs={'item_id': item_id}))
@@ -109,7 +107,7 @@ def itemInfo(request, item_id):
         rely_on_id=item_unveil_info.id)  # secret
     item_unveil_ingre = ItemSecretIngredient.objects.get(
         rely_on_id=item_unveil_info.id)  # ingredient
-
+    
     # [(itter * 2) - random.randint(1, 10, 2)] + gen_salt + key + hash
     item_key = item_unveil_info.the_key
     i_username_pub = item_unveil_info.i_username  # username public key
@@ -125,7 +123,7 @@ def itemInfo(request, item_id):
     i_card_valid_range_pub = item_unveil_info.i_card_valid_range
     i_card_ccv_pub = item_unveil_info.i_card_ccv  # card_ccv public key
     i_card_pin_pub = item_unveil_info.i_card_pin  # card_pin public key
-
+    
     # [(itter * 2) + random.randint(1, 9)] + hash + (itter * 2) + "".join(random.sample(select_from_me, 1))
     item_the_hash = item_unveil_secret.the_hash
     # [(itter - random.randint(1, 10)) * 2] + private + hash + gen_salt
@@ -139,10 +137,10 @@ def itemInfo(request, item_id):
     #   real iteration = my_result[1],
     #   real hash = my_result[2],
     #   real private key = my_result[3]
-
+    
     # calling our encryption class
     _BASE_ = InformationSecurity()
-
+    
     """
     in the following `i_<item_field>_pub` fields we check for the field
     of each to see if it is not empty or it is not None, and if it is not
@@ -221,7 +219,7 @@ def itemInfo(request, item_id):
             i_card_pin_pub.encode('utf-8'), my_result[3])
     else:
         decrypt_i_card_pin = ''
-
+        
     context = {
         'item_unveil_info': item_unveil_info,
         'decrypt_i_username': decrypt_i_username,
@@ -243,7 +241,7 @@ def itemInfo(request, item_id):
 @login_required
 def setPassCode(request):
     user_email = request.user.email
-
+    
     if request.method == 'POST':
         """
         The acc_form is not going to be use in HTML template,
@@ -252,53 +250,52 @@ def setPassCode(request):
         """
         acc_form = AccountPassCodeForm(request.POST, instance=request.user)
         pass_form = PassCodeForm(request.POST, instance=request.user.passcode)
-
+        
         if pass_form.is_valid() and acc_form.is_valid():
             """getting data from HTML template, only for pass_form"""
             verify_user_email = pass_form.cleaned_data.get('verify_email')
             verify_new_passcode = pass_form.cleaned_data.get('verify_passcode')
-            verify_new_passcode_again = pass_form.cleaned_data.get(
-                'passcode_ingredient')
-
+            verify_new_passcode_again = pass_form.cleaned_data.get('passcode_ingredient')
+            
             """authenticating email address"""
             if verify_user_email != user_email:
                 flash_msg.warning(
                     request, f'Email address you enter didn`t match with your account email address')
                 pass_form = PassCodeForm(instance=request.user.passcode)
                 return render(request, 'secureapp/set_passcode.html', {'pass_form': pass_form})
-
+            
             """length Validation of the two fields"""
             if len(verify_new_passcode) < 8 or len(verify_new_passcode_again) < 8:
                 flash_msg.warning(request, f'Your passcode length must be at least 8 character')
                 pass_form = PassCodeForm(instance=request.user.passcode)
                 return render(request, 'secureapp/set_passcode.html', {'pass_form': pass_form})
-
+            
             """Validating the two fields"""
             if verify_new_passcode != verify_new_passcode_again:
                 flash_msg.warning(request, f'The two passcode field mis-match, try again')
                 pass_form = PassCodeForm(instance=request.user.passcode)
                 return render(request, 'secureapp/set_passcode.html', {'pass_form': pass_form})
-
+            
             """committing the two forms save method to false"""
             instance_1 = pass_form.save(commit=False)
             instance_2 = acc_form.save(commit=False)
-
+            
             """invoking the PasscodeSecurity class"""
             auth_pass = PasscodeSecurity()
             salt_q = auth_pass.passcode_salt  # salt of the passcode
             iter_q = auth_pass.passcode_iteration  # iteration of the passcode
-
+            
             # the key of the passcode
             auth_result = auth_pass.get_hash(salt_q, iter_q, verify_new_passcode_again)
             # second hash after been encoded using base64
             hashed_passcode = auth_result[0]
             # the ingredient of the hash (salt + iteration + second_hash) respectively
             pass_ingredient = auth_result[1]
-
+            
             """assigning instances value"""
             instance_1.passcode_ingredient = pass_ingredient
             instance_2.passcode_hash = hashed_passcode
-
+            
             """saving the instances"""
             instance_1.save()
             instance_2.save()
@@ -313,30 +310,31 @@ def setPassCode(request):
 
 
 @check_user_pascode_set(flash_for='update')
+@passcode_required(next_url='secureapp:update_passcode')
 def UpdatePassCode(request):
     """function for updating user passcode"""
-
+    
     user_email = request.user.email
     
     """ingredient (salt + iteration + second hash) respectively"""
     old_ingredient = request.user.passcode.passcode_ingredient
-
+    
     """(second hash) from custome user model"""
     real_hash = request.user.passcode_hash
     """(second hash) slicing it from old_ingredient"""
     slice_hash = old_ingredient[-len(real_hash):]
-
+    
     """
     slicing ingredient from old_ingredient, starting from index zero to the actual length of the (real_hash) above
     """
     slice_ingre = old_ingredient[: -len(slice_hash)]
-
+    
     """slicing iteration from the (slice_ingre) above from index -6 to the end"""
     slice_iter = slice_ingre[-6:]
-
+    
     """slicing salt from the first index of the (slice_ingre) to index -6"""
     slice_salt = slice_ingre[: -6]
-
+    
     if request.method == 'POST':
         """
         The acc_form is not going to be use in HTML template,
@@ -344,7 +342,7 @@ def UpdatePassCode(request):
         """
         acc_form = AccountPassCodeForm(request.POST, instance=request.user)
         pass_form = PassCodeForm(request.POST, instance=request.user.passcode)
-
+        
         if pass_form.is_valid() and acc_form.is_valid():
             """Grabbing data from html template"""
             verify_user_email = pass_form.cleaned_data.get('verify_email')
@@ -352,20 +350,20 @@ def UpdatePassCode(request):
             # old_raw_passcode = request.POST['old_passcode']
             new_raw_passcode = pass_form.cleaned_data.get('passcode_ingredient')
             verify_new_passcode = pass_form.cleaned_data.get('verify_passcode')
-
+            
             """authenticating email address"""
             if verify_user_email != user_email:
                 flash_msg.warning(
                     request, f'Email address you enter didn`t match with your account email address')
                 pass_form = PassCodeForm(instance=request.user.passcode)
                 return render(request, 'secureapp/update_passcode.html', {'pass_form': pass_form})
-
+            
             """length Validation of the three fields"""
             if len(old_raw_passcode) < 8 or len(new_raw_passcode) < 8 or len(verify_new_passcode) < 8:
                 flash_msg.warning(request, f'Your passcode length must be at least 8 character')
                 pass_form = PassCodeForm(instance=request.user.passcode)
                 return render(request, 'secureapp/update_passcode.html', {'pass_form': pass_form})
-
+            
             """
             The below confirm_* is use to authenticate the old passcode that a user claim (old_raw_passcode),
             and compare it with the one he/she want to change it (the one he/she is using, i.e `slice_ingre`).
@@ -374,7 +372,7 @@ def UpdatePassCode(request):
             confirm_result = confirm_auth.get_hash(slice_salt, int(slice_iter), old_raw_passcode)
             confirm_passcode = confirm_result[0]
             confirm_ingredient = confirm_result[1][: -len(confirm_passcode)]
-
+            
             """
             comparing the second hash (old), with the new second hash (compare one), like wise also;
             comparing the ingredient (old), with the new ingredient (compare one),
@@ -384,13 +382,13 @@ def UpdatePassCode(request):
                 flash_msg.warning(request, f'Your old passcode is incorrect')
                 pass_form = PassCodeForm(instance=request.user.passcode)
                 return render(request, 'secureapp/update_passcode.html', {'pass_form': pass_form})
-
+            
             """authenticating two fields for new passcode"""
             if verify_new_passcode != new_raw_passcode:
                 flash_msg.warning(request, f'The two passcode field mis-match, try again')
                 pass_form = PassCodeForm(instance=request.user.passcode)
                 return render(request, 'secureapp/update_passcode.html', {'pass_form': pass_form})
-
+            
             """
             comparing the two html fields with each other, and comparing the old ingredient with the confirm one, for the renewal
             """
@@ -399,26 +397,26 @@ def UpdatePassCode(request):
                 renew_pass = PasscodeSecurity()
                 new_salt = renew_pass.passcode_salt  # salt of the renew passcode
                 new_iter = renew_pass.passcode_iteration  # iteration of  the renew passcode
-
+                
                 # the key of the passcode
                 pass_result = renew_pass.get_hash(new_salt, new_iter, new_raw_passcode)
                 # second hash after been encode using base64
                 new_passcode = pass_result[0]
                 # the ingredient of the hash (salt + iteration + second_hash) respectively
                 new_ingredient = pass_result[1]
-
+                
                 """committing the two forms save method to false"""
                 instance_1 = pass_form.save(commit=False)
                 instance_2 = acc_form.save(commit=False)
-
+                
                 """assigning instances value"""
                 instance_1.passcode_ingredient = new_ingredient
                 instance_2.passcode_hash = new_passcode
-
+                
                 """saving instances"""
                 instance_1.save()
                 instance_2.save()
-
+                
                 flash_msg.success(request, f'Your passcode is updated')
                 return redirect('secureapp:home')
     else:
@@ -430,11 +428,12 @@ def UpdatePassCode(request):
 
 
 @check_user_pascode_set(flash_for='item')
+@passcode_required(next_url='secureapp:new_item')
 def newItem(request):
     """First page for saving new item"""
     site_platform = Platform.objects.all()
     site_categories = Category.objects.all()
-
+    
     """
     making list of platform, by using list comprehension. By default it will
     return a tuples of (id, timestamp, platform_key, platform_value, category_id),
@@ -442,10 +441,10 @@ def newItem(request):
     """
     # l_platform = [i[4] for i in Platform.objects.values_list()]
     l_platform = [i['platform_value'] for i in Platform.objects.values_list().all().values()]
-
+    
     # appending `custom`` in the `l_platform` list, because we did not added it directly into our database, to avoid being categorize into a category. Which will make us do alot if we add it there
     l_platform.append('custom')
-
+    
     """
     making list of category, by using list comprehension. By default it will
     return a tuples of (id, timestamp, category_key, category_value),
@@ -453,10 +452,10 @@ def newItem(request):
     """
     # l_category = [i[3] for i in Category.objects.values_list()]
     l_category = [i['category_value'] for i in Category.objects.values_list().all().values()]
-
+    
     # our default visibility list
     l_visibility = ['private', 'team', 'organisation']
-
+    
     if request.method == 'POST':
         form = SecureItemInfoForm_1(request.POST)
         if form.is_valid():
@@ -466,18 +465,18 @@ def newItem(request):
             item_platform = form.cleaned_data.get("selected_platform")
             item_custom_platform = form.cleaned_data.get("custom_platform")
             item_visibility = form.cleaned_data.get("visibility")
-
+            
             context = {
                 'item_category': item_category,
                 'item_visibility': item_visibility,
                 'item_platform': item_platform,
                 'item_custom_platform': item_custom_platform,
                 'item_label': item_label,
-
+                
                 'site_categories': site_categories,
                 'site_platform': site_platform,
             }
-
+            
             """Checking for whether if a user edited the hidden fields by inspecting the page"""
             if item_visibility not in l_visibility:
                 context = {
@@ -490,7 +489,7 @@ def newItem(request):
                 flash_msg.warning(
                     request, f'May be you edited your visibility field(s), thats why we redirect you back')
                 return render(request, 'secureapp/new_item_1.html', context)
-
+            
             if item_category not in l_category:
                 context = {
                     'form': form,
@@ -502,7 +501,7 @@ def newItem(request):
                 flash_msg.warning(
                     request, f'May be you edited your category field(s), thats why we redirect you back')
                 return render(request, 'secureapp/new_item_1.html', context)
-
+            
             if item_platform not in l_platform:
                 context = {
                     'form': form,
@@ -528,10 +527,11 @@ def newItem(request):
 
 
 @check_user_pascode_set(flash_for='item')
+@passcode_required(next_url='secureapp:new_item_fields')
 def newItemFields(request):
     """Second page for saving new item"""
     the_i_owner = PassCode.objects.get(id=request.user.passcode.id)
-
+    
     """
     making list of platform, by using list comprehension. By default it will
     return a tuples of (id, timestamp, platform_key, platform_value, category_id),
@@ -539,10 +539,10 @@ def newItemFields(request):
     """
     # l_platform = [i[4] for i in Platform.objects.values_list()]
     l_platform = [i['platform_value'] for i in Platform.objects.values_list().all().values()]
-
+    
     # appending `custom`` in the `l_platform` list, because we did not added it directly into our database, to avoid being categorize into a category. Which will make us do alot if we add it there
     l_platform.append('custom')
-
+    
     """
     making list of category, by using list comprehension. By default it will
     return a tuples of (id, timestamp, category_key, category_value),
@@ -550,7 +550,7 @@ def newItemFields(request):
     """
     # l_category = [i[3] for i in Category.objects.values_list()]
     l_category = [i['category_value'] for i in Category.objects.values_list().all().values()]
-
+    
     # our default visibility list
     l_visibility = ['private', 'team', 'organisation']
     
@@ -563,7 +563,7 @@ def newItemFields(request):
             i_platform = form.cleaned_data.get("platform")
             i_custom_platform = form.cleaned_data.get("custom_platform")
             visibility = form.cleaned_data.get("visibility")
-
+            
             """Checking for whether if a user edited the hidden fields by inspecting the page"""
             if visibility not in l_visibility:
                 context = {
@@ -586,25 +586,25 @@ def newItemFields(request):
                 flash_msg.warning(
                     request, f'May be you edited your platform field(s), thats why we redirect you back')
                 return render(request, 'secureapp/new_item_1.html', context)
-
+            
             # fields for social
             i_username = form.cleaned_data.get('i_username')
             i_phone = form.cleaned_data['i_phone']
             i_email = form.cleaned_data['i_email']
             i_password = form.cleaned_data['i_password']
-
+            
             # fields for cloud
             i_passphrase = form.cleaned_data['i_passphrase']
             i_api = form.cleaned_data['i_api']
             i_ssh_key_pub = form.cleaned_data['i_ssh_key_pub']
             i_ssh_key_prt = form.cleaned_data['i_ssh_key_prt']
-
+            
             # fields for card
             i_card_no = form.cleaned_data['i_card_no']
             i_card_valid_range = form.cleaned_data['i_card_valid_range']
             i_card_ccv = form.cleaned_data['i_card_ccv']
             i_card_pin = form.cleaned_data['i_card_pin']
-
+            
             # checking if all the fields are empty
             if i_username == '' and i_phone == None and i_email == None and i_password == None and i_passphrase == None and i_api == None and i_ssh_key_pub == None and i_ssh_key_prt == None and i_card_no == None and i_card_valid_range == None and i_card_ccv == None and i_card_pin == None:
                 form = SecureItemInfoForm_2()
@@ -614,14 +614,14 @@ def newItemFields(request):
                 flash_msg.warning(
                     request, f'All fields can\'t be empty, try again')
                 return redirect('secureapp:new_item')
-
+            
             # calling our encryption class and it's ancesstors
             _BASE_ = InformationSecurity()
             ITEM_private = _BASE_.crypt_key_32  # private key
             fernet_base_class = _BASE_.f_cls  # the fernet class
             # randomly generated salt for pbkdf2_hmac hashing
             ITEM_salt_generation = _BASE_.the_key()
-
+            
             """
             These are items public keys, and we are by passing them,
             if an item is an empty space `''` or is `None`, else we will encrypt it
@@ -650,7 +650,7 @@ def newItemFields(request):
                 i_card_ccv_encrypt_info = _BASE_.encrypt_info(i_card_ccv, fernet_base_class)
             if i_card_pin != '' and i_card_pin != None:
                 i_card_pin_encrypt_info = _BASE_.encrypt_info(i_card_pin, fernet_base_class)
-
+                
             # generating iteration for our item, i.e iteration number (3 digit e.g, 212)
             ITEM_get_iteration = _BASE_.fast_iteration
             # get hash method, return a list of [hash_result, secure_ingredient]
@@ -669,7 +669,7 @@ def newItemFields(request):
             #   the_hash = INS_result[1],
             #   the_private = INS_result[2],
             #   ingredient = INS_result[3]
-
+            
             # assigning the required item fields to their instances
             instance = form.save(commit=False)
             instance.i_owner = the_i_owner
@@ -680,7 +680,7 @@ def newItemFields(request):
             if i_custom_platform != None or i_custom_platform == '':
                 instance.custom_platform = i_custom_platform.lower()
             instance.visibility = visibility
-
+            
             """
             checking to see if whether an item is not an empty space `''` or is `None`,
             before we decode it and assign it to the instance of the field of which we
@@ -717,7 +717,7 @@ def newItemFields(request):
             instance_secret = ItemSecret(
                 rely_on=instance, the_hash=INS_result[1], the_private=INS_result[2])
             instance_secret.save()
-
+            
             # for ingredient
             instance_ingedient = ItemSecretIngredient(
                 rely_on=instance, ingredient=INS_result[3])

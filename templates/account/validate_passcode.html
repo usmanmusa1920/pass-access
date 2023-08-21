@@ -1,0 +1,23 @@
+{% extends 'secureapp/base_2.html' %}
+{% load static %}
+{% block head %}
+  <link rel="stylesheet" href="{% static 'css/auth.css' %}">
+  <link rel="stylesheet" href="{% static 'css/login.css' %}">
+  <title>Encme | validate passcode</title>
+{% endblock head %}
+
+
+{% block form %}
+  <form method="post">
+    {% csrf_token %}
+    <img src="{% static 'css/img/lock.png' %}" class="vault" alt="">
+    <h1>Vault</h1>
+    <p>Enter your secret passcode, to unlock next page!</p>
+    <b>{{host}}{{next_url}}</b>
+    <br>
+    <!-- passcode -->
+    <input type="password" name="passcode" placeholder="Enter passcode" minlength="8" class="input" autofocus required>
+    <button type="submit">Authenticate</button>
+    <p>Back to <a href="{% url 'secureapp:home' %}">Home</a></p>
+  </form>
+{% endblock form %}

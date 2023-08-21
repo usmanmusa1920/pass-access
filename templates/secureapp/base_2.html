@@ -33,6 +33,15 @@
         </div>
       </div>
     </div>
+
+    <!-- flash messages -->
+    {% if messages %}
+      {% for flash_msg in messages %}
+        <div class="alert_{{flash_msg.tags}}">
+          <p class="alert_col_{{flash_msg.tags}}">{{flash_msg}}</p>
+        </div>
+      {% endfor %}
+    {% endif %}
     
     {% block main %}
       <!-- main content -->
