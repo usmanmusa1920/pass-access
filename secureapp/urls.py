@@ -1,15 +1,22 @@
 from django.urls import path
 from .views import (
-    home, setPassCode, UpdatePassCode, itemInfo, addTrustedUser, removeTrustedUser, searchTrustedUser, newItem, newItemFields
+    landing, dashboard, set_pass_code, UpdatePassCode, itemInfo, addTrustedUser, removeTrustedUser, searchTrustedUser, newItem, newItemFields
 )
 
 
 app_name = 'secureapp'
 
 urlpatterns = [
-    path('', home, name='home'),
+    path('', landing, name='landing'),
+    path('dashboard/', dashboard, name='dashboard'),
+
+    # below two path are for setting user passcode, the first path route is for setting user passcode if not set directly, while the second path route will be use if user try to go to route that required user passcode to be set, e.g if creating new item.
     path(
-        'set/passcode/', setPassCode, name='set_passcode'),
+        'set/passcode/', set_pass_code, name='set_passcode'),
+    path(
+        'set/passcode/?next=/<str:next_url>/', set_pass_code, name='set_passcode'),
+
+    # update route
     path(
         'update/passcode/', UpdatePassCode, name='update_passcode'),
     path(

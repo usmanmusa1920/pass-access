@@ -14,14 +14,15 @@
     <img src="{% static 'css/img/lock.png' %}" class="vault" alt="">
     <h1 class="h1_auth">Vault</h1>
     <p class="p_auth">Enter your secret passcode, to unlock next page!</p>
-    <b class="b_auth">{{host}}{{next_url}}</b>
+    <b class="b_auth">{{next_url_to_go}}</b>
     
-    <div class="two_1">
+    <!-- authentication illustration -->
+    <div class="authentic">
       <div class="cntr">
         <div class="circle"></div>
         <p class="scan">running</p>
         <div class="pointer-cntr">
-          <span class="pointer"></span>
+          <span class="pointer">O</span>
         </div>
         <div class="gradient-circle"></div>
       </div>
@@ -30,7 +31,7 @@
 
     <!-- passcode -->
     <input type="password" name="passcode" placeholder="Enter passcode" minlength="8" class="input" autocomplete="off" autofocus required>
-    <button type="submit" onclick="show_val_progress()">Authenticate</button>
-    <p>Back to <a href="{% url 'secureapp:home' %}">Home</a></p>
+    <button type="submit" onclick="show_val_progress()" class="btn">Authenticate</button>
+    <p class="p_home">Back to <a href="{% url 'secureapp:landing' %}">Home</a></p>
   </form>
 {% endblock form %}

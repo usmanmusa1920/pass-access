@@ -48,9 +48,16 @@
 
     <!-- date of birth -->
     <span>Date of birth:</span>
-    <div class="calender">
-      <input type="date" name="date_of_birth" required>
-    </div>
+    {% if form.date_of_birth.value != None or form.date_of_birth.value != '' %}
+      <span>{{form.instance.date_of_birth}}</span>
+      <div class="calender">
+        <input type="date" name="date_of_birth">
+      </div>
+    {% else %}
+      <div class="calender">
+        <input type="date" name="date_of_birth" required>
+      </div>
+    {% endif %}
     {% if form.date_of_birth.errors %}
       <div class="err_danger">
         <small>{{form.date_of_birth.errors}}</small>
@@ -83,7 +90,10 @@
 
     <!-- country -->
     {{form.country}}
+
+    <span>Session age:</span>
+    <input type="number" name="session_age" placeholder="Session age" value="{{form.instance.session_age}}" class="input" required>
     <button type="submit">Update</button>
-    <p>Back to <a href="{% url 'secureapp:home' %}">Home</a></p>
+    <p>Back to <a href="{% url 'secureapp:landing' %}">Home</a></p>
   </form>
 {% endblock form %}

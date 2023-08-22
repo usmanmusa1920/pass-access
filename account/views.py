@@ -11,7 +11,8 @@ from django.contrib.sites.shortcuts import get_current_site
 from .forms import (PasswordChangeForm, SignupForm, UpdateForm)
 from toolkit.crypt import PasscodeSecurity, SliceDetector
 from toolkit.signer import get_token
-from toolkit.decorators import passcode_required
+from toolkit.decorators import passcode_required, check_user_passcode_set
+from toolkit import NextUrl
 
 
 User = get_user_model()
@@ -48,7 +49,7 @@ class LogoutCustom(LoginRequiredMixin, LogoutView):
         return context
     
 
-@passcode_required(next_url='auth:change_password')
+@passcode_required
 def change_password(request):
     """change account password view"""
     if request.user.is_authenticated:
@@ -58,7 +59,7 @@ def change_password(request):
             update_session_auth_hash(request, form.user)
             flash_msg.success(
                 request, f'That sound great {request.user.first_name}, your password has been changed')
-            return redirect(reverse('secureapp:home'))
+            return redirect(reverse('secureapp:landing'))
         else:
             context = {
                 'form': form,
@@ -85,15 +86,26 @@ def signup(request):
     return render(request, 'account/signup.html', context)
 
 
-@passcode_required(next_url='auth:update_profile')
+@passcode_required
 def update_profile(request):
     """update profile view"""
+
+    # storing user dob
+    dob = request.user.date_of_birth
+
     if request.method == 'POST':
         form = UpdateForm(request.POST, instance=request.user)
         if form.is_valid():
-            form.save()
+            instance = form.save(commit=False)
+            # if user updated his/her session age which is les than 60 sec, it will set it back to the default one (60 seconds)
+            if form.cleaned_data.get('session_age') < 60:
+                flash_msg.warning(request, f'Session must not be less than 60 seconds!')
+                return redirect('auth:update_profile')
+            if form.cleaned_data.get('date_of_birth') == None or form.cleaned_data.get('date_of_birth') == '':
+                instance.date_of_birth = dob
+            instance.save()
             flash_msg.success(request, f'Your profile is updated!')
-            return redirect('secureapp:home')
+            return redirect('secureapp:landing')
     else:
         form = UpdateForm(instance=request.user)
     context = {
@@ -103,21 +115,25 @@ def update_profile(request):
     return render(request, 'account/update_profile.html', context)
 
 
-@login_required
+@check_user_passcode_set(flash_for='update')
 def validate_passcode(request, next_url):
     """update profile view"""
     
-    # replacing `-` with `/`, so as to render in the next route and in the passcode validation page
-    next_url_convert = next_url.replace('-', '/')
+    next_url_convert = NextUrl.reverse(next_url)
     # site host
     host = request.headers['Host']
-
-    # getting passcode
-    slc = SliceDetector(request)
-    slice_hash = slc._hash
-    slice_ingre = slc._ingre
-    slice_salt = slc._salt
-    slice_iter = slc._iter
+    # next url
+    next_url_to_go = host+next_url_convert
+    
+    try:
+        # getting passcode
+        slc = SliceDetector(request)
+        slice_hash = slc._hash
+        slice_ingre = slc._ingre
+        slice_salt = slc._salt
+        slice_iter = slc._iter
+    except:
+        pass
     
     if request.method == 'POST':
         # """Grabbing data from html template"""
@@ -143,12 +159,15 @@ def validate_passcode(request, next_url):
         if slice_hash == confirm_passcode and slice_ingre == confirm_ingredient:
             flash_msg.success(request, f'Passcode Authenticated!')
             uu = request.user
-            uu.auth_token = get_token()
+            uu.auth_token = get_token(request.user.session_age)
+
+            # if user updated his/her session age which is les than 60 sec, it will set it back to the default one (60 seconds)
+            if request.user.session_age < 60:
+                request.user.session_age = 60
             uu.save()
             return redirect(next_url_convert)
     context = {
-        'next_url': next_url_convert,
-        'host': host,
+        'next_url_to_go': next_url_to_go,
         'the_year': THIS_YEARE,
     }
     return render(request, 'account/validate_passcode.html', context)

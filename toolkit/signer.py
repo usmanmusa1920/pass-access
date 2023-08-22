@@ -14,7 +14,7 @@ with open('config.json') as config_file:
 SECRET_KEY = os.environ.get('SECRET_KEY')
 
 
-def get_token(expires_sec=30):
+def get_token(expires_sec):
     # default `expires_in` = 3600 (1 hour)
     #                        1800 (30 minutes)
     s = Serializer(SECRET_KEY, expires_sec)

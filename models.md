@@ -1,5 +1,30 @@
 
 ```py
+    #!/bin/usr/python3
+    def func(*args, **kwargs):
+        """
+        args: are used to accept unlimited positional argument to a function or class.
+            the name `args` is the convention we can call it what ever we want,
+            it usually start with single asteric `*args`
+            
+        kwargs: are used to accept unlimited key-word argument to a function or class.
+            the name `kwargs` is the convention we can call it what ever we want,
+            it usually start with double asteric `**kwargs`
+        """
+        
+        print(*args)
+        print(*kwargs)
+        return args
+        
+    # print(type(*args))
+    # print(type(*kwargs))
+    
+    p=func('1', '2', '3', a='4', b='5', c='6')
+    print(dir(p))
+    print(p.index('3'))
+```
+
+```py
 from datetime import datetime
 from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
 from flask import current_app

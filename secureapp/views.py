@@ -13,14 +13,25 @@ from .forms import (
     PassCodeForm, AccountPassCodeForm, SecureItemInfoForm_1, SecureItemInfoForm_2
 )
 from account.models import PassCode
-from toolkit.decorators import check_user_pascode_set, passcode_required
-from toolkit import PasscodeSecurity, InformationSecurity, MixinTrick, SliceDetector
+from toolkit.decorators import check_user_passcode_set, passcode_required
+from toolkit import PasscodeSecurity, InformationSecurity, MixinTrick, SliceDetector, NextUrl
 
 
 User = get_user_model()
 
 
-def home(request):
+def landing(request):
+    the_year = datetime.today().year
+    if request.user.is_authenticated:
+        return redirect('secureapp:dashboard')
+    context = {
+        'the_year': the_year,
+    }
+    return render(request, 'account/landing.html', context)
+    
+
+@passcode_required
+def dashboard(request):
     the_year = datetime.today().year
     if request.user.is_authenticated:
         user_items = SecureItemInfo.objects.filter(
@@ -29,12 +40,12 @@ def home(request):
             'user_items': user_items,
             'the_year': the_year,
         }
-        return render(request, 'secureapp/home.html', context)
+        return render(request, 'secureapp/dashboard.html', context)
     context = {
         'the_year': the_year,
     }
     return render(request, 'account/landing.html', context)
-
+    
 
 @login_required
 def searchTrustedUser(request, item_id):
@@ -98,8 +109,7 @@ def searchTrustedUser(request, item_id):
     return redirect(reverse('secureapp:item_info', kwargs={'item_id': item_id}))
 
 
-# @passcode_required(next_url='secureapp:item_info', item_id=1)
-@login_required
+@passcode_required
 def itemInfo(request, item_id):
     item_unveil_info = SecureItemInfo.objects.get(id=item_id)  # the item info
     if request.user != item_unveil_info.i_owner.owner:
@@ -240,8 +250,16 @@ def itemInfo(request, item_id):
 
 
 @login_required
-def setPassCode(request):
+def set_pass_code(request, next_url='/dashboard/'):
+    """set user passcode view"""
+
     user_email = request.user.email
+    next_url_convert = NextUrl.reverse(next_url)
+    
+    # block user from setting passcode if already setted id
+    # if request.user.passcode.passcode_ingredient != '' or request.user.passcode.passcode_ingredient != None or request.user.passcode_hash != '' or request.user.passcode_hash != None:
+    #     flash_msg.warning(request, f'You already setup passcode')
+    #     return redirect('secureapp:landing')
     
     if request.method == 'POST':
         """
@@ -301,7 +319,7 @@ def setPassCode(request):
             instance_1.save()
             instance_2.save()
             flash_msg.success(request, f'Your passcode is set just now!')
-            return redirect('secureapp:home')
+            return redirect(next_url_convert)
     else:
         pass_form = PassCodeForm(instance=request.user.passcode)
     context = {
@@ -310,8 +328,8 @@ def setPassCode(request):
     return render(request, 'secureapp/set_passcode.html', context)
 
 
-@check_user_pascode_set(flash_for='update')
-@passcode_required(next_url='secureapp:update_passcode')
+@check_user_passcode_set(flash_for='update')
+@passcode_required
 def UpdatePassCode(request):
     """function for updating user passcode"""
     
@@ -407,7 +425,7 @@ def UpdatePassCode(request):
                 instance_2.save()
                 
                 flash_msg.success(request, f'Your passcode is updated')
-                return redirect('secureapp:home')
+                return redirect('secureapp:landing')
     else:
         pass_form = PassCodeForm(instance=request.user.passcode)
     context = {
@@ -416,8 +434,8 @@ def UpdatePassCode(request):
     return render(request, 'secureapp/update_passcode.html', context)
 
 
-@check_user_pascode_set(flash_for='item')
-@passcode_required(next_url='secureapp:new_item')
+@check_user_passcode_set(flash_for='item')
+@passcode_required
 def newItem(request):
     """First page for saving new item"""
     site_platform = Platform.objects.all()
@@ -515,8 +533,8 @@ def newItem(request):
     return render(request, 'secureapp/new_item_1.html', context)
 
 
-@check_user_pascode_set(flash_for='item')
-@passcode_required(next_url='secureapp:new_item_fields')
+@check_user_passcode_set(flash_for='item')
+@passcode_required
 def newItemFields(request):
     """Second page for saving new item"""
     the_i_owner = PassCode.objects.get(id=request.user.passcode.id)

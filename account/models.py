@@ -97,6 +97,8 @@ class UserAccount(AbstractBaseUser):
 
     # user token
     auth_token = models.TextField(blank=True, null=True)
+    # session_age (default is 60 seconds)
+    session_age = models.BigIntegerField(default=60, blank=False, null=False)
 
     # Default django permissions (is_active, is_staff, is_superuser)
     is_active = models.BooleanField(default=True)
