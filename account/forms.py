@@ -23,4 +23,4 @@ class UpdateForm(forms.ModelForm):
     """update form class"""
     class Meta:
         model = User
-        fields = ['first_name', 'last_name', 'gender', 'date_of_birth', 'username', 'phone_number', 'country']
+        fields = ['first_name', 'last_name', 'gender', 'date_of_birth', 'username', 'phone_number', 'country', 'session_age']

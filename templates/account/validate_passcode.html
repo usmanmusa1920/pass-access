@@ -3,6 +3,7 @@
 {% block head %}
   <link rel="stylesheet" href="{% static 'css/auth.css' %}">
   <link rel="stylesheet" href="{% static 'css/login.css' %}">
+  <script src="{% static 'js/val_x.js' %}"></script>
   <title>Encme | validate passcode</title>
 {% endblock head %}
 
@@ -11,13 +12,26 @@
   <form method="post">
     {% csrf_token %}
     <img src="{% static 'css/img/lock.png' %}" class="vault" alt="">
-    <h1>Vault</h1>
-    <p>Enter your secret passcode, to unlock next page!</p>
-    <b>{{host}}{{next_url}}</b>
-    <br>
+    <h1 class="h1_auth">Vault</h1>
+    <p class="p_auth">Enter your secret passcode, to unlock next page!</p>
+    <b class="b_auth">{{next_url_to_go}}</b>
+    
+    <!-- authentication illustration -->
+    <div class="authentic">
+      <div class="cntr">
+        <div class="circle"></div>
+        <p class="scan">running</p>
+        <div class="pointer-cntr">
+          <span class="pointer">O</span>
+        </div>
+        <div class="gradient-circle"></div>
+      </div>
+    </div>
+    <p class="b_auth_process">Authenticating . . .</p>
+
     <!-- passcode -->
-    <input type="password" name="passcode" placeholder="Enter passcode" minlength="8" class="input" autofocus required>
-    <button type="submit">Authenticate</button>
-    <p>Back to <a href="{% url 'secureapp:home' %}">Home</a></p>
+    <input type="password" name="passcode" placeholder="Enter passcode" minlength="8" class="input" autocomplete="off" autofocus required>
+    <button type="submit" onclick="show_val_progress()" class="btn">Authenticate</button>
+    <p class="p_home">Back to <a href="{% url 'secureapp:landing' %}">Home</a></p>
   </form>
 {% endblock form %}

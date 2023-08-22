@@ -257,3 +257,45 @@ class MixinTrick:
         real_private_key = p1[:-p2]
 
         return [real_gen_salt, real_iteration, real_hash, real_private_key]
+    
+
+class SliceDetector:
+
+    def __init__(self, request):
+        self.request = request
+
+        # """ingredient (salt + iteration + second hash) respectively"""
+        old_ingredient = request.user.passcode.passcode_ingredient
+        
+        # """(second hash) from custome user model"""
+        self.real_hash = request.user.passcode_hash
+        # """(second hash) slicing it from old_ingredient"""
+        self.slice_hash = old_ingredient[-len(self.real_hash):]
+        
+        # """
+        # slicing ingredient from old_ingredient, starting from index zero to the actual length of the (real_hash) above
+        # """
+        self.slice_ingre = old_ingredient[: -len(self.slice_hash)]
+        
+        # """slicing iteration from the (slice_ingre) above from index -6 to the end"""
+        self.slice_iter = self.slice_ingre[-6:]
+        
+        # """slicing salt from the first index of the (slice_ingre) to index -6"""
+        self.slice_salt = self.slice_ingre[: -6]
+        
+    @property
+    def _hash(self):
+        return self.slice_hash
+    
+    @property
+    def _ingre(self):
+        return self.slice_ingre
+    
+    @property
+    def _salt(self):
+        return self.slice_salt
+    
+    @property
+    def _iter(self):
+        return self.slice_iter
+    

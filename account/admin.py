@@ -33,7 +33,7 @@ class UserAdminForm(UserAdmin):
         # ('Account activity', {"fields": ('last_login',)}),
         ('Permissions', {"fields": ('is_active',
          'is_staff', 'is_superuser')}),
-         ('Security', {"fields": ('passcode_hash', 'auth_token')})
+         ('Security', {"fields": ('passcode_hash', 'auth_token', 'session_age')})
     )
     
     # These are the field that will display when you want to create new user account via admin
