@@ -1,6 +1,7 @@
 from datetime import datetime
 from django.db.models import Q
 from django.urls import reverse
+from django.utils import timezone
 from django.core.paginator import Paginator
 from django.shortcuts import render, redirect
 from django.contrib.auth import get_user_model
@@ -13,8 +14,9 @@ from .forms import (
     PassCodeForm, AccountPassCodeForm, SecureItemInfoForm_1, SecureItemInfoForm_2
 )
 from account.models import PassCode
-from toolkit.decorators import check_user_passcode_set, passcode_required
-from toolkit import PasscodeSecurity, InformationSecurity, MixinTrick, SliceDetector, NextUrl
+from toolkit import (
+    check_user_passcode_set, passcode_required, PasscodeSecurity, InformationSecurity, MixinTrick, SliceDetector
+)
 
 
 User = get_user_model()
@@ -28,7 +30,7 @@ def landing(request):
         'the_year': the_year,
     }
     return render(request, 'account/landing.html', context)
-    
+
 
 @passcode_required
 def dashboard(request):
@@ -45,7 +47,7 @@ def dashboard(request):
         'the_year': the_year,
     }
     return render(request, 'account/landing.html', context)
-    
+
 
 @login_required
 def searchTrustedUser(request, item_id):
@@ -78,9 +80,9 @@ def searchTrustedUser(request, item_id):
     # data = form.cleaned_data.get('search_value')
     # s_user = User.objects.get(id=user_id)
     # flash_msg.warning(request, f'You added {u_t.first_name} as trusted user in your item ({i_id.custom_platform})')
-    return redirect(reverse('secureapp:item_info', kwargs={'item_id': item_id}))
     # return render(request, 'secureapp/add_trusted_user.html', context)
-    
+    return redirect(reverse('secureapp:item_info', kwargs={'item_id': item_id}))
+
 
 @login_required
 def addTrustedUser(request, item_id, user_id):
@@ -111,7 +113,15 @@ def searchTrustedUser(request, item_id):
 
 @passcode_required
 def itemInfo(request, item_id):
+    """item infomation view"""
+
     item_unveil_info = SecureItemInfo.objects.get(id=item_id)  # the item info
+    # stored previous last review in other to render in template
+    last_review = item_unveil_info.last_review
+    # saving current time as last review
+    item_unveil_info.last_review = timezone.now
+    item_unveil_info.save()
+
     if request.user != item_unveil_info.i_owner.owner:
         return False
     item_unveil_secret = ItemSecret.objects.get(
@@ -141,8 +151,7 @@ def itemInfo(request, item_id):
     item_the_private = item_unveil_secret.the_private
     # [(itter - 13) * 2] + key + hash + [(itter * 2) - random.randint(3, 8)]
     item_ingredient = item_unveil_ingre.ingredient
-    my_result = MixinTrick._3_to_3(item_key, item_the_hash,
-                             item_the_private, item_ingredient)
+    my_result = MixinTrick._3_to_3(item_key, item_the_hash, item_the_private, item_ingredient)
     # OUTPUT:
     #   real salt = my_result[0],
     #   real iteration = my_result[1],
@@ -233,6 +242,7 @@ def itemInfo(request, item_id):
         
     context = {
         'item_unveil_info': item_unveil_info,
+        'last_review': last_review,
         'decrypt_i_username': decrypt_i_username,
         'decrypt_i_phone': decrypt_i_phone,
         'decrypt_i_email': decrypt_i_email,
@@ -250,16 +260,15 @@ def itemInfo(request, item_id):
 
 
 @login_required
-def set_pass_code(request, next_url='/dashboard/'):
+def set_pass_code(request):
     """set user passcode view"""
-
+    
     user_email = request.user.email
-    next_url_convert = NextUrl.reverse(next_url)
     
     # block user from setting passcode if already setted id
-    # if request.user.passcode.passcode_ingredient != '' or request.user.passcode.passcode_ingredient != None or request.user.passcode_hash != '' or request.user.passcode_hash != None:
-    #     flash_msg.warning(request, f'You already setup passcode')
-    #     return redirect('secureapp:landing')
+    if request.user.passcode.passcode_ingredient != '' and request.user.passcode.passcode_ingredient != None and request.user.passcode_hash != '' and request.user.passcode_hash != None:
+        flash_msg.warning(request, f'You already setup passcode, you can change it here!')
+        return redirect('secureapp:update_passcode')
     
     if request.method == 'POST':
         """
@@ -318,8 +327,8 @@ def set_pass_code(request, next_url='/dashboard/'):
             """saving the instances"""
             instance_1.save()
             instance_2.save()
-            flash_msg.success(request, f'Your passcode is set just now!')
-            return redirect(next_url_convert)
+            flash_msg.success(request, f'Your master passcode is set just now!')
+            return redirect('secureapp:landing')
     else:
         pass_form = PassCodeForm(instance=request.user.passcode)
     context = {
@@ -334,7 +343,7 @@ def UpdatePassCode(request):
     """function for updating user passcode"""
     
     user_email = request.user.email
-
+    
     # getting passcode
     slc = SliceDetector(request)
     slice_hash = slc._hash
@@ -465,9 +474,17 @@ def newItem(request):
     
     if request.method == 'POST':
         form = SecureItemInfoForm_1(request.POST)
+        item_label = request.POST['i_label']
+
+        # validating item label
+        validate_label = SecureItemInfo.objects.filter(
+            i_label=item_label, i_owner=request.user.passcode).first()
+        if validate_label:
+            flash_msg.warning(
+                request, f'You already save an item with this label `{item_label}`')
+            
         if form.is_valid():
-            """Items values from html template"""
-            item_label = form.cleaned_data.get("i_label")
+            # Items values from html template
             item_category = form.cleaned_data.get("selected_category")
             item_platform = form.cleaned_data.get("selected_platform")
             item_custom_platform = form.cleaned_data.get("custom_platform")

@@ -48,7 +48,7 @@
 
     <!-- date of birth -->
     <span>Date of birth:</span>
-    {% if form.date_of_birth.value != None or form.date_of_birth.value != '' %}
+    {% if form.date_of_birth.value != None and form.date_of_birth.value != '' %}
       <span>{{form.instance.date_of_birth}}</span>
       <div class="calender">
         <input type="date" name="date_of_birth">

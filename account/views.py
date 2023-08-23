@@ -9,10 +9,9 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.views import LoginView, LogoutView
 from django.contrib.sites.shortcuts import get_current_site
 from .forms import (PasswordChangeForm, SignupForm, UpdateForm)
-from toolkit.crypt import PasscodeSecurity, SliceDetector
-from toolkit.signer import get_token
-from toolkit.decorators import passcode_required, check_user_passcode_set
-from toolkit import NextUrl
+from toolkit import (
+    PasscodeSecurity, SliceDetector, get_token, passcode_required, check_user_passcode_set, NextUrl
+)
 
 
 User = get_user_model()
@@ -89,18 +88,19 @@ def signup(request):
 @passcode_required
 def update_profile(request):
     """update profile view"""
-
+    
     # storing user dob
     dob = request.user.date_of_birth
-
     if request.method == 'POST':
         form = UpdateForm(request.POST, instance=request.user)
         if form.is_valid():
             instance = form.save(commit=False)
+            new_session_age = form.cleaned_data.get('session_age')
             # if user updated his/her session age which is les than 60 sec, it will set it back to the default one (60 seconds)
-            if form.cleaned_data.get('session_age') < 60:
-                flash_msg.warning(request, f'Session must not be less than 60 seconds!')
+            if new_session_age < 60 or new_session_age > 1800:
+                flash_msg.warning(request, f'Session must not be less than 60 or greater than 1800 seconds!')
                 return redirect('auth:update_profile')
+            instance.auth_token = get_token(new_session_age)
             if form.cleaned_data.get('date_of_birth') == None or form.cleaned_data.get('date_of_birth') == '':
                 instance.date_of_birth = dob
             instance.save()
@@ -119,21 +119,17 @@ def update_profile(request):
 def validate_passcode(request, next_url):
     """update profile view"""
     
+    # url
     next_url_convert = NextUrl.reverse(next_url)
     # site host
     host = request.headers['Host']
-    # next url
-    next_url_to_go = host+next_url_convert
     
-    try:
-        # getting passcode
-        slc = SliceDetector(request)
-        slice_hash = slc._hash
-        slice_ingre = slc._ingre
-        slice_salt = slc._salt
-        slice_iter = slc._iter
-    except:
-        pass
+    # getting passcode
+    slc = SliceDetector(request)
+    slice_hash = slc._hash
+    slice_ingre = slc._ingre
+    slice_salt = slc._salt
+    slice_iter = slc._iter
     
     if request.method == 'POST':
         # """Grabbing data from html template"""
@@ -157,17 +153,19 @@ def validate_passcode(request, next_url):
         # comparing the two html fields with each other, and comparing the old ingredient with the confirm one, for the renewal
         # """
         if slice_hash == confirm_passcode and slice_ingre == confirm_ingredient:
+            # if user updated his/her session age which is less than 60 or greater than secconds, it will set it back to the default one (60 seconds).
+            ru = request.user
+            if ru.session_age < 60 or ru.session_age > 1800:
+                ru.session_age = 60
+            ru.auth_token = get_token()
+            ru.save()
             flash_msg.success(request, f'Passcode Authenticated!')
-            uu = request.user
-            uu.auth_token = get_token(request.user.session_age)
-
-            # if user updated his/her session age which is les than 60 sec, it will set it back to the default one (60 seconds)
-            if request.user.session_age < 60:
-                request.user.session_age = 60
-            uu.save()
             return redirect(next_url_convert)
     context = {
-        'next_url_to_go': next_url_to_go,
+        'next_url': {
+            'host': host,
+            'url': next_url_convert,
+            },
         'the_year': THIS_YEARE,
     }
-    return render(request, 'account/validate_passcode.html', context)
+    return render(request, 'account/vault.html', context)

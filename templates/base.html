@@ -15,30 +15,21 @@
     {% endblock title %}
   </title>
 </head>
-<body>
-
-  <!-- first
-  Login
-  signup
-  landing
-  home
-  new item
-  edit Item
-  delete Item
-  Setup SecurePass (default)
-  edit SecurePass (default)
-
-  MFA & security question
-  password manager(generate strong password)
-
-  upgrade (update) salt
-  settings --- (visibility, info)
-  edit
+<body onmouseover="loaddoc()">
   
-  auth page or pop-up (for confirm delete)
-
-  password generator
-  end -->
+  <!-- <script>
+    function loaddoc(){
+      var xhttp = new XMLHttpRequest();
+      xhttp.onreadystatechange = function (){
+        if (this.readyState == 4 && this.status == 200){
+          // document.getElementById("com").innerHTML = this.getResponseHeader('content-length');
+          document.querySelector('body').innerHTML = this.responseText;
+        }
+      };
+      // xhttp.open("GET", "/dashboard", true);
+      xhttp.send();
+    }
+  </script> -->
 
   <div class="container">
     <div class="nav_panel">

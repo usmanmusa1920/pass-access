@@ -11,10 +11,22 @@
 {% block form %}
   <form method="post">
     {% csrf_token %}
-    <img src="{% static 'css/img/lock.png' %}" class="vault" alt="">
-    <h1 class="h1_auth">Vault</h1>
-    <p class="p_auth">Enter your secret passcode, to unlock next page!</p>
-    <b class="b_auth">{{next_url_to_go}}</b>
+    <img src="{% static 'css/img/vault.png' %}" class="vault" alt="">
+    <p class="p_auth">Enter master passcode, to unlock next page!</p>
+
+    {% if next_url.url|length >= 12 %}
+      <p class="b_auth">
+        <a href="{{next_url.url}}">
+          <small>{{next_url.host}}{{next_url.url|truncatechars:10}}</small>
+        </a>
+      </p>
+    {% else %}
+      <p class="b_auth">
+        <a href="{{next_url.url}}">
+          <small>{{next_url.host}}{{next_url.url}}</small>
+        </a>
+      </p>
+    {% endif %}
     
     <!-- authentication illustration -->
     <div class="authentic">
@@ -28,10 +40,9 @@
       </div>
     </div>
     <p class="b_auth_process">Authenticating . . .</p>
-
+    
     <!-- passcode -->
-    <input type="password" name="passcode" placeholder="Enter passcode" minlength="8" class="input" autocomplete="off" autofocus required>
+    <input type="password" name="passcode" placeholder="Enter master passcode" minlength="8" class="input" autocomplete="off" value="19991125u" autofocus required>
     <button type="submit" onclick="show_val_progress()" class="btn">Authenticate</button>
-    <p class="p_home">Back to <a href="{% url 'secureapp:landing' %}">Home</a></p>
   </form>
 {% endblock form %}

@@ -37,13 +37,14 @@ class SecureItemInfo(models.Model):
 
     i_owner = models.ForeignKey(PassCode, on_delete=models.CASCADE)
     trusted_user = models.ManyToManyField(User, blank=True)
-    i_label = models.CharField(max_length=255, blank=False, null=False)
+    i_label = models.CharField(max_length=255, blank=False, null=False, unique=True)
 
     # the_key is for (just like the raw passcode of a user) before applying any encryption or hashing,
     # since it is randomly choosen, but it will look like something else, plus key (of pbkdf2_hmac)
     the_key = models.TextField(blank=True, null=True)
     date_created = models.DateTimeField(default=timezone.now)
     date_modified = models.DateTimeField(auto_now=True)
+    last_review = models.DateTimeField(auto_now=True) # last review (not editable)
     # last_visit = models.DateTimeField("last visit", blank=True, null=True)
 
     # for social

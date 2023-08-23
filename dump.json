@@ -1,0 +1,847 @@
+[
+{
+    "model": "auth.permission",
+    "pk": 1,
+    "fields": {
+        "name": "Can add log entry",
+        "content_type": 1,
+        "codename": "add_logentry"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 2,
+    "fields": {
+        "name": "Can change log entry",
+        "content_type": 1,
+        "codename": "change_logentry"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 3,
+    "fields": {
+        "name": "Can delete log entry",
+        "content_type": 1,
+        "codename": "delete_logentry"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 4,
+    "fields": {
+        "name": "Can view log entry",
+        "content_type": 1,
+        "codename": "view_logentry"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 5,
+    "fields": {
+        "name": "Can add permission",
+        "content_type": 2,
+        "codename": "add_permission"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 6,
+    "fields": {
+        "name": "Can change permission",
+        "content_type": 2,
+        "codename": "change_permission"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 7,
+    "fields": {
+        "name": "Can delete permission",
+        "content_type": 2,
+        "codename": "delete_permission"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 8,
+    "fields": {
+        "name": "Can view permission",
+        "content_type": 2,
+        "codename": "view_permission"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 9,
+    "fields": {
+        "name": "Can add group",
+        "content_type": 3,
+        "codename": "add_group"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 10,
+    "fields": {
+        "name": "Can change group",
+        "content_type": 3,
+        "codename": "change_group"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 11,
+    "fields": {
+        "name": "Can delete group",
+        "content_type": 3,
+        "codename": "delete_group"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 12,
+    "fields": {
+        "name": "Can view group",
+        "content_type": 3,
+        "codename": "view_group"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 13,
+    "fields": {
+        "name": "Can add content type",
+        "content_type": 4,
+        "codename": "add_contenttype"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 14,
+    "fields": {
+        "name": "Can change content type",
+        "content_type": 4,
+        "codename": "change_contenttype"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 15,
+    "fields": {
+        "name": "Can delete content type",
+        "content_type": 4,
+        "codename": "delete_contenttype"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 16,
+    "fields": {
+        "name": "Can view content type",
+        "content_type": 4,
+        "codename": "view_contenttype"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 17,
+    "fields": {
+        "name": "Can add session",
+        "content_type": 5,
+        "codename": "add_session"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 18,
+    "fields": {
+        "name": "Can change session",
+        "content_type": 5,
+        "codename": "change_session"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 19,
+    "fields": {
+        "name": "Can delete session",
+        "content_type": 5,
+        "codename": "delete_session"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 20,
+    "fields": {
+        "name": "Can view session",
+        "content_type": 5,
+        "codename": "view_session"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 21,
+    "fields": {
+        "name": "Can add user account",
+        "content_type": 6,
+        "codename": "add_useraccount"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 22,
+    "fields": {
+        "name": "Can change user account",
+        "content_type": 6,
+        "codename": "change_useraccount"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 23,
+    "fields": {
+        "name": "Can delete user account",
+        "content_type": 6,
+        "codename": "delete_useraccount"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 24,
+    "fields": {
+        "name": "Can view user account",
+        "content_type": 6,
+        "codename": "view_useraccount"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 25,
+    "fields": {
+        "name": "Can add pass code",
+        "content_type": 7,
+        "codename": "add_passcode"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 26,
+    "fields": {
+        "name": "Can change pass code",
+        "content_type": 7,
+        "codename": "change_passcode"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 27,
+    "fields": {
+        "name": "Can delete pass code",
+        "content_type": 7,
+        "codename": "delete_passcode"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 28,
+    "fields": {
+        "name": "Can view pass code",
+        "content_type": 7,
+        "codename": "view_passcode"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 29,
+    "fields": {
+        "name": "Can add category",
+        "content_type": 8,
+        "codename": "add_category"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 30,
+    "fields": {
+        "name": "Can change category",
+        "content_type": 8,
+        "codename": "change_category"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 31,
+    "fields": {
+        "name": "Can delete category",
+        "content_type": 8,
+        "codename": "delete_category"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 32,
+    "fields": {
+        "name": "Can view category",
+        "content_type": 8,
+        "codename": "view_category"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 33,
+    "fields": {
+        "name": "Can add secure item info",
+        "content_type": 9,
+        "codename": "add_secureiteminfo"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 34,
+    "fields": {
+        "name": "Can change secure item info",
+        "content_type": 9,
+        "codename": "change_secureiteminfo"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 35,
+    "fields": {
+        "name": "Can delete secure item info",
+        "content_type": 9,
+        "codename": "delete_secureiteminfo"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 36,
+    "fields": {
+        "name": "Can view secure item info",
+        "content_type": 9,
+        "codename": "view_secureiteminfo"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 37,
+    "fields": {
+        "name": "Can add platform",
+        "content_type": 10,
+        "codename": "add_platform"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 38,
+    "fields": {
+        "name": "Can change platform",
+        "content_type": 10,
+        "codename": "change_platform"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 39,
+    "fields": {
+        "name": "Can delete platform",
+        "content_type": 10,
+        "codename": "delete_platform"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 40,
+    "fields": {
+        "name": "Can view platform",
+        "content_type": 10,
+        "codename": "view_platform"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 41,
+    "fields": {
+        "name": "Can add item secret ingredient",
+        "content_type": 11,
+        "codename": "add_itemsecretingredient"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 42,
+    "fields": {
+        "name": "Can change item secret ingredient",
+        "content_type": 11,
+        "codename": "change_itemsecretingredient"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 43,
+    "fields": {
+        "name": "Can delete item secret ingredient",
+        "content_type": 11,
+        "codename": "delete_itemsecretingredient"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 44,
+    "fields": {
+        "name": "Can view item secret ingredient",
+        "content_type": 11,
+        "codename": "view_itemsecretingredient"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 45,
+    "fields": {
+        "name": "Can add item secret",
+        "content_type": 12,
+        "codename": "add_itemsecret"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 46,
+    "fields": {
+        "name": "Can change item secret",
+        "content_type": 12,
+        "codename": "change_itemsecret"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 47,
+    "fields": {
+        "name": "Can delete item secret",
+        "content_type": 12,
+        "codename": "delete_itemsecret"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 48,
+    "fields": {
+        "name": "Can view item secret",
+        "content_type": 12,
+        "codename": "view_itemsecret"
+    }
+},
+{
+    "model": "contenttypes.contenttype",
+    "pk": 1,
+    "fields": {
+        "app_label": "admin",
+        "model": "logentry"
+    }
+},
+{
+    "model": "contenttypes.contenttype",
+    "pk": 2,
+    "fields": {
+        "app_label": "auth",
+        "model": "permission"
+    }
+},
+{
+    "model": "contenttypes.contenttype",
+    "pk": 3,
+    "fields": {
+        "app_label": "auth",
+        "model": "group"
+    }
+},
+{
+    "model": "contenttypes.contenttype",
+    "pk": 4,
+    "fields": {
+        "app_label": "contenttypes",
+        "model": "contenttype"
+    }
+},
+{
+    "model": "contenttypes.contenttype",
+    "pk": 5,
+    "fields": {
+        "app_label": "sessions",
+        "model": "session"
+    }
+},
+{
+    "model": "contenttypes.contenttype",
+    "pk": 6,
+    "fields": {
+        "app_label": "account",
+        "model": "useraccount"
+    }
+},
+{
+    "model": "contenttypes.contenttype",
+    "pk": 7,
+    "fields": {
+        "app_label": "account",
+        "model": "passcode"
+    }
+},
+{
+    "model": "contenttypes.contenttype",
+    "pk": 8,
+    "fields": {
+        "app_label": "secureapp",
+        "model": "category"
+    }
+},
+{
+    "model": "contenttypes.contenttype",
+    "pk": 9,
+    "fields": {
+        "app_label": "secureapp",
+        "model": "secureiteminfo"
+    }
+},
+{
+    "model": "contenttypes.contenttype",
+    "pk": 10,
+    "fields": {
+        "app_label": "secureapp",
+        "model": "platform"
+    }
+},
+{
+    "model": "contenttypes.contenttype",
+    "pk": 11,
+    "fields": {
+        "app_label": "secureapp",
+        "model": "itemsecretingredient"
+    }
+},
+{
+    "model": "contenttypes.contenttype",
+    "pk": 12,
+    "fields": {
+        "app_label": "secureapp",
+        "model": "itemsecret"
+    }
+},
+{
+    "model": "sessions.session",
+    "pk": "ase0zwa15t6p99caqtr9w0y6gts921e1",
+    "fields": {
+        "session_data": ".eJxVjEEOwiAQRe_C2hAQyhSX7nsGMgyDVA0kpV0Z765NutDtf-_9lwi4rSVsnZcwJ3ERWpx-t4j04LqDdMd6a5JaXZc5yl2RB-1yaomf18P9OyjYy7e2Ca32SAZBRYouoQJUNLoMyAw5e8eRBkMIoNADqbPWbrDGxRFc9uL9AQvhOGI:1qYt3l:vAWeuR6fJaDDWXopaUOykY-lFCn8NaDHjbDiGLkFVSs",
+        "expire_date": "2023-09-06T18:58:29.445Z"
+    }
+},
+{
+    "model": "account.useraccount",
+    "pk": 1,
+    "fields": {
+        "password": "pbkdf2_sha256$600000$V7k9jwo2ew8E07Zy6OfpxZ$oUZTXpvtUQaHAynE0JBiGrz0x13OtZSvalvPzy60/gw=",
+        "last_login": "2023-08-23T18:58:29.288Z",
+        "first_name": "Usman",
+        "last_name": "Musa",
+        "gender": "male",
+        "date_of_birth": "2023-08-10",
+        "username": "usmanmusa1920",
+        "email": "usmanmusa1920@gmail.com",
+        "phone_number": "+2348123456789",
+        "country": "DZ",
+        "date_joined": "2023-08-23T18:57:50.884Z",
+        "last_modified": "2023-08-23T19:20:47.302Z",
+        "passcode_hash": "1a432e49826adb72df8c3f55ef69672bcb3a0c8c22fb3ff8d572ff38a77e647c",
+        "auth_token": "b'eyJhbGciOiJIUzI1NiIsImlhdCI6MTY5MjgxODQ0NywiZXhwIjoxNjkyODIwMjQ3fQ.IlRTVzR4TTdlaUhKS2dVOWJlT1BMWjBqbzIyVlkzQ1pHVkNwUXNBSzY0RjhOMXJzd0UxMG1MR044bjYi.lkTOhPNjK72cpB9yJ2dFg_gWb1B-h9DfsdZ18yObOH4'",
+        "session_age": 1800,
+        "is_active": true,
+        "is_staff": true,
+        "is_superuser": true
+    }
+},
+{
+    "model": "account.passcode",
+    "pk": 1,
+    "fields": {
+        "owner": 1,
+        "passcode_ingredient": "hnetmGwGqTlZxXoS79N3zE1dV0iV1nRvRvSDuAWyrEcOi2992201a432e49826adb72df8c3f55ef69672bcb3a0c8c22fb3ff8d572ff38a77e647c",
+        "date_modified": "2023-08-23T19:20:47.404Z"
+    }
+},
+{
+    "model": "secureapp.category",
+    "pk": 1,
+    "fields": {
+        "timestamp": "2023-08-23T18:57:54.516Z",
+        "category_key": "Social media",
+        "category_value": "social media"
+    }
+},
+{
+    "model": "secureapp.category",
+    "pk": 2,
+    "fields": {
+        "timestamp": "2023-08-23T18:57:54.577Z",
+        "category_key": "Cloud",
+        "category_value": "cloud"
+    }
+},
+{
+    "model": "secureapp.category",
+    "pk": 3,
+    "fields": {
+        "timestamp": "2023-08-23T18:57:54.620Z",
+        "category_key": "Card",
+        "category_value": "card"
+    }
+},
+{
+    "model": "secureapp.category",
+    "pk": 4,
+    "fields": {
+        "timestamp": "2023-08-23T18:57:54.650Z",
+        "category_key": "Other",
+        "category_value": "other"
+    }
+},
+{
+    "model": "secureapp.platform",
+    "pk": 1,
+    "fields": {
+        "category": 1,
+        "timestamp": "2023-08-23T18:57:55.303Z",
+        "platform_key": "Facebook",
+        "platform_value": "facebook"
+    }
+},
+{
+    "model": "secureapp.platform",
+    "pk": 2,
+    "fields": {
+        "category": 1,
+        "timestamp": "2023-08-23T18:57:55.389Z",
+        "platform_key": "Twitter",
+        "platform_value": "twitter"
+    }
+},
+{
+    "model": "secureapp.platform",
+    "pk": 3,
+    "fields": {
+        "category": 1,
+        "timestamp": "2023-08-23T18:57:55.436Z",
+        "platform_key": "Instagram",
+        "platform_value": "instagram"
+    }
+},
+{
+    "model": "secureapp.platform",
+    "pk": 4,
+    "fields": {
+        "category": 1,
+        "timestamp": "2023-08-23T18:57:55.475Z",
+        "platform_key": "LinkedIn",
+        "platform_value": "linkedin"
+    }
+},
+{
+    "model": "secureapp.platform",
+    "pk": 5,
+    "fields": {
+        "category": 2,
+        "timestamp": "2023-08-23T18:57:55.544Z",
+        "platform_key": "Linode",
+        "platform_value": "linode"
+    }
+},
+{
+    "model": "secureapp.platform",
+    "pk": 6,
+    "fields": {
+        "category": 2,
+        "timestamp": "2023-08-23T18:57:55.628Z",
+        "platform_key": "AWS",
+        "platform_value": "aws"
+    }
+},
+{
+    "model": "secureapp.platform",
+    "pk": 7,
+    "fields": {
+        "category": 2,
+        "timestamp": "2023-08-23T18:57:55.678Z",
+        "platform_key": "Heroku",
+        "platform_value": "heroku"
+    }
+},
+{
+    "model": "secureapp.platform",
+    "pk": 8,
+    "fields": {
+        "category": 2,
+        "timestamp": "2023-08-23T18:57:55.747Z",
+        "platform_key": "Digital ocean",
+        "platform_value": "digital ocean"
+    }
+},
+{
+    "model": "secureapp.platform",
+    "pk": 9,
+    "fields": {
+        "category": 2,
+        "timestamp": "2023-08-23T18:57:55.807Z",
+        "platform_key": "Github",
+        "platform_value": "github"
+    }
+},
+{
+    "model": "secureapp.platform",
+    "pk": 10,
+    "fields": {
+        "category": 2,
+        "timestamp": "2023-08-23T18:57:55.885Z",
+        "platform_key": "Docker",
+        "platform_value": "docker"
+    }
+},
+{
+    "model": "secureapp.platform",
+    "pk": 11,
+    "fields": {
+        "category": 2,
+        "timestamp": "2023-08-23T18:57:55.928Z",
+        "platform_key": "Gitlab",
+        "platform_value": "gitlab"
+    }
+},
+{
+    "model": "secureapp.platform",
+    "pk": 12,
+    "fields": {
+        "category": 2,
+        "timestamp": "2023-08-23T18:57:55.977Z",
+        "platform_key": "Namecheap",
+        "platform_value": "namecheap"
+    }
+},
+{
+    "model": "secureapp.platform",
+    "pk": 13,
+    "fields": {
+        "category": 2,
+        "timestamp": "2023-08-23T18:57:56.016Z",
+        "platform_key": "Bitbucket",
+        "platform_value": "bitbucket"
+    }
+},
+{
+    "model": "secureapp.platform",
+    "pk": 14,
+    "fields": {
+        "category": 4,
+        "timestamp": "2023-08-23T18:57:56.066Z",
+        "platform_key": "Gmail",
+        "platform_value": "gmail"
+    }
+},
+{
+    "model": "secureapp.platform",
+    "pk": 15,
+    "fields": {
+        "category": 4,
+        "timestamp": "2023-08-23T18:57:56.121Z",
+        "platform_key": "ChatGPT",
+        "platform_value": "chatgpt"
+    }
+},
+{
+    "model": "secureapp.platform",
+    "pk": 16,
+    "fields": {
+        "category": 2,
+        "timestamp": "2023-08-23T18:57:56.183Z",
+        "platform_key": "Azure",
+        "platform_value": "azure"
+    }
+},
+{
+    "model": "secureapp.platform",
+    "pk": 17,
+    "fields": {
+        "category": 1,
+        "timestamp": "2023-08-23T18:57:56.235Z",
+        "platform_key": "Qiskit api",
+        "platform_value": "qiskit api"
+    }
+},
+{
+    "model": "secureapp.platform",
+    "pk": 18,
+    "fields": {
+        "category": 2,
+        "timestamp": "2023-08-23T18:57:56.274Z",
+        "platform_key": "Hostinger",
+        "platform_value": "hostinger"
+    }
+},
+{
+    "model": "secureapp.platform",
+    "pk": 19,
+    "fields": {
+        "category": 3,
+        "timestamp": "2023-08-23T18:57:56.307Z",
+        "platform_key": "Bank card",
+        "platform_value": "bank card"
+    }
+},
+{
+    "model": "secureapp.platform",
+    "pk": 20,
+    "fields": {
+        "category": 1,
+        "timestamp": "2023-08-23T18:57:56.388Z",
+        "platform_key": "Snapchat",
+        "platform_value": "snapchat"
+    }
+},
+{
+    "model": "secureapp.platform",
+    "pk": 21,
+    "fields": {
+        "category": 3,
+        "timestamp": "2023-08-23T18:57:56.471Z",
+        "platform_key": "Visa card",
+        "platform_value": "visa card"
+    }
+},
+{
+    "model": "secureapp.platform",
+    "pk": 22,
+    "fields": {
+        "category": 3,
+        "timestamp": "2023-08-23T18:57:56.533Z",
+        "platform_key": "ID card",
+        "platform_value": "id card"
+    }
+},
+{
+    "model": "secureapp.platform",
+    "pk": 23,
+    "fields": {
+        "category": 3,
+        "timestamp": "2023-08-23T18:57:56.586Z",
+        "platform_key": "Store id",
+        "platform_value": "store id"
+    }
+},
+{
+    "model": "secureapp.platform",
+    "pk": 24,
+    "fields": {
+        "category": 3,
+        "timestamp": "2023-08-23T18:57:56.693Z",
+        "platform_key": "Credit card",
+        "platform_value": "credit card"
+    }
+}
+]

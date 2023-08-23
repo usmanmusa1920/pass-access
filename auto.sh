@@ -90,4 +90,5 @@ plat_24.save()
 exit()
 # rm dump.json
 # python manage.py dumpdata --format json --indent 4 > dump.json
+# python manage.py loaddata dump.json
 python manage.py runserver

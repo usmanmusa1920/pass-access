@@ -9,7 +9,6 @@ function show_val_progress(){
 
         // hiding
         document.querySelector('.vault').style.display = 'none';
-        document.querySelector('.h1_auth').style.display = 'none';
         document.querySelector('.p_auth').style.display = 'none';
         document.querySelector('.b_auth').style.display = 'none';
         // hiding button

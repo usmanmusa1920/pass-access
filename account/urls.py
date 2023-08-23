@@ -20,6 +20,7 @@ urlpatterns = [
     # administrator update profile info...
     path(
         'update/profile/', update_profile, name='update_profile'),
+    # validate passcode
     path(
         'validate/passcode/?next=/<str:next_url>/', validate_passcode, name='validate_passcode'),
 ]

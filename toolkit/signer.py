@@ -4,23 +4,23 @@ import json
 # from itsdangerous import Serializer #(itsdangerous==2.1.2)
 # from itsdangerous.serializer import Serializer #(itsdangerous==2.1.2)
 from itsdangerous import TimedJSONWebSignatureSerializer as Serializer #(itsdangerous==0.24)
+from toolkit.crypt import PasscodeSecurity
 
 
 with open('config.json') as config_file:
     config = json.load(config_file)
 
 
-# SECRET_KEY = config['SECRET_KEY']
-SECRET_KEY = os.environ.get('SECRET_KEY')
+SECRET_KEY = config['SECRET_KEY']
 
 
-def get_token(expires_sec):
-    # default `expires_in` = 3600 (1 hour)
-    #                        1800 (30 minutes)
+def get_token(expires_sec=60):
     s = Serializer(SECRET_KEY, expires_sec)
     # s = Serializer(SECRET_KEY) #(itsdangerous==2.1.2)
-    return s.dumps('mysecret')
+    mysecret = PasscodeSecurity().passcode_salt
     # return s.dumps([1,2,3,4])
+    # return s.dumps('mysecret')
+    return s.dumps(mysecret)
 
 
 def verify_token(token):
@@ -30,12 +30,6 @@ def verify_token(token):
     except:
         return None
     return load_token
-
-
-# st = get_token()
-# sv = verify_token(st)
-# print('token', st)
-# print('verify', sv)
 
 # from itsdangerous import TimestampSigner as ts
 # s = ts('secretkey')

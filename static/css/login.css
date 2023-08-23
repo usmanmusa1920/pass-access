@@ -69,7 +69,7 @@
   left: 50px;
   width: 2px;
   height: 90px;
-  animation: rotate 10s linear forwards infinite;
+  animation: rotate 7s linear forwards infinite;
   transform-origin: bottom center;
   display: flex;
   justify-content: center;
