@@ -112,6 +112,9 @@ class UserAccount(AbstractBaseUser):
     is_superuser = models.BooleanField(default=False)
     # Designates that this user has all permissions without explicitly assigning them.
 
+    # our custom permissions
+    monitor_session_age = models.BooleanField(default=True)
+
     objects = UserAccountManager()
 
     USERNAME_FIELD = 'email'

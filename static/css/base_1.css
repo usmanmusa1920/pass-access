@@ -21,6 +21,11 @@ time, mark, audio, video {
   background:transparent;
 }
 
+/* user session age */
+.security_secs, .security_user_sess_age{
+  display: none;
+}
+
 body{
   background-color: lightgray;
   overflow-x: hidden;
@@ -145,25 +150,16 @@ body{
   display: flex;
 }
 
-.category p:hover{
-  margin-top: 7px;
-  margin-bottom: 7px;
-  display: flex;
-  flex-direction: column;
-}
-
 .category p a{
   color: white;
   transition-delay: 0.5s;
   width: fit-content;
   text-decoration: none;
+  border-bottom: solid grey 1px;
 }
 
 .category p a:hover{
   text-decoration: underline;
-  padding: 7px;
-  transition-timing-function: linear;
-  transition: width 1s, height 1s;
 }
 
 .category p span{

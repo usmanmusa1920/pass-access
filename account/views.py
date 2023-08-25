@@ -65,6 +65,7 @@ def change_password(request):
             context = {
                 'form': form,
                 'the_year': THIS_YEARE,
+                'monitor_session_age': True,
             }
             return render(request, 'account/change_password.html', context)
     return False
@@ -113,6 +114,7 @@ def update_profile(request):
     context = {
         'form': form,
         'the_year': THIS_YEARE,
+        'monitor_session_age': True,
     }
     return render(request, 'account/update_profile.html', context)
 
@@ -185,10 +187,12 @@ def password_generator(request):
         context = {
             'pwd_value': pwd_value,
             'the_year': THIS_YEARE,
+            'monitor_session_age': True,
         }
         return render(request, 'account/generated_password.html', context)
     context = {
         'the_year': THIS_YEARE,
+        'monitor_session_age': True,
     }
     return render(request, 'account/password_generator.html', context)
 

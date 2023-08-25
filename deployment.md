@@ -1,40 +1,66 @@
 # Deployment on linode platform
 
-1. First create account on linode `cloud.linode.com` & click on create (linode i.e select) & select image & scroll i.e pick region & plan (nanode) & write your app label (umfo-server) & root password on the server & create, wait to boot.
-2. Click on your new server & click on networking & copy ssh access & paste to your terminal & type yes & type root password.
-3. apt-get update && apt-get upgrade & (hit enter)
-4. hostnamectl set-hostname umfo-server
-5. hostname NB: you will see `umfo-server`
-6. nano /etc/hosts NB: under
+This readme will walk on how to deploy django app on linode platform! In here we will assume our ip-address is `197.33.12.17`.
+
+First create account on linode `cloud.linode.com`, once you create and login, click on create (linode i.e select) & select image & scroll i.e pick region & plan (nanode for testing mostly) & write your app label e.g (umfo-server) & root password on the server & create, wait to boot.
+
+Once finished, click on your new server & click on networking & copy ssh access & paste to your terminal & type yes & type root password. Next is to run the following command on your server terminal:
+
 ```sh
-127.0.0.1       localhost
-197.3.11.7      umfo-server
+    apt-get update && apt-get upgrade -y
 ```
-and save.
-7. Add new user: `adduser usman` & password & fullname & hit tab
-8. `adduser usman sudo` & logout
-9. ssh usman@197.3.11.7 tab & password & pwd & mkdir -p ~/.ssh & ls -la
-10. and open new terminal for local machine & type ssh-keygen -b 4096 & hit enter
-11. scp ~/.ssh/id_rsa.pub usman@197.3.11.7:~/.ssh/authorised_keys & enter your password
-12. Nb go back to server terminal and type ls .ssh you will see authorised_keys % sudo chmod 700 ~/.ssh/ & enter your password & sudo chmod 600 ~/.ssh/* & exit
-13. ssh usman@197.3.11.7 & sudo nano /etc/ssh/sshd_config & put password edit PermitRootLogin from yes to no, and also edit PasswordAuthentication from yes to no & CTRL + X & y & hit tab
+
+and hit enter, next change hostname by
+
+```sh
+    hostnamectl set-hostname umfo-server
+```
+
+if you type `hostname` after such you will see `umfo-server`. Next get into a file using nano text-editor so as to add your ip-address and your server hostname, like so:
+
+```sh
+    nano /etc/hosts NB: under
+```
+
+in the file add the following and save the file
+
+```sh
+127.0.0.1         localhost
+197.33.12.17      umfo-server
+```
+
+The next thing is to add new user: `adduser usman` & put password & fullname & hit tab. Also add the new user to the sudo group by `adduser usman sudo`, now logout and then loging using the user you just created by:
+
+```sh
+    ssh usman@197.33.12.17
+```
+
+hit tab & put password, if you type pwd you will see you are in home directory, now make a directory tree using `mkdir -p ~/.ssh` & then `ls -la`
+
+Next thing is to open new terminal for local machine & type `ssh-keygen -b 4096` & hit enter, which will generate a public and private key.
+
+After such type `scp ~/.ssh/id_rsa.pub usman@197.33.12.17:~/.ssh/authorised_keys` & enter your password, this will copy your generated public key from your local machine to your server machin.
+
+To verify if it copy it, go back to server terminal and type `ls .ssh` you will see `authorised_keys`, change the mode of the entire `.ssh` directory by `sudo chmod 700 ~/.ssh/` & enter your password, then `sudo chmod 600 ~/.ssh/*` which will chnage the mode of everything within the directory & exit.
+
+13. ssh usman@197.33.12.17 & sudo nano /etc/ssh/sshd_config & put password edit PermitRootLogin from yes to no, and also edit PasswordAuthentication from yes to no & CTRL + X & y & hit tab
 14. And now restart the server by typing: sudo systemctl restart sshd
 15. sudo apt-get instal ufw & sudo ufw default allow outgoing &
 sudo ufw default deny incoming & sudo ufw allow 8000 & sudo ufw enable & y
 and hit tab & sudo ufw status
 16. Go back to local machine terminal and make requirements.txt
 for your project, NB if you are in your project folder, go back one by cd ..
-& scp -r zazzone usman@197.3.11.7:~/
+& scp -r zazzone usman@197.33.12.17:~/
 17. Go back to server machine and type ls to see your project you copy just now
 18. ls & ls zazzone
 20. sudo apt-get install python3-pip & sudo apt-get install python3-venv
 python3 -m venv zazzone/venv & ls zazzone & cd zazzone
 & source venv/bin/activate & pip install -r requirements.txt
-& sudo nano zazzone/settings.py & edit allowed host (Allowed_Host=['197.3.11.7'])
+& sudo nano zazzone/settings.py & edit allowed host (Allowed_Host=['197.33.12.17'])
 and go to bottom and add:STATIC_ROOT=os.path.join(BASE_DIR, 'static')
 21. python manage.py collectstatic & ls (you will see new folder i.e static)
 22. python3 manage.py runserver 0.0.0.0:8000 (specify the linode server i.e 0.0.0.0:8000)
-23. Open browser and type your ip address (197.3.11.7:8000), and then test
+23. Open browser and type your ip address (197.33.12.17:8000), and then test
 your app by l,ogging and do manything as you can do when using localhost & CTRL + C
 NB python manage.py runserver is not suite for production, but it is for testing.
 NB to run server that is reliable for production e.g (apache, ngnix) first install apache & WSGI
@@ -92,7 +118,7 @@ and then save and exit
 29. Now disallow the port 8000 for testing by: sudo ufw delete allow 8000
 sudo ufw allow http/tcp, and now restart apache server
 sudo service apache2 restart
-NB: open browser and visit 197.3.11.7 without the port 8000, but if you
+NB: open browser and visit 197.33.12.17 without the port 8000, but if you
 specify the port it won't reach, and then test your site by making post or login.
 NB: if you see any error while testing a live server (website) you should set a test server and test with debug=True
 NB: if you see attempt to write a readonly database, go to server terminal

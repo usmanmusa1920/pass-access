@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="shortcut icon" href="{% static 'img/favicon.ico' %}" type="image/x-icon">
-  <link rel="stylesheet" href="{% static 'base.css' %}">
+  <link rel="stylesheet" href="{% static 'css/base_1.css' %}">
   <script src="{% static 'js/base.js' %}"></script>
   <title>
     PassAccess | 
@@ -15,22 +15,13 @@
     {% endblock title %}
   </title>
 </head>
-<body onmouseover="loaddoc()">
+<body>
+  {% if monitor_session_age == True and request.user.monitor_session_age == True %}
+    <!-- thes two span tags won`t be visible (they are hidden in the base_1.css file). The first one will count number of seconds of in active, while the second one is the logged in user session age value -->
+    <span class="security_secs"></span>
+    <span class="security_user_sess_age">{{request.user.session_age}}</span>
+  {% endif %}
   
-  <!-- <script>
-    function loaddoc(){
-      var xhttp = new XMLHttpRequest();
-      xhttp.onreadystatechange = function (){
-        if (this.readyState == 4 && this.status == 200){
-          // document.getElementById("com").innerHTML = this.getResponseHeader('content-length');
-          document.querySelector('body').innerHTML = this.responseText;
-        }
-      };
-      // xhttp.open("GET", "/dashboard", true);
-      xhttp.send();
-    }
-  </script> -->
-
   <div class="container">
     <div class="nav_panel">
       <form class="search_form">
@@ -131,5 +122,44 @@
     </div>
 
   </div>
+  <script type="text/javascript">
+		let timer = 0;
+		let currSeconds = 0;
+    let secsCount = document.querySelector('.security_secs').textContent;
+    let userSessionAge = document.querySelector('.security_user_sess_age').textContent;
+    
+		function resetTimer() {
+			// Hide the timer text
+			document.querySelector('body').style.display = 'block';
+      document.querySelector('html').style.background = 'white';
+			// Clear the previous interval
+			clearInterval(timer);
+			// Reset the seconds of the timer
+			currSeconds = 0;
+			// Set a new interval
+      // NOTE: 1 second = 1000 milliseconds
+			timer = setInterval(startIdleTimer, 1000);
+		}
+    
+		// events that would reset the timer
+		window.onload = resetTimer;
+		window.onmousemove = resetTimer;
+		window.onmousedown = resetTimer;
+		window.ontouchstart = resetTimer;
+		window.onclick = resetTimer;
+		window.onkeypress = resetTimer;
+    
+		function startIdleTimer() {
+			// Increment the timer seconds
+			currSeconds++;
+      // if (secsCount == userSessionAge / 2 || secsCount === userSessionAge / 2){
+      if (secsCount == 30 || secsCount === 30){
+        document.querySelector('body').style.display = 'none';
+        document.querySelector('html').style.background = 'rgb(3, 3, 45)';
+      }
+			// Set the timer text to the new value
+			secsCount = currSeconds;
+		}
+	</script>
 </body>
 </html>

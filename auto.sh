@@ -2,13 +2,13 @@
 clear && source ~/.bashrc
 source venv/bin/activate
 
-# rm -rf account/__pycache__
-# rm -rf account/migrations/*
-# touch account/migrations/__init__.py
+rm -rf account/__pycache__
+rm -rf account/migrations/*
+touch account/migrations/__init__.py
 
-# rm -rf secureapp/__pycache__
-# rm -rf secureapp/migrations/*
-# touch secureapp/migrations/__init__.py
+rm -rf secureapp/__pycache__
+rm -rf secureapp/migrations/*
+touch secureapp/migrations/__init__.py
 
 rm db.sqlite3
 
@@ -115,7 +115,7 @@ plat_24.save()
 
 
 exit()
-# rm dump.json
-# python manage.py dumpdata --format json --indent 4 > dump.json
+rm dump.json
+python manage.py dumpdata --format json --indent 4 > dump.json
 # python manage.py loaddata dump.json
 python manage.py runserver

@@ -32,6 +32,7 @@ def dashboard(request):
     context = {
         'user_items': user_items,
         'the_year': THIS_YEARE,
+        'monitor_session_age': True,
     }
     return render(request, 'secureapp/dashboard.html', context)
 
@@ -110,6 +111,7 @@ def set_passcode(request):
         pass_form = PassCodeForm(instance=request.user.passcode)
     context = {
         'pass_form': pass_form,
+        'monitor_session_age': True,
     }
     return render(request, 'secureapp/set_passcode.html', context)
 
@@ -216,5 +218,6 @@ def update_passcode(request):
         pass_form = PassCodeForm(instance=request.user.passcode)
     context = {
         'pass_form': pass_form,
+        'monitor_session_age': True,
     }
     return render(request, 'secureapp/update_passcode.html', context)

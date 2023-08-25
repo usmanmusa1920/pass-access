@@ -71,6 +71,7 @@ def new_item(request):
                 
                 'site_categories': site_categories,
                 'site_platform': site_platform,
+                'monitor_session_age': True,
             }
             
             """Checking for whether if a user edited the hidden fields by inspecting the page"""
@@ -81,6 +82,7 @@ def new_item(request):
                     'site_platform': site_platform,
                     'l_platform': l_platform,
                     'l_category': l_category,
+                    'monitor_session_age': True,
                 }
                 flash_msg.warning(
                     request, f'May be you edited your visibility field(s), thats why we redirect you back')
@@ -93,6 +95,7 @@ def new_item(request):
                     'site_platform': site_platform,
                     'l_platform': l_platform,
                     'l_category': l_category,
+                    'monitor_session_age': True,
                 }
                 flash_msg.warning(
                     request, f'May be you edited your category field(s), thats why we redirect you back')
@@ -105,6 +108,7 @@ def new_item(request):
                     'site_platform': site_platform,
                     'l_platform': l_platform,
                     'l_category': l_category,
+                    'monitor_session_age': True,
                 }
                 flash_msg.warning(
                     request, f'May be you edited your platform field(s), thats why we redirect you back')
@@ -118,6 +122,7 @@ def new_item(request):
         'site_platform': site_platform,
         'l_platform': l_platform,
         'l_category': l_category,
+        'monitor_session_age': True,
     }
     return render(request, 'secureapp/new_item_1.html', context)
 
@@ -164,6 +169,7 @@ def new_item_fields(request):
             if visibility not in l_visibility:
                 context = {
                     'form': form,
+                    'monitor_session_age': True,
                 }
                 flash_msg.warning(
                     request, f'May be you edited your visibility field(s), thats why we redirect you back')
@@ -171,6 +177,7 @@ def new_item_fields(request):
             if i_category not in l_category:
                 context = {
                     'form': form,
+                    'monitor_session_age': True,
                 }
                 flash_msg.warning(
                     request, f'May be you edited your category field(s), thats why we redirect you back')
@@ -178,6 +185,7 @@ def new_item_fields(request):
             if i_platform not in l_platform:
                 context = {
                     'form': form,
+                    'monitor_session_age': True,
                 }
                 flash_msg.warning(
                     request, f'May be you edited your platform field(s), thats why we redirect you back')
@@ -206,6 +214,7 @@ def new_item_fields(request):
                 form = SecureItemInfoForm_2()
                 context = {
                     'form': form,
+                    'monitor_session_age': True,
                 }
                 flash_msg.warning(
                     request, f'All fields can\'t be empty, try again')
@@ -325,6 +334,7 @@ def new_item_fields(request):
         form = SecureItemInfoForm_2()
     context = {
         'form': form,
+        'monitor_session_age': True,
     }
     return render(request, 'secureapp/new_item_2.html', context)
 
@@ -473,6 +483,7 @@ def item_info(request, item_id):
         'decrypt_i_card_valid_range': decrypt_i_card_valid_range,
         'decrypt_i_card_ccv': decrypt_i_card_ccv,
         'decrypt_i_card_pin': decrypt_i_card_pin,
+        'monitor_session_age': True,
     }
     return render(request, 'secureapp/item_info.html', context)
 
@@ -504,6 +515,7 @@ def search_trusted_user(request, item_id):
     context = {
         'item': item,
         'searches': searches,
+        'monitor_session_age': True,
     }
     return render(request, 'secureapp/add_trusted_user.html', context)
 
@@ -545,6 +557,7 @@ def remove_all_trusted_user(request, item_id):
         return redirect(reverse('secureapp:item_info', kwargs={'item_id': item_id}))
     context = {
         'item': item,
+        'monitor_session_age': True,
     }
     return render(request, 'secureapp/remove_all_trusted_user.html', context)
 
@@ -560,5 +573,6 @@ def delete_item(request, item_id):
         return redirect('secureapp:landing')
     context = {
         'item': item,
+        'monitor_session_age': True,
     }
     return render(request, 'secureapp/delete_item.html', context)
