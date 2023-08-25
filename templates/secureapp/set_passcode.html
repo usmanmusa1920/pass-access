@@ -27,6 +27,7 @@
         <p class="alert_info">
           Passcode are case-sensitive. Use a strong passcode with a combination of characters, <br> upper and lower letters, along side with numbers to make it strong, like: <b>p@s$w0r01.1</b>
         </p>
+        Enter your email that start with <b>{{request.user.email|truncatechars:7}}</b> and end with <b>{{request.user.email|slice:'-7:'}}</b>
         <br>
         <input type="email" name="verify_email" placeholder="Enter your email" value="usmanmusa1920@gmail.com" autofocus required>
         <br>

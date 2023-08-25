@@ -1,5 +1,6 @@
+# -*- coding: utf-8 -*-
 from django.urls import path
-from .views import (LoginCustom, LogoutCustom, change_password, signup, update_profile, validate_passcode)
+from .views import (LoginCustom, LogoutCustom, change_password, signup, update_profile, validate_passcode, password_generator, generated_password)
 
 
 app_name = 'auth'
@@ -23,4 +24,10 @@ urlpatterns = [
     # validate passcode
     path(
         'validate/passcode/?next=/<str:next_url>/', validate_passcode, name='validate_passcode'),
+    # password generator
+    path(
+        'password/generator/', password_generator, name='password_generator'),
+    # generated password
+    path(
+        'generated/password/', generated_password, name='generated_password'),
 ]

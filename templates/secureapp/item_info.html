@@ -16,13 +16,13 @@
   </div>
 
   <div class="box">
-    <form method="get" action="{% url 'secureapp:search_trusted' item_unveil_info.id %}" class="box_head">
+    <form method="get" action="{% url 'secureapp:search_trusted_user' item_unveil_info.id %}" class="box_head">
       <small class="danger">Stay away from public when viewing information.</small>
       <small>Add a trusted user by searching his/her id or username</small>
       <br>
-      <input type="search" name="search_trusted" placeholder="Search a trusted user">
+      <input type="search" name="search_trusted_user" placeholder="Search a trusted user">
       <button type="submit">search</button>
-    </form>{{p}}
+    </form>
     {% for result in searches %}
       <div class="trusted_user">
         <h4>{{result.first_name}} {{result.last_name}}</h4>
@@ -215,25 +215,31 @@
     </div>
 
     <div class="box_bot">
-      <p>If you want to discard (delete) this item information click here <a href="#" class="danger_round">Discard</a></p>
+      <p>If you want to discard (delete) this item information click here <a href="{% url 'secureapp:delete_item' item_unveil_info.id %}" class="danger_round">Discard</a></p>
     </div>
   </div>
 
   <div class="box">
-    <div class="box_head">
-      <h1>Trusted users</h1>
-      <small>These are your team (trusted user) that have access to this item</small>
-    </div>
-
+    <form method="get" action="{% url 'secureapp:search_trusted_user' item_unveil_info.id %}" class="box_head">
+      <small class="danger">Stay away from public when viewing information.</small>
+      <small>Add a trusted user by searching his/her id or username</small>
+      <br>
+      <input type="search" name="search_trusted_user" placeholder="Search a trusted user">
+      <button type="submit">search</button>
+    </form>
+    <hr>
     {% if item_unveil_info.trusted_user.all.count > 0 %}
+      <div class="box_head">
+        <h1>Trusted users</h1>
+        <small>These are your team (trusted user) that have access to this item</small>
+      </div>
       {% for trust in item_unveil_info.trusted_user.all %}
         <div class="trusted_user">
           <h4>{{trust.first_name}} {{trust.last_name}}</h4>
-          <a href="{% url 'secureapp:remove_trusted' item_unveil_info.id trust.id   %}" class="danger">Remove trusted user ({{trust.username}})</a>
+          <a href="{% url 'secureapp:remove_trusted_user' item_unveil_info.id trust.id   %}" class="danger">Remove trusted user ({{trust.username}})</a>
         </div>
       {% endfor %}
     {% else %}
-
       <div class="box_center">
         <div class="box_border">
           <p class="alert_warning">No trusted added yet in this {{item_unveil_info.visibility}} item</p>
@@ -242,7 +248,7 @@
     {% endif %}
 
     <div class="box_bot">
-      <p>You can remove all trusted user by just one click <a href="#" class="danger_round">Remove all trusted user</a></p>
+      <p>You can remove all trusted user by just one click <a href="{% url 'secureapp:remove_all_trusted_user' item_unveil_info.id %}" class="danger_round">Remove all trusted user</a></p>
       <small>Note: removing trusted users may not give them access to this sensitive information</small>
     </div>
   </div>

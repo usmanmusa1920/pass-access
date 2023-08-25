@@ -5,7 +5,7 @@ class NextUrl:
     @staticmethod
     def foward(request):
         """
-        replacing route `/` with `-`, so as to pass it in the `password_validation` and `set_pass_code` view
+        replacing route `/` with `-`, so as to pass it in the `password_validation` and `set_passcode` view
         """
         next_url = request.path_info.replace('/', '-')
         # next_url = next_url.replace('//', '/')

@@ -1,6 +1,10 @@
+# -*- coding: utf-8 -*-
 from django.urls import path
 from .views import (
-    landing, dashboard, set_pass_code, UpdatePassCode, itemInfo, addTrustedUser, removeTrustedUser, searchTrustedUser, newItem, newItemFields
+    landing, dashboard, set_passcode, update_passcode
+)
+from .item import (
+    new_item, new_item_fields, item_info, search_trusted_user, add_trusted_user, remove_trusted_user, remove_all_trusted_user, delete_item
 )
 
 
@@ -10,20 +14,24 @@ urlpatterns = [
     path('', landing, name='landing'),
     path('dashboard/', dashboard, name='dashboard'),
     path(
-        'set/passcode/', set_pass_code, name='set_passcode'),
-    # update route
+        'set/passcode/', set_passcode, name='set_passcode'),
     path(
-        'update/passcode/', UpdatePassCode, name='update_passcode'),
+        'update/passcode/', update_passcode, name='update_passcode'),
+    # item
     path(
-        'item/info/<int:item_id>/', itemInfo, name='item_info'),
+        'new/item/', new_item, name='new_item'),
     path(
-        'add/trusted/<int:item_id>/<int:user_id>/', addTrustedUser, name='add_trusted'),
+        'new/item/fields', new_item_fields, name='new_item_fields'),
     path(
-        'remove/trusted/<int:item_id>/<int:user_id>/', removeTrustedUser, name='remove_trusted'),
+        'item/info/<int:item_id>/', item_info, name='item_info'),
     path(
-        'search/trusted/<int:item_id>/', searchTrustedUser, name='search_trusted'),
+        'search/trusted/<int:item_id>/', search_trusted_user, name='search_trusted_user'),
     path(
-        'new/item/', newItem, name='new_item'),
+        'add/trusted/<int:item_id>/<int:user_id>/', add_trusted_user, name='add_trusted_user'),
     path(
-        'new/item/fields', newItemFields, name='new_item_fields'),
+        'remove/trusted/<int:item_id>/<int:user_id>/', remove_trusted_user, name='remove_trusted_user'),
+    path(
+        'remove/all/trusted/<int:item_id>/', remove_all_trusted_user, name='remove_all_trusted_user'),
+    path(
+        'delete/item/<int:item_id>/', delete_item, name='delete_item'),
 ]

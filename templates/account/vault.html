@@ -4,7 +4,7 @@
   <link rel="stylesheet" href="{% static 'css/auth.css' %}">
   <link rel="stylesheet" href="{% static 'css/login.css' %}">
   <script src="{% static 'js/val_x.js' %}"></script>
-  <title>Encme | validate passcode</title>
+  <title>PassAccess | validate passcode</title>
 {% endblock head %}
 
 
@@ -12,16 +12,16 @@
   <form method="post">
     {% csrf_token %}
     <img src="{% static 'css/img/vault.png' %}" class="vault" alt="">
-    <p class="p_auth">Enter master passcode, to unlock next page!</p>
+    <p class="p_auth_1">Enter master passcode, to unlock next page!</p>
 
     {% if next_url.url|length >= 12 %}
-      <p class="b_auth">
+      <p class="p_auth_2">
         <a href="{{next_url.url}}">
           <small>{{next_url.host}}{{next_url.url|truncatechars:10}}</small>
         </a>
       </p>
     {% else %}
-      <p class="b_auth">
+      <p class="p_auth_2">
         <a href="{{next_url.url}}">
           <small>{{next_url.host}}{{next_url.url}}</small>
         </a>
@@ -39,7 +39,7 @@
         <div class="gradient-circle"></div>
       </div>
     </div>
-    <p class="b_auth_process">Authenticating . . .</p>
+    <p class="auth_process">Authenticating . . .</p>
     
     <!-- passcode -->
     <input type="password" name="passcode" placeholder="Enter master passcode" minlength="8" class="input" autocomplete="off" value="19991125u" autofocus required>

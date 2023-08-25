@@ -2,7 +2,7 @@ from django.contrib import admin
 from django.contrib.auth.models import Group
 from django.contrib.auth import get_user_model
 from django.contrib.auth.admin import UserAdmin
-from .models import PassCode
+from .models import PassCode, PasswordGenerator
 
 
 User = get_user_model()
@@ -58,10 +58,11 @@ class PassCodeAdmin(admin.ModelAdmin):
     )
 
 
-admin.site.site_header = 'Encme'
-admin.site.site_title = 'Encme'
-admin.site.index_title = 'Encme admin'
+admin.site.site_header = 'PassAccess'
+admin.site.site_title = 'PassAccess'
+admin.site.index_title = 'PassAccess admin'
 
 admin.site.register(User, UserAdminForm)
 admin.site.register(PassCode, PassCodeAdmin)
 admin.site.unregister(Group)
+admin.site.register(PasswordGenerator)

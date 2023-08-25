@@ -10,14 +10,14 @@
   {% block head %}
     <!-- content tags -->
   {% endblock head %}
-  <title>Encme</title>
+  <title>PassAccess</title>
 </head>
 <body>
   <div class="container">
 
     <div class="header">
       <div class="head">
-        <h1><a href="{% url 'secureapp:landing' %}">Encme</a></h1>
+        <h1><a href="{% url 'secureapp:landing' %}">PassAccess</a></h1>
         <div class="div">
           {% if request.user.is_authenticated %}
             <a href="{% url 'secureapp:landing' %}" class="h_link">Dashboard</a>
@@ -54,8 +54,8 @@
     </div>
 
     <div class="foot">
-      <h1><a href="{% url 'secureapp:landing' %}">Encme</a></h1>
-      <small><i>(Encrypt Me)</i></small>
+      <h1><a href="{% url 'secureapp:landing' %}">PassAccess</a></h1>
+      <small><i>(Privacy is priority)</i></small>
       <!-- <small><i>Security is piority</i></small> -->
       <br>
       <br>

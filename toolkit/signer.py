@@ -1,10 +1,9 @@
 # -*- coding: utf-8 -*-
-import os
 import json
 # from itsdangerous import Serializer #(itsdangerous==2.1.2)
 # from itsdangerous.serializer import Serializer #(itsdangerous==2.1.2)
 from itsdangerous import TimedJSONWebSignatureSerializer as Serializer #(itsdangerous==0.24)
-from toolkit.crypt import PasscodeSecurity
+from toolkit.base import PasscodeSecurity
 
 
 with open('config.json') as config_file:

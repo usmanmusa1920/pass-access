@@ -135,3 +135,14 @@ class PassCode(models.Model):
 
     def __str__(self):
         return f'{self.owner.username}\'s secure passcode'
+    
+
+class PasswordGenerator(models.Model):
+    """password generator table"""
+    owner = models.ForeignKey(User, on_delete=models.CASCADE)
+    label = models.CharField(max_length=255, blank=False, null=False, unique=True)
+    generated_password = models.TextField(blank=False, null=False)
+    date_modified = models.DateTimeField(auto_now=True)
+    date_joined = models.DateTimeField(default=timezone.now) # date_joined (not editable)
+    def __str__(self):
+        return f'{self.owner.username}\'s No.{self.id} generated password'

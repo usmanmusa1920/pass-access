@@ -1,3 +1,4 @@
+import secrets
 from datetime import datetime
 from django.urls import reverse
 from django.shortcuts import render, redirect
@@ -8,6 +9,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.views import LoginView, LogoutView
 from django.contrib.sites.shortcuts import get_current_site
+from .models import PasswordGenerator
 from .forms import (PasswordChangeForm, SignupForm, UpdateForm)
 from toolkit import (
     PasscodeSecurity, SliceDetector, get_token, passcode_required, check_user_passcode_set, NextUrl
@@ -154,11 +156,11 @@ def validate_passcode(request, next_url):
         # """
         if slice_hash == confirm_passcode and slice_ingre == confirm_ingredient:
             # if user updated his/her session age which is less than 60 or greater than secconds, it will set it back to the default one (60 seconds).
-            ru = request.user
-            if ru.session_age < 60 or ru.session_age > 1800:
-                ru.session_age = 60
-            ru.auth_token = get_token()
-            ru.save()
+            instance = request.user
+            if instance.session_age < 60 or instance.session_age > 1800:
+                instance.session_age = 60
+            instance.auth_token = get_token(instance.session_age)
+            instance.save()
             flash_msg.success(request, f'Passcode Authenticated!')
             return redirect(next_url_convert)
     context = {
@@ -169,3 +171,38 @@ def validate_passcode(request, next_url):
         'the_year': THIS_YEARE,
     }
     return render(request, 'account/vault.html', context)
+
+
+@passcode_required
+def password_generator(request):
+    """password generator view"""
+    if request.method == 'POST':
+        pwd_length = int(request.POST['pwd_length'])
+        if pwd_length < 32 or pwd_length > 1000:
+            flash_msg.warning(request, f'Minimum length is 32 and a maximum of 1000')
+            return redirect('auth:password_generator')
+        pwd_value = secrets.token_hex(pwd_length)
+        context = {
+            'pwd_value': pwd_value,
+            'the_year': THIS_YEARE,
+        }
+        return render(request, 'account/generated_password.html', context)
+    context = {
+        'the_year': THIS_YEARE,
+    }
+    return render(request, 'account/password_generator.html', context)
+
+
+@passcode_required
+def generated_password(request):
+    """generated password view"""
+    if request.method == 'POST':
+        pwd_label = request.POST['label']
+        if PasswordGenerator.objects.filter(label=pwd_label).first():
+            flash_msg.warning(request, f'You already have password with this label `{pwd_label}`')
+            return redirect('auth:password_generator')
+        new_gen_pwd = PasswordGenerator(
+            owner=request.user, label=pwd_label, generated_password=request.POST['pwd_value'])
+        new_gen_pwd.save()
+        flash_msg.success(request, f'Your generated password successfully saved!')
+    return redirect('auth:password_generator')

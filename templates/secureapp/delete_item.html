@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+  delete item ({{item.i_label}})
+{% endblock title %}
+
+
+{% block main %}
+  <div class="t_s">
+    <p>Delete <i>{{item.i_label}}</i></p>
+  </div>
+
+  <form method="post" class="box">
+    {% csrf_token %}
+    <br>
+    <div class="box_inn">
+      <p>Label:</p>
+      <p class="box_border">{{item.i_label}}</p>
+      <br>
+      <p>Visibility:</p>
+      <p class="box_border">
+        <b>Visibility: </b>{{item.visibility}} access
+      </p>
+      <br>
+      <p>Category and platform:</p>
+      <p class="box_border">
+        <b>Category:</b>
+        {{item.category}}
+        <br>
+        <b>Platform:</b>
+        {{item.platform}}
+
+        <!-- handling custom platform view -->
+        {% if item.custom_platform == None %}
+          <!-- pass -->
+        {% elif item.custom_platform == '' %}
+          <!-- pass -->
+        {% else %}
+          <br>
+          <b>Custom platform:</b>
+          {{item.custom_platform}}
+        {% endif %}
+      </p>
+      <br>
+      
+      <p class="alert_warning">Once deleted action can`t be restore.</p>
+      <br>
+      <div class="box_border">
+        <p class="alert_col_warning">
+          <input type="checkbox" required> Are you sure to delete?
+        </p>
+      </div>
+      <br>
+      <div>
+        <button type="submit">Delete</button>
+      </div>
+      <br>
+        
+    </div>
+  </form>
+{% endblock main %}

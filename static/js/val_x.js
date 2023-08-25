@@ -5,15 +5,14 @@ function show_val_progress(){
     if (passcode.length > 8){
         // displaying authentication illustration
         document.querySelector('.authentic').style.display = 'flex';
-        document.querySelector('.b_auth_process').style.display = 'flex';
+        document.querySelector('.auth_process').style.display = 'flex';
 
         // hiding
         document.querySelector('.vault').style.display = 'none';
-        document.querySelector('.p_auth').style.display = 'none';
-        document.querySelector('.b_auth').style.display = 'none';
+        document.querySelector('.p_auth_1').style.display = 'none';
+        document.querySelector('.p_auth_2').style.display = 'none';
         // hiding button
         document.querySelector('.btn').style.display = 'none';
-        document.querySelector('.p_home').style.display = 'none';
         document.querySelector('.input').style.display = 'none';
 
         // hiding alert divs

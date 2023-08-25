@@ -7,13 +7,68 @@
 
 
 {% block main %}
-  <div class="box">
-    {{p}}
-    {% for result in searches %}
-      <div class="trusted_user">
-        <h4>{{result.first_name}} {{result.last_name}}</h4>
-        <a href="#" class="peace">Add trusted user</a>
-      </div>
-    {% endfor %}
+  <div class="t_s">
+    <p>Search trusted user</p>
+    <form action="#">
+      <a href="#">upgrade</a>
+      <button type="submit">Edit</button>
+    </form>
   </div>
+  <div class="box">
+  {% if searches %}
+    {% for result in searches %}
+      <div class="t_s">
+        <p>Add trusted user <i>({{result.first_name}})</i></p>
+      </div>
+
+      <form action="{% url 'secureapp:add_trusted_user' item.id result.id %}" method="post" class="box">
+        {% csrf_token %}
+        <br>
+        <div class="box_inn">
+          <p>Trusted user full name:</p>
+          <p class="box_border">
+            <b>Full name: </b>
+            {{result.first_name}} {{result.last_name}}
+          </p>
+          <br>
+          <p>Trusted user other details:</p>
+          <p class="box_border">
+            <b>Username: </b>{{result.username}}
+            <br>
+            <b>Email: </b>{{result.email}}
+            <br>
+            <b>Phone number: </b>{{result.phone_number}}
+          </p>
+          <br>
+          
+          <p class="alert_warning">
+            <input type="checkbox" required> Are you sure to add this trusted user?
+            <a href="{% url 'secureapp:item_info' item.id %}" class="danger">No back to item</a>
+          </p>
+          <br>
+          <div>
+            <button type="submit">Add trusted user</button>
+          </div>
+          <br>
+        </div>
+      </form>
+    {% endfor %}
+  {% else %}
+    <form method="get" action="" class="box_head">
+      <small class="danger">Stay away from public when viewing information.</small>
+      <small>Add a trusted user by searching his/her id or username</small>
+      <br>
+      <input type="search" name="search_trusted_user" placeholder="Search a trusted user">
+      <button type="submit">search</button>
+    </form>
+    <br>
+    <hr>
+    <div class="box_center">
+      <div class="box_border">
+        <p class="alert_warning">We can't find trusted user with that data</p>
+      </div>
+    </div>
+  {% endif %}
+</div>
 {% endblock main %}
+

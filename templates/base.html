@@ -9,7 +9,7 @@
   <link rel="stylesheet" href="{% static 'base.css' %}">
   <script src="{% static 'js/base.js' %}"></script>
   <title>
-    Encme | 
+    PassAccess | 
     {% block title %}
       <!-- inheritance -->
     {% endblock title %}
@@ -67,7 +67,8 @@
           {% if request.user.is_authenticated %}
             <p><a href="admin">Admin</a></P>
             <p><a href="{% url 'auth:update_profile' %}">Update profile</a></P>
-              <p><a href="{% url 'auth:change_password' %}">Change password</a></P>
+              <p><a href="{% url 'auth:password_generator' %}">Password generator</a></P>
+                <p><a href="{% url 'auth:change_password' %}">Change password</a></P>
             <p><a href="{% url 'auth:logout' %}">Logout</a></P>
           {% else %}
             <p><a href="{% url 'auth:login' %}">Login</a></P>
@@ -85,7 +86,7 @@
 
         <div class="foot">
           <small>Get 
-            <a href="#">help</a> from encme community or start live <a href="#">chat</a> with our people
+            <a href="#">help</a> from PassAccess community or start live <a href="#">chat</a> with our people
           </small>
           <p>2022 - {{the_year}}</p>
         </div>
@@ -97,11 +98,11 @@
         <div class="l_header">
           <img src="{% static 'img/show_menu.png' %}" id="show_menu" alt="" onclick="showMenu()">
           <img src="{% static 'img/show_menu.png' %}" id="hide_menu" alt="" onclick="hideMenu()">
-          <a href="{% url 'secureapp:landing' %}"><h1>Encme</h1></a>
+          <a href="{% url 'secureapp:landing' %}"><h1>PassAccess</h1></a>
         </div>
 
         <div class="r_header">
-          <span>{{request.user.first_name|slice:':1'}}{{request.user.last_name|slice:':1'}}</span>
+          <span>{{request.user.first_name|slice:':1'|upper}}{{request.user.last_name|slice:':1'|upper}}</span>
           <a href="#">{{request.user.first_name}} {{request.user.last_name}}</a>
           <a>|</a>
           <a href="#">Notification</a>
