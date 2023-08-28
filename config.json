@@ -1,5 +1,6 @@
 {
     "SECRET_KEY": "django-insecure-%3q*o5zv0-ftvpjdf4+ydfk2h3-xpuw62ijrbw&7%x(142hi+g",
+    "DEBUG": true,
     "EMAIL_USER": "user@mail.com",
     "EMAIL_PASS": "**********"
 }

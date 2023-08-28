@@ -1,9 +1,7 @@
 # -*- coding: utf-8 -*-
 from django.urls import path
+from .update import update_item, update_item_salt
 from .views import (
-    landing, dashboard, set_passcode, update_passcode
-)
-from .item import (
     new_item, new_item_fields, item_info, search_trusted_user, add_trusted_user, remove_trusted_user, remove_all_trusted_user, delete_item
 )
 
@@ -11,13 +9,14 @@ from .item import (
 app_name = 'secureapp'
 
 urlpatterns = [
-    path('', landing, name='landing'),
-    path('dashboard/', dashboard, name='dashboard'),
+    # views.py module path (views routes)
     path(
-        'set/passcode/', set_passcode, name='set_passcode'),
+        'update/item/<int:item_id>/', update_item, name='update_item'),
     path(
-        'update/passcode/', update_passcode, name='update_passcode'),
-    # item
+        'update/item/salt/<int:item_id>/', update_item_salt, name='update_item_salt'),
+
+
+    # views.py module path (views routes)
     path(
         'new/item/', new_item, name='new_item'),
     path(

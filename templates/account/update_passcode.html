@@ -26,6 +26,10 @@
           Passcode are case-sensitive. Use a strong passcode with a combination of characters, <br> upper and lower letters, along side with numbers to make it strong, like: <b>p@s$w0r01.1</b>
         </p>
         <br>
+        <p class="alert_warning">
+          Make sure to remember your passcode for frequently use. Also you can change your password later again.
+        </p>
+        <br>
         <input type="email" name="verify_email" placeholder="Enter your email" value="usmanmusa1920@gmail.com" autofocus required>
         <br>
         <br>
@@ -44,13 +48,16 @@
       </div>
       <br>
       
-      <p class="alert_warning">Make sure to remember your passcode for frequently use. Also you can change your passcode later again.</p>
+      <p class="alert_warning">
+        <span class="center_span">
+          <input type="checkbox" required> &nbsp; Are you sure to change your passcode?
+        </span>
+      </p>
       <br>
       <div>
-        <button type="submit"><h1>Submit</h1></button>
+        <button type="submit">Change</button>
       </div>
       <br>
-        
     </div>
   </form>
 {% endblock main %}

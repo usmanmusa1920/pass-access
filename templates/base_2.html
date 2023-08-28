@@ -13,27 +13,21 @@
   <title>PassAccess</title>
 </head>
 <body>
-  {% if monitor_session_age == True and request.user.monitor_session_age == True %}
-    <!-- thes two span tags won`t be visible (they are hidden in the base_2.css file). The first one will count number of seconds of in active, while the second one is the logged in user session age value -->
-    <span class="security_secs"></span>
-    <span class="security_user_sess_age">{{request.user.session_age}}</span>
-  {% endif %}
   <div class="container">
 
     <div class="header">
       <div class="head">
-        <h1><a href="{% url 'secureapp:landing' %}">PassAccess</a></h1>
+        <h1><a href="{% url 'auth:landing' %}">PassAccess</a></h1>
         <div class="div">
           {% if request.user.is_authenticated %}
-            <a href="{% url 'secureapp:landing' %}" class="h_link">Dashboard</a>
             <a href="{% url 'auth:logout' %}" class="h_link">Logout</a>
-            <a href="{% url 'secureapp:landing' %}" class="h_link_sm">Dashboard</a>
+            <a href="{% url 'auth:logout' %}" class="h_link_sm">Logout</a>
           {% else %}
             {% block link %}
               <!-- links -->
             {% endblock link %}
-            <a href="#" class="h_link">About</a>
-            <a href="#" class="h_link">Privacy</a>
+            <a href="{% url 'auth:about' %}" class="h_link">About</a>
+            <a href="{% url 'auth:privacy' %}" class="h_link">Privacy</a>
           {% endif %}
         </div>
       </div>
@@ -59,67 +53,26 @@
     </div>
 
     <div class="foot">
-      <h1><a href="{% url 'secureapp:landing' %}">PassAccess</a></h1>
-      <small><i>(Privacy is priority)</i></small>
-      <!-- <small><i>Security is piority</i></small> -->
+      <h1><a href="{% url 'auth:landing' %}">PassAccess</a></h1>
+      <small><i>(Security & privacy is priority)</i></small>
       <br>
       <br>
       <p>A password and sensitive information manager, that encrypt and save them for a user, which can be decrypt by the use when ever need to be. A security application that secure sensitive informations.</p>
       <br>
       {% if request.user.is_authenticated %}
-        <li><a href="{% url 'secureapp:landing' %}">Dashboard</a></li>
-        <li><a href="{% url 'auth:update_profile' %}">Update profile</a></li>
-        <li><a href="{% url 'auth:change_password' %}">Change password</a></li>
+        <li><a href="{% url 'auth:landing' %}">Dashboard</a></li>
         <li><a href="{% url 'auth:logout' %}">Logout</a></li>
       {% else %}
-        &nbsp; <li><a href="{% url 'auth:login' %}">Login</a></li>
-        &nbsp; <li><a href="{% url 'auth:signup' %}">Sign Up</a></li>
-        &nbsp; <li><a href="#">About</a></li>
-        &nbsp; <li><a href="#">Privacy</a></li>
+        <li><a href="{% url 'auth:login' %}">Login</a></li>
+        <li><a href="{% url 'auth:signup' %}">Sign Up</a></li>
       {% endif %}
+      <li><a href="{% url 'auth:about' %}">About</a></li>
+      <li><a href="{% url 'auth:privacy' %}">Privacy</a></li>
+      <li><a href="{% url 'auth:help' %}">Help</a></li>
+      <li><a href="{% url 'auth:contact_us' %}">Contact Us</a></li>
       <br>
       <p>Alright reserved &copy; 2022 - {{the_year}}</p>
     </div>
-
   </div>
-  <script type="text/javascript">
-		let timer = 0;
-		let currSeconds = 0;
-    let secsCount = document.querySelector('.security_secs').textContent;
-    let userSessionAge = document.querySelector('.security_user_sess_age').textContent;
-    
-		function resetTimer() {
-			// Hide the timer text
-			document.querySelector('body').style.display = 'block';
-      document.querySelector('html').style.background = 'white';
-			// Clear the previous interval
-			clearInterval(timer);
-			// Reset the seconds of the timer
-			currSeconds = 0;
-			// Set a new interval
-      // NOTE: 1 second = 1000 milliseconds
-			timer = setInterval(startIdleTimer, 1000);
-		}
-    
-		// events that would reset the timer
-		window.onload = resetTimer;
-		window.onmousemove = resetTimer;
-		window.onmousedown = resetTimer;
-		window.ontouchstart = resetTimer;
-		window.onclick = resetTimer;
-		window.onkeypress = resetTimer;
-    
-		function startIdleTimer() {
-			// Increment the timer seconds
-			currSeconds++;
-      // if (secsCount == userSessionAge / 2 || secsCount === userSessionAge / 2){
-      if (secsCount == 30 || secsCount === 30){
-        document.querySelector('body').style.display = 'none';
-        document.querySelector('html').style.background = 'rgb(3, 3, 45)';
-      }
-			// Set the timer text to the new value
-			secsCount = currSeconds;
-		}
-	</script>
 </body>
 </html>

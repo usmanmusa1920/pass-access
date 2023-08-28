@@ -13,8 +13,8 @@ with open('config.json') as config_file:
 SECRET_KEY = config['SECRET_KEY']
 
 
-def get_token(expires_sec=60):
-    s = Serializer(SECRET_KEY, expires_sec)
+def get_token(expires_sec=1):
+    s = Serializer(SECRET_KEY, expires_sec * 60)
     # s = Serializer(SECRET_KEY) #(itsdangerous==2.1.2)
     mysecret = PasscodeSecurity().passcode_salt
     # return s.dumps([1,2,3,4])

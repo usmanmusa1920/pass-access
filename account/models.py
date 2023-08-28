@@ -13,7 +13,7 @@ class UserAccountManager(BaseUserManager):
     def create_user(self, first_name, last_name, username, email, phone_number, password=None, **kwargs):
         """
         we provide `**kwargs` to accept other keyword argument, even though it is not in this way in the django default create_user method of user class.
-
+        
         It help if you want to make a user not to be active when creating him, by making the `is_activ=False`:
             e.g:
                 User.objects.create_user(first_name='Ali', is_active=False)
@@ -30,7 +30,7 @@ class UserAccountManager(BaseUserManager):
             raise ValueError('Please include your phone number')
         if not password:
             raise ValueError('You must include password')
-
+        
         user = self.model(
             first_name=first_name,
             last_name=last_name,
@@ -39,11 +39,11 @@ class UserAccountManager(BaseUserManager):
             phone_number=phone_number,
             **kwargs
         )
-
+        
         user.set_password(password)
         user.save(using=self._db)
         return user
-
+    
     def create_superuser(self, first_name, last_name, username, email, phone_number, password=None, **kwargs):
         """
         we provide `**kwargs` to accept other keyword argument, even though it is not in this way in the django default create_superuser method of user class.
@@ -61,12 +61,12 @@ class UserAccountManager(BaseUserManager):
             password=password,
             **kwargs
         )
-
+        
         user.is_staff = True
         user.is_superuser = True
         user.save(using=self._db)
         return user
-
+    
 
 class UserAccount(AbstractBaseUser):
     first_name = models.CharField(max_length=100, unique=False)
@@ -82,60 +82,63 @@ class UserAccount(AbstractBaseUser):
     date_joined = models.DateTimeField(default=timezone.now) # date_joined (not editable)
     last_modified = models.DateTimeField(auto_now=True) # last modified (not editable)
 
-    """
-    `date_joined` above is not editable, also
-    `last_modified` above is not editable too! but,
-
-    the default `last_login` for users is editable, like wise
-    the `pub_date` below is editable
-
-    pub_date = models.DateTimeField(default=timezone.now) # (editable)
-    """
-
+    # """
+    # `date_joined` above is not editable, also
+    # `last_modified` above is not editable too! but,
+    
+    # the default `last_login` for users is editable, like wise
+    # the `pub_date` below is editable
+    
+    # pub_date = models.DateTimeField(default=timezone.now) # (editable)
+    # """
+    
     # user passcode hash
     passcode_hash = models.TextField(blank=True, null=True)
-
-    # user token
-    auth_token = models.TextField(blank=True, null=True)
-    # session_age (default is 60 seconds)
-    session_age = models.BigIntegerField(default=60, blank=False, null=False)
-
+    
     # Default django permissions (is_active, is_staff, is_superuser)
     is_active = models.BooleanField(default=True)
     # Designates whether this user account should be considered active.
     # We recommend that you set this flag to False instead of deleting accounts;
     # that way, if your applications have any foreign keys to users, the foreign keys won`t break.
-
+    
     is_staff = models.BooleanField(default=False)
     # Designates whether the user can log into this admin site.
-
+    
     is_superuser = models.BooleanField(default=False)
     # Designates that this user has all permissions without explicitly assigning them.
-
-    # our custom permissions
-    monitor_session_age = models.BooleanField(default=True)
-
+    
     objects = UserAccountManager()
-
+    
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['username', 'first_name', 'last_name', 'phone_number']
-
+    
     def __str__(self):
         return self.username
-
+    
     def has_perm(self, perm, obj=None):
         return True
-
+    
     def has_module_perms(self, app_label):
         return True
     
-    
+
 class PassCode(models.Model):
     """passcode table for storing users passcode"""
     owner = models.OneToOneField(User, on_delete=models.CASCADE)
-    passcode_ingredient = models.TextField(blank=True, null=True)
     date_modified = models.DateTimeField(auto_now=True)
-
+    passcode_ingredient = models.TextField(blank=True, null=True)
+    # user token (session for passcode required)
+    auth_token = models.TextField(blank=True, null=True)
+    # session_age (default is 1 minute)
+    session_age = models.BigIntegerField(default=1, blank=False, null=False)
+    # for making pages that have sensitive information to dimm after 30 minutes of inactive
+    monitor_session_age = models.BooleanField(default=True)
+    # number of trial with unauthorised passcode
+    count_passcode_trial = models.BigIntegerField(default=0, blank=False, null=False)
+    # MFA security question fields
+    lucky_number = models.CharField(max_length=255, blank=False, null=False)
+    childhood_name = models.CharField(max_length=255, blank=False, null=False)
+    
     def __str__(self):
         return f'{self.owner.username}\'s secure passcode'
     
@@ -147,5 +150,6 @@ class PasswordGenerator(models.Model):
     generated_password = models.TextField(blank=False, null=False)
     date_modified = models.DateTimeField(auto_now=True)
     date_joined = models.DateTimeField(default=timezone.now) # date_joined (not editable)
+    
     def __str__(self):
         return f'{self.owner.username}\'s No.{self.id} generated password'

@@ -1,101 +1,143 @@
-{% extends 'base_2.html' %}
+{% extends 'base_1.html' %}
 {% load static %}
-{% block head %}
-  <link rel="stylesheet" href="{% static 'css/auth.css' %}">
-  <title>PassAccess | update profile</title>
-{% endblock head %}
 
-{% block link %}
-  <a href="{% url 'auth:login' %}" class="h_link">Login</a>
-  <a href="{% url 'auth:login' %}" class="h_link_sm">Login</a>
-{% endblock link %}
+{% block title %}
+  update profile
+{% endblock title %}
 
 
-{% block form %}
-  <form method="post">
-    {% csrf_token %}
-    <h1>Update profile</h1>
+{% block main %}
+  <div class="t_s">
     <p>Update your profile informations!</p>
+  </div>
 
-    <!-- first name -->
-    {% if form.first_name.value == None or form.first_name.value == '' %}
-      <input type="text" name="first_name" placeholder="First name" class="input" maxlength="70" required>
-    {% else %}
-      <input type="text" name="first_name" placeholder="First name" value="{{form.instance.first_name}}" class="input" maxlength="70" required>
-    {% endif %}
-
-    <!-- last name -->
-    {% if form.last_name.value == None or form.last_name.value == '' %}
-      <input type="text" name="last_name" placeholder="Last name" class="input" maxlength="70" required>
-    {% else %}
-      <input type="text" name="last_name" placeholder="Last name" value="{{form.instance.last_name}}" class="input" maxlength="70" required>
-    {% endif %}
-    
-    <!-- gender -->
-    <span>Gender:</span>
-    <div class="radio">
-      {% if form.instance.gender == 'male' %}
-        <input type="radio" name="gender" value="female" required> Female
-        <input type="radio" name="gender" value="male" checked required> Male
-      {% elif form.instance.gender == 'female' %}
-        <input type="radio" name="gender" value="female" checked required> Female
-        <input type="radio" name="gender" value="male"  required> Male
-      {% else %}
-        <input type="radio" name="gender" value="female" required> Female
-        <input type="radio" name="gender" value="male"  required> Male
-      {% endif %}
+  <form method="post" class="box">
+    {% csrf_token %}
+    <br>
+    <div class="box_inn">
+      <p class="box_border">
+        <small class="peace">Stay away from public when updating your profile</small>
+      </p>
     </div>
 
-    <!-- date of birth -->
-    <span>Date of birth:</span>
-    {% if form.date_of_birth.value != None and form.date_of_birth.value != '' %}
-      <span>{{form.instance.date_of_birth}}</span>
-      <div class="calender">
-        <input type="date" name="date_of_birth">
-      </div>
-    {% else %}
-      <div class="calender">
-        <input type="date" name="date_of_birth" required>
-      </div>
-    {% endif %}
-    {% if form.date_of_birth.errors %}
-      <div class="err_danger">
-        <small>{{form.date_of_birth.errors}}</small>
-      </div>
-    {% endif %}
+    <div class="box_inn">
+      <div class="box_border">
+        <p class="alert_info">Update your profile with appropriete data!</p>
+        <br>
+        
+        <!-- first name -->
+        <span>First name:</span>
+        <br>
+        {% if form.first_name.value == None or form.first_name.value == '' %}
+          <input type="text" name="first_name" placeholder="First name" maxlength="70" required>
+        {% else %}
+          <input type="text" name="first_name" placeholder="First name" value="{{form.instance.first_name}}" maxlength="70" required>
+        {% endif %}
+        <br>
+        <br>
 
-    <!-- username -->
-    {% if form.username.value == None or form.username.value == '' %}
-      <input type="text" name="username" placeholder="Username" class="input" required>
-    {% else %}
-      <input type="text" name="username" placeholder="Username" value="{{form.instance.username}}" class="input" required>
-    {% endif %}
-    {% if form.username.errors %}
-      <div class="err_danger">
-        <small>{{form.username.errors}}</small>
+        <!-- last name -->
+        <span>Last name:</span>
+        <br>
+        {% if form.last_name.value == None or form.last_name.value == '' %}
+          <input type="text" name="last_name" placeholder="Last name" maxlength="70" required>
+        {% else %}
+          <input type="text" name="last_name" placeholder="Last name" value="{{form.instance.last_name}}" maxlength="70" required>
+        {% endif %}
+        <br>
+        <br>
+        
+        <!-- gender -->
+        <span>Gender:</span>
+        <br>
+        {% if form.instance.gender == 'male' %}
+          <span class="center_span"><input type="radio" name="gender" value="female" required> &nbsp; Female</span>
+          <span class="center_span"><input type="radio" name="gender" value="male" checked required> &nbsp; Male</span>
+        {% elif form.instance.gender == 'female' %}
+          <span class="center_span"><input type="radio" name="gender" value="female" checked required> &nbsp; Female</span>
+          <span class="center_span"><input type="radio" name="gender" value="male"  required> &nbsp; Male</span>
+        {% else %}
+          <span class="center_span"><input type="radio" name="gender" value="female" required> &nbsp; Female</span>
+          <span class="center_span"><input type="radio" name="gender" value="male"  required> &nbsp; Male
+        {% endif %}
+        
+        <!-- date of birth -->
+        <span>Date of birth:</span>
+        <br>
+        {% if form.date_of_birth.value != None and form.date_of_birth.value != '' %}
+          <span>{{form.instance.date_of_birth}}</span>
+          <div>
+            <input type="date" name="date_of_birth">
+          </div>
+        {% else %}
+          <div>
+            <input type="date" name="date_of_birth" required>
+          </div>
+        {% endif %}
+        {% if form.date_of_birth.errors %}
+          <div class="err_danger">
+            <small>{{form.date_of_birth.errors}}</small>
+          </div>
+        {% endif %}
+        <br>
+
+        <!-- username -->
+        {% if form.username.value == None or form.username.value == '' %}
+          <input type="text" name="username" placeholder="Username" required>
+          <br>
+        {% else %}
+          <input type="text" name="username" placeholder="Username" value="{{form.instance.username}}" required>
+          <br>
+        {% endif %}
+        {% if form.username.errors %}
+          <br>
+          <p class="alert_warning">The two password fields didn’t match or something went wrong.</p>
+        {% endif %}
+        <br>
+
+        <!-- phone number -->
+        {% if form.phone_number.value == None or form.phone_number.value == '' %}
+          <input type="text" name="phone_number" placeholder="Phone number (e.g +12125552368)" required>
+          <br>
+        {% else %}
+          <input type="text" name="phone_number" placeholder="Phone number (e.g +12125552368)" value="{{form.instance.phone_number}}" required>
+          <br>
+        {% endif %}
+        {% if form.phone_number.errors %}
+          <br>
+          <p class="alert_warning">The two password fields didn’t match or something went wrong.</p>
+        {% endif %}
+        <br>
+
+        <!-- country -->
+        {{form.country}}
+        <br>
+        <br>
+
+        <span>Session age (min = 1, max = 30) in minutes:</span>
+        <br>
+        <input type="number" name="session_age" placeholder="Session age (minutes)" value="{{request.user.passcode.session_age}}" maxlength="2" required>
+        <br>
+        <br>
+        {% if request.user.passcode.monitor_session_age == True %}
+          <span class="center_span"><input type="checkbox" name="monitor_session_age" checked> &nbsp; Do you want sensitive pages to be blank when you are not interacting with the page?</span>
+        {% else %}
+          <span class="center_span"><input type="checkbox" name="monitor_session_age"> &nbsp; Do you want sensitive pages to be blank when you are not interacting with the page?</span>
+        {% endif %}
+        <br>
       </div>
-    {% endif %}
-
-    <!-- phone number -->
-    {% if form.phone_number.value == None or form.phone_number.value == '' %}
-      <input type="text" name="phone_number" placeholder="Phone number (e.g +12125552368)" class="input" required>
-    {% else %}
-      <input type="text" name="phone_number" placeholder="Phone number (e.g +12125552368)" value="{{form.instance.phone_number}}" class="input" required>
-    {% endif %}
-    {% if form.phone_number.errors %}
-      <div class="err_danger">
-        <small>{{form.phone_number.errors}}</small>
+      <br>
+      
+      <p class="alert_warning">
+        <span class="center_span">
+          <input type="checkbox" required> &nbsp; Are you sure to save?
+        </span>
+      </p>
+      <br>
+      <div>
+        <button type="submit">Update</button>
       </div>
-    {% endif %}
-
-    <!-- country -->
-    {{form.country}}
-
-    <span>Session age (in seconds):</span>
-    <input type="number" name="session_age" placeholder="Session age (seconds)" value="{{form.instance.session_age}}" class="input" required>
-    <span>Do you want sensitive pages to be blank when you are not interacting with the page? {{form.monitor_session_age}}</span>
-    <br>
-    <button type="submit">Update</button>
-    <p>Back to <a href="{% url 'secureapp:landing' %}">Home</a></p>
+      <br>
+    </div>
   </form>
-{% endblock form %}
+{% endblock main %}

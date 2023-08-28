@@ -1,0 +1,41 @@
+{% extends 'base_2.html' %}
+{% load static %}
+{% block head %}
+  <link rel="stylesheet" href="{% static 'css/landing.css' %}">
+  <title>PassAccess | about</title>
+{% endblock head %}
+
+
+{% block link %}
+  <a href="{% url 'auth:signup' %}" class="h_link">Sign Up</a>
+  <a href="{% url 'auth:login' %}" class="h_link">Login</a>
+  <a href="{% url 'auth:login' %}"class="h_link_sm">Login</a>
+{% endblock link %}
+
+
+{% block main %}
+  <div class="header">
+    <br>
+    <h2 class="p">About</h2>
+    <br>
+  </div>
+  
+  <div class="main">
+    <div class="main_col">
+      <br>
+      <br>
+      <br>
+      <p class="pp">Security application that secure sensitive informations!</p>
+      <br>
+      <p class="pp"><b>PassAccess</b> is a password and sensitive information manager, that encrypt and save sensitive informations for a user, which can be decrypt by the user when ever need to be, using a good methodological algorithm.</p>
+      <br>
+      <br>
+      <br>
+      <div class="two">
+        <img src="{% static 'img/landing.png' %}" alt="">
+      </div>
+      <p>Protect your password with <b><i>PassAccess</i></b></p>
+      <br>
+    </div>
+  </div>
+{% endblock main %}

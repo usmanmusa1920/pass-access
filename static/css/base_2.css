@@ -21,11 +21,6 @@ time, mark, audio, video {
   background:transparent;
 }
 
-/* user session age */
-.security_secs, .security_user_sess_age{
-  display: none;
-}
-
 body{
   background-color: lightgray;
   overflow-x: hidden;

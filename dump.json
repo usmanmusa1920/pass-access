@@ -575,7 +575,7 @@
     "model": "account.useraccount",
     "pk": 1,
     "fields": {
-        "password": "pbkdf2_sha256$600000$H6yrQR9NpISYm9fgO0MAXE$ykYVRiFpeTeJjI9fOcbWWqmaoqaoPF1kdUwJzsQkgAk=",
+        "password": "pbkdf2_sha256$600000$jdvsNFTvZWW10bodbJdQL4$VJLKRb7gpVeMqSr6JVK0Z7cJq/XVr0MsaGCdRO0L76Q=",
         "last_login": null,
         "first_name": "Usman",
         "last_name": "Musa",
@@ -585,22 +585,19 @@
         "email": "usmanmusa1920@gmail.com",
         "phone_number": "+2348123456789",
         "country": "",
-        "date_joined": "2023-08-25T18:21:05.625Z",
-        "last_modified": "2023-08-25T18:21:47.198Z",
+        "date_joined": "2023-08-27T14:53:19.811Z",
+        "last_modified": "2023-08-27T14:53:55.159Z",
         "passcode_hash": null,
-        "auth_token": null,
-        "session_age": 60,
         "is_active": true,
         "is_staff": true,
-        "is_superuser": true,
-        "monitor_session_age": true
+        "is_superuser": true
     }
 },
 {
     "model": "account.useraccount",
     "pk": 2,
     "fields": {
-        "password": "pbkdf2_sha256$600000$rZktmrS0Z9UCNilBWnY73d$RKoWuf9npq5v3fdyU3nDSnAc+HnDKBHPcgyvklGQTog=",
+        "password": "pbkdf2_sha256$600000$a1eRtWUJRRWauMqwMwW7vM$GPhuB2KHIRunEfqTFWgOy0CW/VD4VRd+WhF8zCIyA/E=",
         "last_login": null,
         "first_name": "Aliyu",
         "last_name": "Muhammad",
@@ -610,22 +607,19 @@
         "email": "aliyumuhammad@gmail.com",
         "phone_number": "+2348123456789",
         "country": "",
-        "date_joined": "2023-08-25T18:21:09.509Z",
-        "last_modified": "2023-08-25T18:21:47.380Z",
+        "date_joined": "2023-08-27T14:53:22.876Z",
+        "last_modified": "2023-08-27T14:53:55.348Z",
         "passcode_hash": null,
-        "auth_token": null,
-        "session_age": 60,
         "is_active": true,
         "is_staff": false,
-        "is_superuser": false,
-        "monitor_session_age": true
+        "is_superuser": false
     }
 },
 {
     "model": "account.useraccount",
     "pk": 3,
     "fields": {
-        "password": "pbkdf2_sha256$600000$yBCgG7OCB9lsrchrlTPrty$7ELAnrvlW5w9ZDirfkCogCyR8ZMIeQbqlPSqBbHaJts=",
+        "password": "pbkdf2_sha256$600000$JwkUQrnrBtDL4FgMXCVJqe$KgRmVKbcZ2rEi6EXi1cHjpSI/FJ3wPxAj9J3eCqjBGE=",
         "last_login": null,
         "first_name": "Fatima",
         "last_name": "Sani",
@@ -635,22 +629,19 @@
         "email": "fatimasani@gmail.com",
         "phone_number": "+2348123456789",
         "country": "",
-        "date_joined": "2023-08-25T18:21:12.869Z",
-        "last_modified": "2023-08-25T18:21:47.556Z",
+        "date_joined": "2023-08-27T14:53:26.293Z",
+        "last_modified": "2023-08-27T14:53:55.577Z",
         "passcode_hash": null,
-        "auth_token": null,
-        "session_age": 60,
         "is_active": true,
         "is_staff": false,
-        "is_superuser": false,
-        "monitor_session_age": true
+        "is_superuser": false
     }
 },
 {
     "model": "account.useraccount",
     "pk": 4,
     "fields": {
-        "password": "pbkdf2_sha256$600000$lD3fZbTWkuJay59pDXdO1D$GAEYWoVEtDt26++ywoBGxXhTbF50E6GVlznuOFFw5vg=",
+        "password": "pbkdf2_sha256$600000$gg1acNACrWqzEpOkUgo695$4eGLSQMzea7MSradA8WqYcmEucAPXDBkXni+0FewOyc=",
         "last_login": null,
         "first_name": "Ahmad",
         "last_name": "Amiun",
@@ -660,22 +651,19 @@
         "email": "ahmadaminu@gmail.com",
         "phone_number": "+2348123456789",
         "country": "",
-        "date_joined": "2023-08-25T18:21:17.588Z",
-        "last_modified": "2023-08-25T18:21:47.765Z",
+        "date_joined": "2023-08-27T14:53:28.969Z",
+        "last_modified": "2023-08-27T14:53:55.743Z",
         "passcode_hash": null,
-        "auth_token": null,
-        "session_age": 60,
         "is_active": true,
         "is_staff": false,
-        "is_superuser": false,
-        "monitor_session_age": true
+        "is_superuser": false
     }
 },
 {
     "model": "account.useraccount",
     "pk": 5,
     "fields": {
-        "password": "pbkdf2_sha256$600000$6mOZiwj3dRH0d3AzhF8gku$KULlzG/p2bhjMf5cD89Pw/o2kXeBuYXDlvUhNhLlxmw=",
+        "password": "pbkdf2_sha256$600000$4HPXRgTiTL65sXAqx7ET4T$d/Kb/OC9PwR9v2f9rtSnUlYOM97msfxoyoj+PAEIL/o=",
         "last_login": null,
         "first_name": "John",
         "last_name": "Christain",
@@ -685,22 +673,19 @@
         "email": "johnchristain@gmail.com",
         "phone_number": "+2348123456789",
         "country": "",
-        "date_joined": "2023-08-25T18:21:22.795Z",
-        "last_modified": "2023-08-25T18:21:47.975Z",
+        "date_joined": "2023-08-27T14:53:31.694Z",
+        "last_modified": "2023-08-27T14:53:55.936Z",
         "passcode_hash": null,
-        "auth_token": null,
-        "session_age": 60,
         "is_active": true,
         "is_staff": false,
-        "is_superuser": false,
-        "monitor_session_age": true
+        "is_superuser": false
     }
 },
 {
     "model": "account.useraccount",
     "pk": 6,
     "fields": {
-        "password": "pbkdf2_sha256$600000$jF8dfyPIdN3T55u3Xwo0U9$dQt9Bx0mPGjCREVXiQhHTRXJJNBXvudpaEZrAI98MYc=",
+        "password": "pbkdf2_sha256$600000$kvOvaBupUiLFZyOZxEr9wp$cWf+lbux8NwU6BqRA2Jlja1i0IAH50umpXIKKKp+ByI=",
         "last_login": null,
         "first_name": "Nura",
         "last_name": "Ali",
@@ -710,22 +695,19 @@
         "email": "nuraali@gmail.com",
         "phone_number": "+2348123456789",
         "country": "",
-        "date_joined": "2023-08-25T18:21:26.068Z",
-        "last_modified": "2023-08-25T18:21:48.155Z",
+        "date_joined": "2023-08-27T14:53:34.709Z",
+        "last_modified": "2023-08-27T14:53:56.140Z",
         "passcode_hash": null,
-        "auth_token": null,
-        "session_age": 60,
         "is_active": true,
         "is_staff": false,
-        "is_superuser": false,
-        "monitor_session_age": true
+        "is_superuser": false
     }
 },
 {
     "model": "account.useraccount",
     "pk": 7,
     "fields": {
-        "password": "pbkdf2_sha256$600000$ULZCCv8XktMaXhUGwFNtLg$KizHx3zpFMV5b9Sakx77JR9XGC7ceIKifk97CCacnVI=",
+        "password": "pbkdf2_sha256$600000$wXTuqpYtu44oNZojJYD0pl$VGdrVi3XDkrsYrJXtm1wNvJO2NozSNkIbOHYZzEKI68=",
         "last_login": null,
         "first_name": "Zainab",
         "last_name": "Musa",
@@ -735,22 +717,19 @@
         "email": "zainabmusa@gmail.com",
         "phone_number": "+2348123456789",
         "country": "",
-        "date_joined": "2023-08-25T18:21:28.938Z",
-        "last_modified": "2023-08-25T18:21:48.349Z",
+        "date_joined": "2023-08-27T14:53:38.092Z",
+        "last_modified": "2023-08-27T14:53:56.345Z",
         "passcode_hash": null,
-        "auth_token": null,
-        "session_age": 60,
         "is_active": true,
         "is_staff": false,
-        "is_superuser": false,
-        "monitor_session_age": true
+        "is_superuser": false
     }
 },
 {
     "model": "account.useraccount",
     "pk": 8,
     "fields": {
-        "password": "pbkdf2_sha256$600000$km9npHCmaHm6p8ZKAmGlr9$i/agbCO61gYTKlht9paowPULpQ1uYyqKEAU6OtjgXpc=",
+        "password": "pbkdf2_sha256$600000$jO5IvG2EOLw0EQVlnwHozh$vFM0YVtcCzPTMBWsEWSKEtdo69kHPxI1iaCWQyq+mqw=",
         "last_login": null,
         "first_name": "Adamu",
         "last_name": "Musa",
@@ -760,22 +739,19 @@
         "email": "adamunmusa@gmail.com",
         "phone_number": "+2348123456789",
         "country": "",
-        "date_joined": "2023-08-25T18:21:33.415Z",
-        "last_modified": "2023-08-25T18:21:48.512Z",
+        "date_joined": "2023-08-27T14:53:42.819Z",
+        "last_modified": "2023-08-27T14:53:56.532Z",
         "passcode_hash": null,
-        "auth_token": null,
-        "session_age": 60,
         "is_active": true,
         "is_staff": false,
-        "is_superuser": false,
-        "monitor_session_age": true
+        "is_superuser": false
     }
 },
 {
     "model": "account.useraccount",
     "pk": 9,
     "fields": {
-        "password": "pbkdf2_sha256$600000$MrqXSZcWagZT0sJadqoIQv$muly84iEXBuOcnzj6sjQePQF0TIYaPwREruVxhzFyvE=",
+        "password": "pbkdf2_sha256$600000$MLjsgR36UymXOHykwuHKWy$ZGXwJ1Utd+GLbb/515kl8AsE5hlSrfnYTQGEX1FIEOw=",
         "last_login": null,
         "first_name": "Maryam",
         "last_name": "Yusuf",
@@ -785,22 +761,19 @@
         "email": "maryamyusuf@gmail.com",
         "phone_number": "+2348123456789",
         "country": "",
-        "date_joined": "2023-08-25T18:21:38.314Z",
-        "last_modified": "2023-08-25T18:21:48.718Z",
+        "date_joined": "2023-08-27T14:53:46.855Z",
+        "last_modified": "2023-08-27T14:53:56.696Z",
         "passcode_hash": null,
-        "auth_token": null,
-        "session_age": 60,
         "is_active": true,
         "is_staff": false,
-        "is_superuser": false,
-        "monitor_session_age": true
+        "is_superuser": false
     }
 },
 {
     "model": "account.useraccount",
     "pk": 10,
     "fields": {
-        "password": "pbkdf2_sha256$600000$mWV32be6PFe16ksA4bQSaT$BR1G5OhRYntGeT6HJJiqT6EURJ6V22ljj58esbj1o8E=",
+        "password": "pbkdf2_sha256$600000$ldJc6W3QKUOTLNR10wubBs$XtXm71dmNetdwGECJggs8iIRJm+FWY4zpNrErs0Ppds=",
         "last_login": null,
         "first_name": "Joshua",
         "last_name": "Andy",
@@ -810,15 +783,12 @@
         "email": "joshuaandy@gmail.com",
         "phone_number": "+2348123456789",
         "country": "",
-        "date_joined": "2023-08-25T18:21:42.801Z",
-        "last_modified": "2023-08-25T18:21:48.892Z",
+        "date_joined": "2023-08-27T14:53:49.649Z",
+        "last_modified": "2023-08-27T14:53:56.872Z",
         "passcode_hash": null,
-        "auth_token": null,
-        "session_age": 60,
         "is_active": true,
         "is_staff": false,
-        "is_superuser": false,
-        "monitor_session_age": true
+        "is_superuser": false
     }
 },
 {
@@ -826,8 +796,14 @@
     "pk": 1,
     "fields": {
         "owner": 1,
+        "date_modified": "2023-08-27T14:53:55.233Z",
         "passcode_ingredient": null,
-        "date_modified": "2023-08-25T18:21:47.284Z"
+        "auth_token": null,
+        "session_age": 1,
+        "monitor_session_age": true,
+        "count_passcode_trial": 0,
+        "lucky_number": "",
+        "childhood_name": ""
     }
 },
 {
@@ -835,8 +811,14 @@
     "pk": 2,
     "fields": {
         "owner": 2,
+        "date_modified": "2023-08-27T14:53:55.433Z",
         "passcode_ingredient": null,
-        "date_modified": "2023-08-25T18:21:47.450Z"
+        "auth_token": null,
+        "session_age": 1,
+        "monitor_session_age": true,
+        "count_passcode_trial": 0,
+        "lucky_number": "",
+        "childhood_name": ""
     }
 },
 {
@@ -844,8 +826,14 @@
     "pk": 3,
     "fields": {
         "owner": 3,
+        "date_modified": "2023-08-27T14:53:55.633Z",
         "passcode_ingredient": null,
-        "date_modified": "2023-08-25T18:21:47.650Z"
+        "auth_token": null,
+        "session_age": 1,
+        "monitor_session_age": true,
+        "count_passcode_trial": 0,
+        "lucky_number": "",
+        "childhood_name": ""
     }
 },
 {
@@ -853,8 +841,14 @@
     "pk": 4,
     "fields": {
         "owner": 4,
+        "date_modified": "2023-08-27T14:53:55.825Z",
         "passcode_ingredient": null,
-        "date_modified": "2023-08-25T18:21:47.867Z"
+        "auth_token": null,
+        "session_age": 1,
+        "monitor_session_age": true,
+        "count_passcode_trial": 0,
+        "lucky_number": "",
+        "childhood_name": ""
     }
 },
 {
@@ -862,8 +856,14 @@
     "pk": 5,
     "fields": {
         "owner": 5,
+        "date_modified": "2023-08-27T14:53:56.008Z",
         "passcode_ingredient": null,
-        "date_modified": "2023-08-25T18:21:48.050Z"
+        "auth_token": null,
+        "session_age": 1,
+        "monitor_session_age": true,
+        "count_passcode_trial": 0,
+        "lucky_number": "",
+        "childhood_name": ""
     }
 },
 {
@@ -871,8 +871,14 @@
     "pk": 6,
     "fields": {
         "owner": 6,
+        "date_modified": "2023-08-27T14:53:56.233Z",
         "passcode_ingredient": null,
-        "date_modified": "2023-08-25T18:21:48.225Z"
+        "auth_token": null,
+        "session_age": 1,
+        "monitor_session_age": true,
+        "count_passcode_trial": 0,
+        "lucky_number": "",
+        "childhood_name": ""
     }
 },
 {
@@ -880,8 +886,14 @@
     "pk": 7,
     "fields": {
         "owner": 7,
+        "date_modified": "2023-08-27T14:53:56.441Z",
         "passcode_ingredient": null,
-        "date_modified": "2023-08-25T18:21:48.416Z"
+        "auth_token": null,
+        "session_age": 1,
+        "monitor_session_age": true,
+        "count_passcode_trial": 0,
+        "lucky_number": "",
+        "childhood_name": ""
     }
 },
 {
@@ -889,8 +901,14 @@
     "pk": 8,
     "fields": {
         "owner": 8,
+        "date_modified": "2023-08-27T14:53:56.600Z",
         "passcode_ingredient": null,
-        "date_modified": "2023-08-25T18:21:48.600Z"
+        "auth_token": null,
+        "session_age": 1,
+        "monitor_session_age": true,
+        "count_passcode_trial": 0,
+        "lucky_number": "",
+        "childhood_name": ""
     }
 },
 {
@@ -898,8 +916,14 @@
     "pk": 9,
     "fields": {
         "owner": 9,
+        "date_modified": "2023-08-27T14:53:56.769Z",
         "passcode_ingredient": null,
-        "date_modified": "2023-08-25T18:21:48.779Z"
+        "auth_token": null,
+        "session_age": 1,
+        "monitor_session_age": true,
+        "count_passcode_trial": 0,
+        "lucky_number": "",
+        "childhood_name": ""
     }
 },
 {
@@ -907,15 +931,21 @@
     "pk": 10,
     "fields": {
         "owner": 10,
+        "date_modified": "2023-08-27T14:53:56.941Z",
         "passcode_ingredient": null,
-        "date_modified": "2023-08-25T18:21:48.968Z"
+        "auth_token": null,
+        "session_age": 1,
+        "monitor_session_age": true,
+        "count_passcode_trial": 0,
+        "lucky_number": "",
+        "childhood_name": ""
     }
 },
 {
     "model": "secureapp.category",
     "pk": 1,
     "fields": {
-        "timestamp": "2023-08-25T18:21:49.074Z",
+        "timestamp": "2023-08-27T14:53:57.039Z",
         "category_key": "Social media",
         "category_value": "social media"
     }
@@ -924,7 +954,7 @@
     "model": "secureapp.category",
     "pk": 2,
     "fields": {
-        "timestamp": "2023-08-25T18:21:49.118Z",
+        "timestamp": "2023-08-27T14:53:57.085Z",
         "category_key": "Cloud",
         "category_value": "cloud"
     }
@@ -933,7 +963,7 @@
     "model": "secureapp.category",
     "pk": 3,
     "fields": {
-        "timestamp": "2023-08-25T18:21:49.182Z",
+        "timestamp": "2023-08-27T14:53:57.141Z",
         "category_key": "Card",
         "category_value": "card"
     }
@@ -942,7 +972,7 @@
     "model": "secureapp.category",
     "pk": 4,
     "fields": {
-        "timestamp": "2023-08-25T18:21:49.224Z",
+        "timestamp": "2023-08-27T14:53:57.194Z",
         "category_key": "Other",
         "category_value": "other"
     }
@@ -952,7 +982,7 @@
     "pk": 1,
     "fields": {
         "category": 1,
-        "timestamp": "2023-08-25T18:21:50.018Z",
+        "timestamp": "2023-08-27T14:53:57.714Z",
         "platform_key": "Facebook",
         "platform_value": "facebook"
     }
@@ -962,7 +992,7 @@
     "pk": 2,
     "fields": {
         "category": 1,
-        "timestamp": "2023-08-25T18:21:50.085Z",
+        "timestamp": "2023-08-27T14:53:57.765Z",
         "platform_key": "Twitter",
         "platform_value": "twitter"
     }
@@ -972,7 +1002,7 @@
     "pk": 3,
     "fields": {
         "category": 1,
-        "timestamp": "2023-08-25T18:21:50.148Z",
+        "timestamp": "2023-08-27T14:53:57.830Z",
         "platform_key": "Instagram",
         "platform_value": "instagram"
     }
@@ -982,7 +1012,7 @@
     "pk": 4,
     "fields": {
         "category": 1,
-        "timestamp": "2023-08-25T18:21:50.235Z",
+        "timestamp": "2023-08-27T14:53:57.887Z",
         "platform_key": "LinkedIn",
         "platform_value": "linkedin"
     }
@@ -992,7 +1022,7 @@
     "pk": 5,
     "fields": {
         "category": 2,
-        "timestamp": "2023-08-25T18:21:50.283Z",
+        "timestamp": "2023-08-27T14:53:57.952Z",
         "platform_key": "Linode",
         "platform_value": "linode"
     }
@@ -1002,7 +1032,7 @@
     "pk": 6,
     "fields": {
         "category": 2,
-        "timestamp": "2023-08-25T18:21:50.309Z",
+        "timestamp": "2023-08-27T14:53:57.998Z",
         "platform_key": "AWS",
         "platform_value": "aws"
     }
@@ -1012,7 +1042,7 @@
     "pk": 7,
     "fields": {
         "category": 2,
-        "timestamp": "2023-08-25T18:21:50.337Z",
+        "timestamp": "2023-08-27T14:53:58.038Z",
         "platform_key": "Heroku",
         "platform_value": "heroku"
     }
@@ -1022,7 +1052,7 @@
     "pk": 8,
     "fields": {
         "category": 2,
-        "timestamp": "2023-08-25T18:21:50.374Z",
+        "timestamp": "2023-08-27T14:53:58.089Z",
         "platform_key": "Digital ocean",
         "platform_value": "digital ocean"
     }
@@ -1032,7 +1062,7 @@
     "pk": 9,
     "fields": {
         "category": 2,
-        "timestamp": "2023-08-25T18:21:50.404Z",
+        "timestamp": "2023-08-27T14:53:58.129Z",
         "platform_key": "Github",
         "platform_value": "github"
     }
@@ -1042,7 +1072,7 @@
     "pk": 10,
     "fields": {
         "category": 2,
-        "timestamp": "2023-08-25T18:21:50.432Z",
+        "timestamp": "2023-08-27T14:53:58.167Z",
         "platform_key": "Docker",
         "platform_value": "docker"
     }
@@ -1052,7 +1082,7 @@
     "pk": 11,
     "fields": {
         "category": 2,
-        "timestamp": "2023-08-25T18:21:50.454Z",
+        "timestamp": "2023-08-27T14:53:58.203Z",
         "platform_key": "Gitlab",
         "platform_value": "gitlab"
     }
@@ -1062,7 +1092,7 @@
     "pk": 12,
     "fields": {
         "category": 2,
-        "timestamp": "2023-08-25T18:21:50.480Z",
+        "timestamp": "2023-08-27T14:53:58.241Z",
         "platform_key": "Namecheap",
         "platform_value": "namecheap"
     }
@@ -1072,7 +1102,7 @@
     "pk": 13,
     "fields": {
         "category": 2,
-        "timestamp": "2023-08-25T18:21:50.508Z",
+        "timestamp": "2023-08-27T14:53:58.287Z",
         "platform_key": "Bitbucket",
         "platform_value": "bitbucket"
     }
@@ -1082,7 +1112,7 @@
     "pk": 14,
     "fields": {
         "category": 4,
-        "timestamp": "2023-08-25T18:21:50.545Z",
+        "timestamp": "2023-08-27T14:53:58.317Z",
         "platform_key": "Gmail",
         "platform_value": "gmail"
     }
@@ -1092,7 +1122,7 @@
     "pk": 15,
     "fields": {
         "category": 4,
-        "timestamp": "2023-08-25T18:21:50.579Z",
+        "timestamp": "2023-08-27T14:53:58.345Z",
         "platform_key": "ChatGPT",
         "platform_value": "chatgpt"
     }
@@ -1102,7 +1132,7 @@
     "pk": 16,
     "fields": {
         "category": 2,
-        "timestamp": "2023-08-25T18:21:50.612Z",
+        "timestamp": "2023-08-27T14:53:58.377Z",
         "platform_key": "Azure",
         "platform_value": "azure"
     }
@@ -1112,7 +1142,7 @@
     "pk": 17,
     "fields": {
         "category": 1,
-        "timestamp": "2023-08-25T18:21:50.647Z",
+        "timestamp": "2023-08-27T14:53:58.416Z",
         "platform_key": "Qiskit api",
         "platform_value": "qiskit api"
     }
@@ -1122,7 +1152,7 @@
     "pk": 18,
     "fields": {
         "category": 2,
-        "timestamp": "2023-08-25T18:21:50.684Z",
+        "timestamp": "2023-08-27T14:53:58.464Z",
         "platform_key": "Hostinger",
         "platform_value": "hostinger"
     }
@@ -1132,7 +1162,7 @@
     "pk": 19,
     "fields": {
         "category": 3,
-        "timestamp": "2023-08-25T18:21:50.718Z",
+        "timestamp": "2023-08-27T14:53:58.524Z",
         "platform_key": "Bank card",
         "platform_value": "bank card"
     }
@@ -1142,7 +1172,7 @@
     "pk": 20,
     "fields": {
         "category": 1,
-        "timestamp": "2023-08-25T18:21:50.749Z",
+        "timestamp": "2023-08-27T14:53:58.566Z",
         "platform_key": "Snapchat",
         "platform_value": "snapchat"
     }
@@ -1152,7 +1182,7 @@
     "pk": 21,
     "fields": {
         "category": 3,
-        "timestamp": "2023-08-25T18:21:50.783Z",
+        "timestamp": "2023-08-27T14:53:58.597Z",
         "platform_key": "Visa card",
         "platform_value": "visa card"
     }
@@ -1162,7 +1192,7 @@
     "pk": 22,
     "fields": {
         "category": 3,
-        "timestamp": "2023-08-25T18:21:50.831Z",
+        "timestamp": "2023-08-27T14:53:58.647Z",
         "platform_key": "ID card",
         "platform_value": "id card"
     }
@@ -1172,7 +1202,7 @@
     "pk": 23,
     "fields": {
         "category": 3,
-        "timestamp": "2023-08-25T18:21:50.875Z",
+        "timestamp": "2023-08-27T14:53:58.703Z",
         "platform_key": "Store id",
         "platform_value": "store id"
     }
@@ -1182,7 +1212,7 @@
     "pk": 24,
     "fields": {
         "category": 3,
-        "timestamp": "2023-08-25T18:21:50.914Z",
+        "timestamp": "2023-08-27T14:53:58.773Z",
         "platform_key": "Credit card",
         "platform_value": "credit card"
     }

@@ -1,33 +1,54 @@
 # -*- coding: utf-8 -*-
 from django.urls import path
-from .views import (LoginCustom, LogoutCustom, change_password, signup, update_profile, validate_passcode, password_generator, generated_password)
+from .auth import signup, LoginCustom, validate_passcode, LogoutCustom, set_passcode
+from .generate import password_generator, generated_password
+from .update import update_profile, change_password, update_passcode
+from .views import landing, dashboard, about, privacy, contact_us, help_page
 
 
 app_name = 'auth'
 
 urlpatterns = [
-    # login
-    path(
-        'login/', LoginCustom.as_view(template_name='account/login.html'), name='login'),
-    # logout
-    path(
-        'logout/', LogoutCustom.as_view(template_name='account/logout.html'), name='logout'),
-    # change password
-    path(
-        'change/password/', change_password, name='change_password'),
-    # register new administrator
+    # auth.py module path (views routes)
     path(
         'signup/', signup, name='signup'),
-    # administrator update profile info...
     path(
-        'update/profile/', update_profile, name='update_profile'),
-    # validate passcode
+        'login/', LoginCustom.as_view(template_name='account/login.html'), name='login'),
     path(
         'validate/passcode/?next=/<str:next_url>/', validate_passcode, name='validate_passcode'),
-    # password generator
+    path(
+        'logout/', LogoutCustom.as_view(template_name='account/logout.html'), name='logout'),
+    path(
+        'set/passcode/', set_passcode, name='set_passcode'),
+        
+
+    # generator.py module path (views routes)
     path(
         'password/generator/', password_generator, name='password_generator'),
-    # generated password
     path(
         'generated/password/', generated_password, name='generated_password'),
+        
+
+    # update.py module path (views routes)
+    path(
+        'update/profile/', update_profile, name='update_profile'),
+    path(
+        'change/password/', change_password, name='change_password'),
+    path(
+        'update/passcode/', update_passcode, name='update_passcode'),
+        
+
+    # views.py module path (views routes)
+    path(
+        '', landing, name='landing'),
+    path(
+        'dashboard/', dashboard, name='dashboard'),
+    path(
+        'about/', about, name='about'),
+    path(
+        'privacy/', privacy, name='privacy'),
+    path(
+        'contact_us/', contact_us, name='contact_us'),
+    path(
+        'help/', help_page, name='help'),
 ]

@@ -20,7 +20,7 @@ def check_user_passcode_set(**kwargs_1):
                     flash_msg.warning(request, f'You have not even setup your secure passcode since you register, set it here now!')
                 else:
                     flash_msg.warning(request, f'You must finish setting up your account passcode, before you store any item')
-                return redirect('secureapp:set_passcode')
+                return redirect('auth:set_passcode')
             return view(request, *args, **kwargs)
         return wrapper
     return decorator
@@ -34,9 +34,9 @@ def passcode_required(view):
         
         next_url = NextUrl.foward(request)
         
-        if request.user.auth_token != None and request.user.auth_token != '':
+        if request.user.passcode.auth_token != None and request.user.passcode.auth_token != '':
             # taking the user auth_token, by default it is in string including the bytes characters e.g (b'eyJhyc'), we remove the first `b`, single qoute `'` and last single qoute `'`
-            u_token = request.user.auth_token[2:-1].encode('utf-8')
+            u_token = request.user.passcode.auth_token[2:-1].encode('utf-8')
             verify = verify_token(u_token)
             if verify:
                 # if session is not expired

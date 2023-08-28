@@ -16,10 +16,14 @@
   </title>
 </head>
 <body>
-  {% if monitor_session_age == True and request.user.monitor_session_age == True %}
-    <!-- thes two span tags won`t be visible (they are hidden in the base_1.css file). The first one will count number of seconds of in active, while the second one is the logged in user session age value -->
+  {% if monitor_session_age == True and request.user.passcode.monitor_session_age == True %}
+    <!-- these two span tags won`t be visible (they are hidden in the base_1.css file). The first one will count number of seconds of in active, while the second one is the logged in user session age value -->
+
+    <!-- The ('monitor_session_age': True) within some view's context dictionary (mostly in view that are decorated with `@passcode_required` and have page to render), enable the (security_secs, and security_user_sess_age) span tags to display in the html page. Note these two tags are only place at the top of this `base_1.html` where as some other pages are in herited from it(mostly those required passcode authentication). The javascript function for it is below the file, within the script (<script></script>) tag. All what am trying to say is, by the use of such, if a user take 30 seconds without doing nothing `(onload, onmousemove, onmousedown, ontouchstart, onclick, or onkeypress)` the screen page will be dim (dark navy in color).
+    
+    User can disable it by unchecking the checkbox in the update page. -->
     <span class="security_secs"></span>
-    <span class="security_user_sess_age">{{request.user.session_age}}</span>
+    <span class="security_user_sess_age">{{request.user.passcode.session_age}}</span>
   {% endif %}
   
   <div class="container">
@@ -29,77 +33,81 @@
         <button type="submit">search</button>
         <img src="{% static 'img/hide_menu.png' %}" id="hide_menu_t" alt="" onclick="hideMenu()">
       </form>
-
+      
       <div class="side">
         <div class="category">
-          <h1>Category</h1>
-          <p><a href="{% url 'secureapp:landing' %}">Dashboard</a></P>
-            <p><a href="{% url 'secureapp:new_item' %}">New item</a></P>
-            <p><a href="{% url 'secureapp:set_passcode' %}">Set secure</a></P>
-            <p><a href="{% url 'secureapp:update_passcode' %}">Update secure</a></P>
-          {% if request.user.passcode.passcode_ingredient == None or request.user.passcode.passcode_ingredient == '' %}
-            <p><a href="{% url 'secureapp:set_passcode' %}">Finish setting passcode</a></P>
-          {% endif %}
-        </div>
-        <br>
-
-        {% block item %}
-            <!-- items -->
-        {% endblock item %}
-        <br>
-        <div class="category">
-          <h1>Auth</h1>
+          <h1>Dashboard</h1>
+          <br>
+          <p><a href="{% url 'auth:landing' %}">Overview</a></P>
+          <p><a href="{% url 'secureapp:new_item' %}">New item</a></P>
           <p><a href="#">Secure Notes</a> <span>4</span></P>
           <p><a href="#">Trusted memberships</a><span>3</span></P>
           <p><a href="#">Trusted people</a><span>7</span></P>
-          <p><a href="#">Contact Us</a></P>
-          <p><a href="#">About</a></P>
-
-          {% if request.user.is_authenticated %}
-            <p><a href="admin">Admin</a></P>
-            <p><a href="{% url 'auth:update_profile' %}">Update profile</a></P>
-              <p><a href="{% url 'auth:password_generator' %}">Password generator</a></P>
-                <p><a href="{% url 'auth:change_password' %}">Change password</a></P>
-            <p><a href="{% url 'auth:logout' %}">Logout</a></P>
-          {% else %}
-            <p><a href="{% url 'auth:login' %}">Login</a></P>
-            <p><a href="{% url 'auth:signup' %}">Sign Up</a></P>
-          {% endif %}
+        </div>
+        <br>
+        
+        {% block item %}
+            <!-- items -->
+        {% endblock item %}
+        <div class="category">
+          <p><a href="{% url 'auth:set_passcode' %}">Linode server</a></P>
         </div>
         <br>
 
         <div class="category">
-          <h1>Trusted access</h1>
+          <h1>Auth</h1>
+          <p><a href="{% url 'auth:update_profile' %}">Update profile</a></P>
+          {% if request.user.passcode.passcode_ingredient == None or request.user.passcode.passcode_ingredient == '' %}
+            <p><a href="{% url 'auth:set_passcode' %}">Set passcode</a></P>
+          {% else %}
+            <p><a href="{% url 'auth:update_passcode' %}">Change passcode</a></P>
+            <p><a href="{% url 'auth:change_password' %}">Change password</a></P>
+            <p><a href="{% url 'auth:password_generator' %}">Generate password</a></P>
+          {% endif %}
+          <p><a href="admin">Admin</a></P>
+          <p><a href="{% url 'auth:logout' %}">Logout</a></P>
+        </div>
+        <br>
+        
+        <div class="category">
+          <h1>Trusted users</h1>
           <p><a href="#">Hamza Musa</a></P>
           <p><a href="#">Aliyu Samaila</a></P>
         </div>
         <br>
-
+        
+        <div class="category">
+          <p><a href="{% url 'auth:about' %}">About</a></P>
+          <p><a href="{% url 'auth:privacy' %}">Privacy</a></P>
+            <p><a href="{% url 'auth:contact_us' %}">Contact Us</a></P>
+        </div>
+        <br>
+        
         <div class="foot">
           <small>Get 
-            <a href="#">help</a> from PassAccess community or start live <a href="#">chat</a> with our people
+            <a href="{% url 'auth:help' %}">help</a> from PassAccess community or start live <a href="{% url 'auth:contact_us' %}">chat</a> with us via email.
           </small>
           <p>2022 - {{the_year}}</p>
         </div>
       </div>
     </div>
-
+    
     <div class="main">
       <div class="header">
         <div class="l_header">
           <img src="{% static 'img/show_menu.png' %}" id="show_menu" alt="" onclick="showMenu()">
           <img src="{% static 'img/show_menu.png' %}" id="hide_menu" alt="" onclick="hideMenu()">
-          <a href="{% url 'secureapp:landing' %}"><h1>PassAccess</h1></a>
+          <a href="{% url 'auth:landing' %}"><h1>PassAccess</h1></a>
         </div>
-
+        
         <div class="r_header">
           <span>{{request.user.first_name|slice:':1'|upper}}{{request.user.last_name|slice:':1'|upper}}</span>
-          <a href="#">{{request.user.first_name}} {{request.user.last_name}}</a>
+          <a href="{% url 'auth:landing' %}">{{request.user.first_name}} {{request.user.last_name}}</a>
           <a>|</a>
-          <a href="#">Notification</a>
+          <a href="{% url 'auth:logout' %}">Logout</a>
         </div>
       </div>
-
+      
       <div class="main_inn">
         {% if messages %}
           {% for flash_msg in messages %}
@@ -114,13 +122,13 @@
             </div>
           {% endfor %}
         {% endif %}
-
+        
         {% block main %}
           <!-- inheritance -->
         {% endblock main %}
       </div>
     </div>
-
+    
   </div>
   <script type="text/javascript">
 		let timer = 0;

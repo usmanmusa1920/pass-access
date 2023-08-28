@@ -28,7 +28,8 @@ with open('config.json') as config_file:
 SECRET_KEY = config['SECRET_KEY']
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+# DEBUG = True
+DEBUG = config['DEBUG']
 
 ALLOWED_HOSTS = []
 
@@ -130,7 +131,7 @@ STATIC_URL = 'static/'
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 
 LOGIN_URL = 'auth:login'
-LOGIN_REDIRECT_URL = 'secureapp:landing'
+LOGIN_REDIRECT_URL = 'auth:landing'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field

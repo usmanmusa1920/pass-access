@@ -2,69 +2,53 @@
 {% load static %}
 
 {% block title %}
-  remove all trusted user in ({{item.i_label}})
+  add trusted user
 {% endblock title %}
 
 
 {% block main %}
   <div class="t_s">
-    <p>Remove all trusted user in <i>{{item.i_label}}</i></p>
+    <p>Search trusted user</p>
+    <form action="#">
+      <a href="#">upgrade</a>
+      <button type="submit">Edit</button>
+    </form>
   </div>
-
-  <form method="post" class="box">
-    {% csrf_token %}
-    <br>
-    <div class="box_inn">
-      <p>Label:</p>
-      <p class="box_border">{{item.i_label}}</p>
-      <br>
-      <p>Visibility:</p>
-      <p class="box_border">
-        <b>Visibility: </b>{{item.visibility}} access
-      </p>
-      <br>
-      <p>Category and platform:</p>
-      <p class="box_border">
-        <b>Category:</b>
-        {{item.category}}
-        <br>
-        <b>Platform:</b>
-        {{item.platform}}
-
-        <!-- handling custom platform view -->
-        {% if item.custom_platform == None %}
-          <!-- pass -->
-        {% elif item.custom_platform == '' %}
-          <!-- pass -->
-        {% else %}
+  <div class="box">
+  {% if item.trusted_user.all.count > 0 %}
+      <form method="post" class="box">
+        {% csrf_token %}
+        <div class="box_inn">
+          {% for result in item.trusted_user.all %}
+            <br>
+            <p>Trusted user:</p>
+            <p class="box_border">
+              <b>Full name: </b>
+              <a href="#" class="peace">{{result.first_name}} {{result.last_name}}</a>
+            </p>
+          {% endfor %}
+          
           <br>
-          <b>Custom platform:</b>
-          {{item.custom_platform}}
-        {% endif %}
-      </p>
-      <br>
-      <p>Trusted users:</p>
-      <p class="box_border">
-        {% for user in item.trusted_user.all %}
-          <a class="peace">{{user.first_name}} {{user.last_name}}</a>
+          <p class="alert_warning">
+            <span class="center_span">
+              <input type="checkbox" required> Are you sure to remove these ({{item.trusted_user.all.count}}) trusted user? &nbsp;
+              <a href="{% url 'secureapp:item_info' item.id %}" class="danger">No back to item</a>
+            </span>
+          </p>
           <br>
-        {% endfor %}
-      </p>
-      <br>
-      
-      <p class="alert_warning">Once deleted action can`t be restore.</p>
-      <br>
+          <div>
+            <button type="submit">Remove</button>
+          </div>
+          <br>
+        </div>
+      </form>
+  {% else %}
+    <div class="box_center">
       <div class="box_border">
-        <p class="alert_col_warning">
-          <input type="checkbox" required> Are you sure to delete?
-        </p>
+        <p class="alert_warning">This item have no trusted user!</p>
       </div>
-      <br>
-      <div>
-        <button type="submit">Delete</button>
-      </div>
-      <br>
-        
     </div>
-  </form>
+  {% endif %}
+</div>
 {% endblock main %}
+

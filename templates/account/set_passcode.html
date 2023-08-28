@@ -10,16 +10,16 @@
   <div class="t_s">
     <p>Setup your secure passcode</p>
   </div>
-
+  
   <form method="post" class="box">
     {% csrf_token %}
     <br>
     <div class="box_inn">
       <p class="box_border">
         <small class="peace">Stay away from public when Setting up your passcode</small>
+        <br>
+        Passcode is a code that will be ask every time you want to get access into each an every secret item page you saved after it session expired.
       </p>
-      <br>
-      <p class="box_border">Passcode is a code that will be ask every time you want to get access into each an every secret item page you saved, e.g if you want to copy your facebook username or password that you set, for login into facebook, this is the code that you will be ask for. Make sure to remember it.</p>
     </div>
 
     <div class="box_inn">
@@ -27,7 +27,7 @@
         <p class="alert_info">
           Passcode are case-sensitive. Use a strong passcode with a combination of characters, <br> upper and lower letters, along side with numbers to make it strong, like: <b>p@s$w0r01.1</b>
         </p>
-        Enter your email that start with <b>{{request.user.email|truncatechars:7}}</b> and end with <b>{{request.user.email|slice:'-7:'}}</b>
+        Enter your email that start with <b>{{request.user.email|truncatechars:3}}</b> and end with <b>{{request.user.email|slice:'-12:'}}</b>
         <br>
         <input type="email" name="verify_email" placeholder="Enter your email" value="usmanmusa1920@gmail.com" autofocus required>
         <br>
@@ -39,16 +39,28 @@
         <br>
         <small class="selected_passcode_error">Two passcode fields mis-match</small>
         <small class="selected_passcode_success">Your two passcode fields match</small>
+        <br>
+        <p class="alert_info">The two fields below are usefull, when you entered 5 unauthorized passcode in a time!, for MFA reason you will be notify to provide them at that moment, so make sure to remember them! also case-sensitive is included.</p>
+        <br>
+        <input type="number" name="lucky_number" placeholder="Enter your lucky number" required>
+        <br>
+        <br>
+        <input type="text" name="childhood_name" placeholder="Enter your childhood name" required>
+        <br>
+        <br>
       </div>
       <br>
       
-      <p class="alert_warning">Make sure to remember your passcode for frequently use. Also you can change your passcode later.</p>
+      <p class="alert_warning">
+        <span class="center_span">
+          <input type="checkbox"> &nbsp; Make sure to remember your passcode for frequently use. Also you can change your passcode later.
+        </span>
+      </p>
       <br>
       <div>
-        <button type="submit"><h1>Create</h1></button>
+        <button type="submit">Set passcode</button>
       </div>
       <br>
-        
     </div>
   </form>
 {% endblock main %}

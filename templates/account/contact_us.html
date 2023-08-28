@@ -1,0 +1,41 @@
+{% extends 'base_2.html' %}
+{% load static %}
+{% block head %}
+  <link rel="stylesheet" href="{% static 'css/landing.css' %}">
+  <title>PassAccess | contact us</title>
+{% endblock head %}
+
+
+{% block link %}
+  <a href="{% url 'auth:signup' %}" class="h_link">Sign Up</a>
+  <a href="{% url 'auth:login' %}" class="h_link">Login</a>
+  <a href="{% url 'auth:login' %}"class="h_link_sm">Login</a>
+{% endblock link %}
+
+
+{% block main %}
+  <div class="header">
+    <br>
+    <h2 class="p">Contact us</h2>
+    <br>
+  </div>
+  
+  <div class="main">
+    <div class="main_col">
+      <br>
+      <br>
+      <br>
+      <p class="pp">Password and sensitive information manager, that encrypt and save them for a user, which can be decrypt by the user when ever need to be. Security application that secure sensitive informations.</p>
+      <br>
+      <p class="pp">Contact us by making pull request via <a href="https://github.com/usmanmusa1920/passaccess" class="alert_col_info">github repository of passaccess</a> or email us through <a href="mailto:passaccess@gmail.com" class="alert_col_info">passaccess@gmail.com</a></p>
+      <br>
+      <br>
+      <br>
+      <div class="two">
+        <img src="{% static 'css/img/password-protection-hero-image.jpg' %}" alt="">
+      </div>
+      <p>Protect your password with <b><i>PassAccess</i></b></p>
+      <br>
+    </div>
+  </div>
+{% endblock main %}

@@ -1,0 +1,41 @@
+{% extends 'base_2.html' %}
+{% load static %}
+{% block head %}
+  <link rel="stylesheet" href="{% static 'css/landing.css' %}">
+  <title>PassAccess | privacy</title>
+{% endblock head %}
+
+
+{% block link %}
+  <a href="{% url 'auth:signup' %}" class="h_link">Sign Up</a>
+  <a href="{% url 'auth:login' %}" class="h_link">Login</a>
+  <a href="{% url 'auth:login' %}"class="h_link_sm">Login</a>
+{% endblock link %}
+
+
+{% block main %}
+  <div class="header">
+    <br>
+    <h2 class="p">Privacy</h2>
+    <br>
+  </div>
+  
+  <div class="main">
+    <div class="main_col">
+      <br>
+      <br>
+      <br>
+      <p class="pp">Security & privacy is priority</p>
+      <br>
+      <p class="pp">Manage all your sensitive information in one place with <b>PassAccess</b>. It secure your sensitive information with good strong, and unpredictable gauss password hash, which disable an attacker from getting access to your secrets when he is doing his stuffs such as <b>brute force attack</b> and others like such!</p>
+      <br>
+      <br>
+      <br>
+      <div class="two">
+        <img src="{% static 'css/img/mfa_passwords.webp' %}" alt="">
+      </div>
+      <p>Protect your password with <b><i>PassAccess</i></b></p>
+      <br>
+    </div>
+  </div>
+{% endblock main %}
