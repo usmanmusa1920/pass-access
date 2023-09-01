@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from django.urls import path
 from .auth import signup, LoginCustom, validate_passcode, LogoutCustom, set_passcode
-from .generate import password_generator, generated_password
+from .generate import password_generator, generated_password, strong_password
 from .update import update_profile, change_password, update_passcode
 from .views import landing, dashboard, about, privacy, contact_us, help_page
 
@@ -27,6 +27,8 @@ urlpatterns = [
         'password/generator/', password_generator, name='password_generator'),
     path(
         'generated/password/', generated_password, name='generated_password'),
+    path(
+        'strong/password/<int:pwd_id>/', strong_password, name='strong_password'),
         
 
     # update.py module path (views routes)

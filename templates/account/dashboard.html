@@ -95,4 +95,37 @@
       <small>Note: removing trusted users may not give them access to this sensitive information</small>
     </div>
   </div>
+
+  <div class="box">
+    <div class="box_head">
+      <h1>Items you were assign as trusted user</h1>
+      <small>These are your team (trusted user) that have access to this item</small>
+    </div>
+
+    {% for item in items %}
+      {% if request.user != item.owner %}
+        {% if request.user in item.trusted_user %}
+          {{item}}
+        {% endif %}
+      {% endif %}
+    {% endfor %}
+
+    <div class="trusted_user">
+      <h4>Usman Musa</h4>
+      <a href="#" class="danger">Remove trusted user</a>
+    </div>
+    <div class="trusted_user">
+      <h4>Muhammad Shehu</h4>
+      <a href="#" class="danger">Remove trusted user</a>
+    </div>
+    <div class="trusted_user">
+      <h4>Aliyu Sani</h4>
+      <a href="#" class="danger">Remove trusted user</a>
+    </div>
+
+    <div class="box_bot">
+      <p>You can remove all trusted user by just one click <a href="#" class="danger_round">Remove all trusted user</a></p>
+      <small>Note: removing trusted users may not give them access to this sensitive information</small>
+    </div>
+  </div>
 {% endblock main %}

@@ -75,6 +75,8 @@ class PasscodeSecurity:
             max of 400000, and 
             stepping of 20
         """
+        
+        # itter = random.randrange(2048, 4048, 20)
         itter = random.randrange(260000, 400000, 20)
         return itter # return type is integer
     

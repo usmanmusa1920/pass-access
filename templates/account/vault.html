@@ -43,12 +43,12 @@
 
     {% if request.user.passcode.count_passcode_trial >= 5 %}
       <p>Multi-factor authentication (MFA) must be provided, in other to get access!</p>
-      <input type="number" name="lucky_number" placeholder="Enter your lucky number" class="input" autofocus required>
-      <input type="text" name="childhood_name" placeholder="Enter your childhood name" class="input" required>
+      <input type="number" name="lucky_number" placeholder="Enter your lucky number" class="input" autocomplete="off" autofocus required>
+      <input type="text" name="childhood_name" placeholder="Enter your childhood name" class="input" autocomplete="off" required>
     {% endif %}
     
     <!-- passcode -->
-    <input type="password" name="passcode" placeholder="Enter master passcode" minlength="8" class="input" autocomplete="off" value="19991125u" autofocus required>
+    <input type="password" name="passcode" placeholder="Enter master passcode" minlength="8" class="input" autocomplete="off" value="19991125u" autocomplete="off" autofocus required>
     <button type="submit" onclick="show_val_progress()" class="btn">Authenticate</button>
   </form>
 {% endblock form %}

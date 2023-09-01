@@ -29,23 +29,23 @@
         </p>
         Enter your email that start with <b>{{request.user.email|truncatechars:3}}</b> and end with <b>{{request.user.email|slice:'-12:'}}</b>
         <br>
-        <input type="email" name="verify_email" placeholder="Enter your email" value="usmanmusa1920@gmail.com" autofocus required>
+        <input type="email" name="verify_email" placeholder="Enter your email" value="usmanmusa1920@gmail.com" autocomplete="off" autofocus required>
         <br>
         <br>
-        <input type="password" name="passcode_ingredient" class="passcode_ingredient" placeholder="Enter passcode" value="19991125u" minlength="8" required>
+        <input type="password" name="passcode_ingredient" class="passcode_ingredient" placeholder="Enter passcode" value="19991125u" minlength="8" autocomplete="off" required>
         <br>
         <br>
-        <input type="password" name="verify_passcode" placeholder="Verify passcode" value="19991125u" minlength="8" oninput="validatePasscodeValue(this)" required>
+        <input type="password" name="verify_passcode" placeholder="Verify passcode" value="19991125u" minlength="8" oninput="validatePasscodeValue(this)" autocomplete="off" required>
         <br>
         <small class="selected_passcode_error">Two passcode fields mis-match</small>
         <small class="selected_passcode_success">Your two passcode fields match</small>
         <br>
         <p class="alert_info">The two fields below are usefull, when you entered 5 unauthorized passcode in a time!, for MFA reason you will be notify to provide them at that moment, so make sure to remember them! also case-sensitive is included.</p>
         <br>
-        <input type="number" name="lucky_number" placeholder="Enter your lucky number" required>
+        <input type="number" name="lucky_number" placeholder="Enter your lucky number" autocomplete="off" required>
         <br>
         <br>
-        <input type="text" name="childhood_name" placeholder="Enter your childhood name" required>
+        <input type="text" name="childhood_name" placeholder="Enter your childhood name" autocomplete="off" required>
         <br>
         <br>
       </div>

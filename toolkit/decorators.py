@@ -43,3 +43,8 @@ def passcode_required(view):
                 return view(request, *args, **kwargs)
         return redirect('auth:validate_passcode', next_url=next_url)
     return wrapper
+
+
+def trusted_user(request):
+    """only trusted user will pass"""
+    pass
