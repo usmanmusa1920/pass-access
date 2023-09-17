@@ -27,15 +27,24 @@
       <br>
       <p class="pp"><b>PassAccess</b> help me!</p>
       <br>
-      <p class="pp">Help could be found on the readme file of the project, over it official github repository. <a href="https://github.com/usmanmusa1920/passaccess" class="alert_col_info">PassAccess official repository</a> or email us through <a href="mailto:passaccess0@gmail.com" class="alert_col_info">passaccess0@gmail.com</a></p>
-      <br>
-      <br>
-      <br>
-      <div class="two">
-        <img src="{% static 'css/img/password-protection-hero-image.jpg' %}" alt="">
-      </div>
-      <p>Protect your password with <b><i>PassAccess</i></b></p>
+      <p class="pp">Help could be found on the readme file of the project, over it official github repository. <a href="https://github.com/usmanmusa1920/passaccess" class="alert_col_info">PassAccess official repository</a> or email us.</p>
       <br>
     </div>
+  </div>
+  <div class="feedback-container">
+    <h2>Send your feedback!</h2>
+    <form action="mailto:usmanmusa1920@gmail.com" method="post">
+    <!-- <form action="mailto:passaccess0@gmail.com" method="post"> -->
+      <label for="name">Name:</label>
+      <input type="text" id="name" name="name" placeholder="Enter your name" required>
+
+      <label for="email">Email:</label>
+      <input type="email" id="email" name="email" placeholder="Enter your email address" required>
+
+      <label for="feedback">Feedback:</label>
+      <textarea id="feedback" name="feedback" placeholder="Enter your feedback" required></textarea>
+
+      <input type="submit" value="Send">
+    </form>
   </div>
 {% endblock main %}

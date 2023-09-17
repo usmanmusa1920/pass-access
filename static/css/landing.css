@@ -122,3 +122,60 @@
 .form{
   display: none;
 }
+
+/* css style for feedback.html page */
+.feedback-container{
+  margin: 50px auto;
+  max-width: 500px;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  background: white;
+}
+
+@media only screen and (max-width: 700px){
+  .feedback-container{
+    margin: 10px;
+  }
+}
+
+@media only screen and (max-width: 1050px){
+  .feedback-container{
+    margin: 10px;
+  }
+}
+
+.feedback-container h2{
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.feedback-container label{
+  display: block;
+  margin-bottom: 10px;
+  font-size: 18px;
+}
+
+.feedback-container input,
+.feedback-container textarea{
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  margin-bottom: 20px;
+}
+
+.feedback-container input[type="submit"]{
+  background-color: rgb(3, 3, 45);
+  color: #fff;
+  padding: 10px 20px;
+  font-size: 16px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.feedback-container input[type="submit"]:hover{
+  background-color: #0069d9;
+}
