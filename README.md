@@ -63,3 +63,5 @@ Visit the url address `http://localhost:8000`, use any of the below users creden
 **Email:** maryamyusuf@gmail.com **Password:** passwd123
 
 **Email:** joshuaandy@gmail.com **Password:** passwd123
+
+Pull requests are welcome

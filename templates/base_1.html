@@ -40,9 +40,9 @@
           <br>
           <p><a href="{% url 'auth:landing' %}">Overview</a></P>
           <p><a href="{% url 'secureapp:new_item' %}">New item</a></P>
-          <p><a href="#">Secure Notes</a> <span>4</span></P>
-          <p><a href="#">Trusted memberships</a><span>3</span></P>
-          <p><a href="#">Trusted people</a><span>7</span></P>
+          <p><a href="{% url 'auth:coming' 'secure note' %}">Secure Notes</a> <span>4</span></P>
+          <p><a href="{% url 'auth:coming' 'Trusted memberships' %}">Trusted memberships</a><span>3</span></P>
+          <p><a href="{% url 'auth:coming' 'Trusted people' %}">Trusted people</a><span>7</span></P>
         </div>
         <br>
         
@@ -50,7 +50,7 @@
             <!-- items -->
         {% endblock item %}
         <div class="category">
-          <p><a href="{% url 'auth:set_passcode' %}">Linode server</a></P>
+          <p><a href="{% url 'auth:coming' 'My server' %}">My server</a></P>
         </div>
         <br>
 
@@ -71,8 +71,8 @@
         
         <div class="category">
           <h1>Trusted users</h1>
-          <p><a href="#">Hamza Musa</a></P>
-          <p><a href="#">Aliyu Samaila</a></P>
+          <p><a href="{% url 'auth:coming' 'Trusted user' %}">Hamza Musa</a></P>
+          <p><a href="{% url 'auth:coming' 'Trusted user' %}">Aliyu Samaila</a></P>
         </div>
         <br>
         

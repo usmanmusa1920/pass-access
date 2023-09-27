@@ -2,13 +2,13 @@
 clear && source ~/.bashrc
 source venv/bin/activate
 
-rm -rf account/__pycache__
-rm -rf account/migrations/*
-touch account/migrations/__init__.py
+# rm -rf account/__pycache__
+# rm -rf account/migrations/*
+# touch account/migrations/__init__.py
 
-rm -rf secureapp/__pycache__
-rm -rf secureapp/migrations/*
-touch secureapp/migrations/__init__.py
+# rm -rf secureapp/__pycache__
+# rm -rf secureapp/migrations/*
+# touch secureapp/migrations/__init__.py
 
 rm db.sqlite3
 

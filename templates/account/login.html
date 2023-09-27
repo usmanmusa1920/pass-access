@@ -18,14 +18,14 @@
     <h1>Login to your account</h1>
     <p>Security application that secure sensitive informations!</p>
     <span>Email:</span>
-    <input type="email" name="username" placeholder="Email addres" class="input" value="usmanmusa1920@gmail.com" autocomplete="off" autofocus required>
+    <input type="email" name="username" placeholder="Email addres" class="input" autocomplete="off" autofocus required>
     {% if form.email.errors %}
       <div class="alert-warning">
         <small>{{form.email.errors}}</small>
       </div>
     {% endif %}
     <span>Password:</span>
-    <input type="password" name="password" placeholder="Password" minlength="8" value="passwd123" class="input" autocomplete="off" required>
+    <input type="password" name="password" placeholder="Password" minlength="8" class="input" autocomplete="off" required>
     {% if form.password2.errors %}
       <div class="alert-warning">
         <small>{{form.password2.errors}}</small>

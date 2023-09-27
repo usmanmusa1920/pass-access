@@ -1,6 +1,9 @@
 from datetime import datetime
+from django.urls import reverse
 from django.shortcuts import render, redirect
 from django.contrib.auth import get_user_model
+from django.contrib import messages as flash_msg
+from django.contrib.auth.decorators import login_required
 from toolkit import passcode_required
 from secureapp.models import SecureItemInfo
 
@@ -62,3 +65,10 @@ def help_page(request):
         'the_year': THIS_YEARE,
     }
     return render(request, 'account/help.html', context)
+
+
+@login_required
+def coming(request, pg):
+    """pages that are not implemented"""
+    flash_msg.success(request, f'This page ({pg}) is coming soon!')
+    return redirect(reverse('auth:landing'))
