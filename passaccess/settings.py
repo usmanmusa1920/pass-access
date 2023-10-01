@@ -31,7 +31,9 @@ SECRET_KEY = config['SECRET_KEY']
 # DEBUG = True
 DEBUG = config['DEBUG']
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['passaccess.onrender.com']
+CSRF_TRUSTED_ORIGINS = ['https://passaccess.onrender.com']
+# ALLOWED_HOSTS = []
 
 
 # Application definition
