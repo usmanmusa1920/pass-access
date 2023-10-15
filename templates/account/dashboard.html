@@ -34,72 +34,41 @@
       <div class="box_border">
         <a href="#" class="grey">Subscription</a>
         <a href="#" class="grey">Security</a>
-        <p>This will take you through a series of prompts where you can make some changes to your MySQL installation’s security options. The first prompt will ask whether you’d like to set up the Validate Password Plugin, which can be used to test the password strength of new MySQL users before deeming them valid.</p>
+        <p><b>PassAccess</b>, a password and sensitive information manager, that encrypt and save them for a user, which can be decrypt by the user when ever need to be! it is a security application that secure sensitive informations.</p>
       </div>
     </div>
-    <form class="box_head">
-      <small>Stay away from public when saving new information. You can search a trusted user by id or username</small>
-      <br>
-      <input type="search" name="" placeholder="Search a trusted user">
-      <button type="submit">search</button>
-    </form>
 
-    <div class="trusted_user">
-      <h4>Usman Musa</h4>
-      <a href="#" class="peace">Add trusted user</a>
+    <div class="box_head">
+      <h1>My items</h1>
+      <small>These are your items</small>
     </div>
 
-    {% for item in user_items %}
-      <div class="trusted_user">
-        <h4>{{item.i_label}}, {{item.category}}</h4>
-        <a href="{% url 'secureapp:item_info' item.id %}" class="danger">{{item.platform}}</a>
+    {% if default.user_items %}
+      {% for item in default.user_items %}
+        <div class="trusted_user">
+          <h4>{{item.i_label}}, {{item.category}}</h4>
+          <a href="{% url 'secureapp:item_info' item.id %}" class="peace">{{item.platform}}</a>
+        </div>
+      {% endfor %}
+    {% else %}
+      <div class="box_center">
+        <div class="box_border">
+          <p class="alert_warning">You have not save any item, <a href="{% url 'secureapp:new_item' %}" class="peace">add new item</a></p>
+        </div>
       </div>
-    {% endfor %}
-
-    <div class="trusted_user">
-      <h2 class="danger">We can't find trusted user with that data</h2>
-    </div>
+    {% endif %}
 
     <div class="box_inn">
       <p>Description:</p>
-      <p class="box_border">This will take you through a series of prompts where you can make some changes to your MySQL installation’s security options. The first prompt will ask whether you’d like to set up the Validate Password Plugin, which can be used to test the password strength of new MySQL users before deeming them valid.</p>
+      <p class="box_border">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci ipsam voluptas magni, officia odio quaerat aliquid culpa quasi eum consequatur delectus explicabo, alias repellendus, odit quos recusandae sunt laborum blanditiis?</p>
       <br>
-    </div>
-
-    <div class="box_bot">
-      <p>If you want to discard (delete) this item information click here <a href="#" class="danger_round">Discard</a></p>
-    </div>
-  </div>
-
-  <div class="box">
-    <div class="box_head">
-      <h1>Trusted users</h1>
-      <small>These are your team (trusted user) that have access to this item</small>
-    </div>
-
-    <div class="trusted_user">
-      <h4>Usman Musa</h4>
-      <a href="#" class="danger">Remove trusted user</a>
-    </div>
-    <div class="trusted_user">
-      <h4>Muhammad Shehu</h4>
-      <a href="#" class="danger">Remove trusted user</a>
-    </div>
-    <div class="trusted_user">
-      <h4>Aliyu Sani</h4>
-      <a href="#" class="danger">Remove trusted user</a>
-    </div>
-
-    <div class="box_bot">
-      <p>You can remove all trusted user by just one click <a href="#" class="danger_round">Remove all trusted user</a></p>
-      <small>Note: removing trusted users may not give them access to this sensitive information</small>
     </div>
   </div>
 
   <div class="box">
     <div class="box_head">
       <h1>Items you were assign as trusted user</h1>
-      <small>These are your team (trusted user) that have access to this item</small>
+      <small>These are your team/organisation that you have access to their items</small>
     </div>
 
     {% for item in items %}
@@ -110,22 +79,28 @@
       {% endif %}
     {% endfor %}
 
-    <div class="trusted_user">
-      <h4>Usman Musa</h4>
-      <a href="#" class="danger">Remove trusted user</a>
+    <!-- <div class="trusted_user">
+      <h4>SSH server</h4>
+      <a href="#" class="peace">Get inside</a>
     </div>
     <div class="trusted_user">
-      <h4>Muhammad Shehu</h4>
-      <a href="#" class="danger">Remove trusted user</a>
+      <h4>Team house</h4>
+      <a href="#" class="peace">Get inside</a>
     </div>
     <div class="trusted_user">
-      <h4>Aliyu Sani</h4>
-      <a href="#" class="danger">Remove trusted user</a>
+      <h4>Github APIs</h4>
+      <a href="#" class="peace">Get inside</a>
+    </div> -->
+
+    <div class="box_center">
+      <div class="box_border">
+        <p class="alert_warning">You don't have access to any team/organisation item</p>
+      </div>
     </div>
 
     <div class="box_bot">
-      <p>You can remove all trusted user by just one click <a href="#" class="danger_round">Remove all trusted user</a></p>
-      <small>Note: removing trusted users may not give them access to this sensitive information</small>
+      <p>You can log-out now by just one click <a href="{% url 'auth:logout' %}" class="danger_round">Logout</a></p>
+      <small>Still you can log-in again after been logged-out!</small>
     </div>
   </div>
 {% endblock main %}

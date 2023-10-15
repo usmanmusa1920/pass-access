@@ -3,7 +3,7 @@ from django.urls import path
 from .auth import signup, LoginCustom, validate_passcode, LogoutCustom, set_passcode
 from .generate import password_generator, generated_password, strong_password
 from .update import update_profile, change_password, update_passcode
-from .views import landing, dashboard, about, privacy, contact_us, help_page, coming
+from .views import landing, dashboard, about, privacy, contact_us, help_page
 
 
 app_name = 'auth'
@@ -50,11 +50,7 @@ urlpatterns = [
     path(
         'privacy/', privacy, name='privacy'),
     path(
-        'contact_us/', contact_us, name='contact_us'),
+        'contact/us/', contact_us, name='contact_us'),
     path(
         'help/', help_page, name='help'),
-
-    # coming
-    path(
-        'coming/<str:pg>/', coming, name='coming'),
 ]

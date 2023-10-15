@@ -4,17 +4,6 @@ import random
 import hashlib
 from cryptography.fernet import Fernet
 
-# # put this some where safe!
-# key = Fernet.generate_key()
-# f = Fernet(key)
-
-# token_public = f.encrypt(b'My secret message here!')
-# token_private = f.decrypt(token_public)
-
-# print(key)
-# print(token_public)
-# print(token_private.decode())
-
 
 class PasscodeSecurity:
     """
@@ -126,7 +115,21 @@ class PasscodeSecurity:
     
 
 class InformationSecurity(PasscodeSecurity):
-    """Information security class"""
+    """
+    Information security class
+
+    NOTE: fernet usage:
+        >>> # put this some where safe!
+        >>> key = Fernet.generate_key()
+        >>> f = Fernet(key)
+
+        >>> token_public = f.encrypt(b'My secret message here!')
+        >>> token_private = f.decrypt(token_public)
+
+        >>> print(key)
+        >>> print(token_public)
+        >>> print(token_private.decode())
+    """
 
     # put this some where safe! (the key),type is <class 'bytes'>
     crypt_key_32 = Fernet.generate_key()

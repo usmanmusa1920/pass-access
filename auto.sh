@@ -25,23 +25,23 @@ User = get_user_model()
 user_no_1 = User.objects.create_superuser(
     first_name='Usman', last_name='Musa', username='usmanmusa1920', email='usmanmusa1920@gmail.com', phone_number='+2348123456789', password='passwd123')
 user_no_2 = User.objects.create_user(
-    first_name='Aliyu', last_name='Muhammad', username='aliyumuhammad', email='aliyumuhammad@gmail.com', phone_number='+2348123456789', password='passwd123')
+    first_name='Aliyu', last_name='Muhammad', username='aliyumuhammad', email='aliyumuhammad@mail.com', phone_number='+2348123456789', password='passwd123')
 user_no_3 = User.objects.create_user(
-    first_name='Fatima', last_name='Sani', username='fatimasani', email='fatimasani@gmail.com', phone_number='+2348123456789', password='passwd123')
+    first_name='Fatima', last_name='Sani', username='fatimasani', email='fatimasani@mail.com', phone_number='+2348123456789', password='passwd123')
 user_no_4 = User.objects.create_user(
-    first_name='Ahmad', last_name='Amiun', username='ahmadaminu', email='ahmadaminu@gmail.com', phone_number='+2348123456789', password='passwd123')
+    first_name='Ahmad', last_name='Amiun', username='ahmadaminu', email='ahmadaminu@mail.com', phone_number='+2348123456789', password='passwd123')
 user_no_5 = User.objects.create_user(
-    first_name='John', last_name='Christain', username='johnchristain', email='johnchristain@gmail.com', phone_number='+2348123456789', password='passwd123')
+    first_name='John', last_name='Christain', username='johnchristain', email='johnchristain@mail.com', phone_number='+2348123456789', password='passwd123')
 user_no_6 = User.objects.create_user(
-    first_name='Nura', last_name='Ali', username='nuraali', email='nuraali@gmail.com', phone_number='+2348123456789', password='passwd123')
+    first_name='Nura', last_name='Ali', username='nuraali', email='nuraali@mail.com', phone_number='+2348123456789', password='passwd123')
 user_no_7 = User.objects.create_user(
-    first_name='Zainab', last_name='Musa', username='zainabmusa', email='zainabmusa@gmail.com', phone_number='+2348123456789', password='passwd123')
+    first_name='Zainab', last_name='Musa', username='zainabmusa', email='zainabmusa@mail.com', phone_number='+2348123456789', password='passwd123')
 user_no_8 = User.objects.create_user(
-    first_name='Adamu', last_name='Musa', username='adamunmusa', email='adamunmusa@gmail.com', phone_number='+2348123456789', password='passwd123')
+    first_name='Adamu', last_name='Musa', username='adamunmusa', email='adamunmusa@mail.com', phone_number='+2348123456789', password='passwd123')
 user_no_9 = User.objects.create_user(
-    first_name='Maryam', last_name='Yusuf', username='maryamyusuf', email='maryamyusuf@gmail.com', phone_number='+2348123456789', password='passwd123')
+    first_name='Maryam', last_name='Yusuf', username='maryamyusuf', email='maryamyusuf@mail.com', phone_number='+2348123456789', password='passwd123')
 user_no_10 = User.objects.create_user(
-    first_name='Joshua', last_name='Andy', username='joshuaandy', email='joshuaandy@gmail.com', phone_number='+2348123456789', password='passwd123')
+    first_name='Joshua', last_name='Andy', username='joshuaandy', email='joshuaandy@mail.com', phone_number='+2348123456789', password='passwd123')
 user_no_1.save()
 user_no_2.save()
 user_no_3.save()

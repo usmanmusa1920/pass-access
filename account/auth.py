@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-from datetime import datetime
 from django.shortcuts import render, redirect
 from django.contrib.auth import get_user_model
 from django.contrib import messages as flash_msg
@@ -9,12 +8,11 @@ from django.contrib.auth.views import LoginView, LogoutView
 from django.contrib.sites.shortcuts import get_current_site
 from .forms import (SignupForm, AccountPassCodeForm, PassCodeForm_1)
 from toolkit import (
-    PasscodeSecurity, SliceDetector, get_token, check_user_passcode_set, NextUrl
-)
+    PasscodeSecurity, SliceDetector, get_token, check_user_passcode_set, NextUrl)
+from .default import default
 
 
 User = get_user_model()
-THIS_YEARE = datetime.today().year
 
 
 def signup(request):
@@ -29,7 +27,7 @@ def signup(request):
         form = SignupForm()
     context = {
         'form': form,
-        'the_year': THIS_YEARE,
+        'default': default(request),
     }
     return render(request, 'account/signup.html', context)
 
@@ -43,7 +41,7 @@ class LoginCustom(LoginView):
             self.redirect_field_name: self.get_redirect_url(),
             'site': current_site,
             'site_name': current_site.name,
-            'the_year': THIS_YEARE, # include current year
+            'default': default(self.request), # include current year
             **(self.extra_context or {})
         })
         return context
@@ -122,7 +120,7 @@ def validate_passcode(request, next_url):
             'host': host,
             'url': next_url_convert,
             },
-        'the_year': THIS_YEARE,
+        'default': default(request),
     }
     return render(request, 'account/vault.html', context)
 
@@ -135,7 +133,7 @@ class LogoutCustom(LoginRequiredMixin, LogoutView):
         context.update({
             'site': current_site,
             'site_name': current_site.name,
-            'the_year': THIS_YEARE, # include current year
+            'default': default(self.request), # include current year
             # 'title': _('Logged out'),
             **(self.extra_context or {})
         })
@@ -228,5 +226,6 @@ def set_passcode(request):
     context = {
         'pass_form': pass_form,
         'monitor_passcode.session_age': True,
+        'default': default(request),
     }
     return render(request, 'account/set_passcode.html', context)

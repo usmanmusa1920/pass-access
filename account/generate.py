@@ -1,16 +1,15 @@
 # -*- coding: utf-8 -*-
 import random
 import secrets
-from datetime import datetime
 from django.shortcuts import render, redirect
 from django.contrib.auth import get_user_model
 from django.contrib import messages as flash_msg
 from .models import PasswordGenerator
+from .default import default
 from toolkit import PasscodeSecurity, passcode_required
 
 
 User = get_user_model()
-THIS_YEARE = datetime.today().year
 
 
 @passcode_required
@@ -34,13 +33,11 @@ def password_generator(request):
         pwd_value = p_token_generate[:pwd_length]
         context = {
             'pwd_value': pwd_value,
-            'the_year': THIS_YEARE,
-            'monitor_session_age': True,
+            'default': default(request),
         }
         return render(request, 'account/generated_password.html', context)
     context = {
-        'the_year': THIS_YEARE,
-        'monitor_session_age': True,
+        'default': default(request),
     }
     return render(request, 'account/password_generator.html', context)
 
@@ -67,7 +64,6 @@ def strong_password(request, pwd_id):
     my_pwd = PasswordGenerator.objects.filter(owner=request.user, id=pwd_id).first()
     context = {
         'my_pwd': my_pwd,
-        'the_year': THIS_YEARE,
-        'monitor_session_age': True,
+        'default': default(request),
     }
     return render(request, 'account/strong_password.html', context)

@@ -1,20 +1,17 @@
 # -*- coding: utf-8 -*-
-from datetime import datetime
 from django.urls import reverse
 from django.shortcuts import render, redirect
 from django.contrib.auth import get_user_model
 from django.contrib import messages as flash_msg
 from django.contrib.auth import update_session_auth_hash
 from .forms import (
-    PassCodeForm_1, PassCodeForm_2, AccountPassCodeForm, PasswordChangeForm, UpdateForm
-)
+    PassCodeForm_1, PassCodeForm_2, AccountPassCodeForm, PasswordChangeForm, UpdateForm)
 from toolkit import (
-    PasscodeSecurity, SliceDetector, get_token, passcode_required, check_user_passcode_set
-)
+    PasscodeSecurity, SliceDetector, get_token, passcode_required, check_user_passcode_set)
+from .default import default
 
 
 User = get_user_model()
-THIS_YEARE = datetime.today().year
 
 
 @passcode_required
@@ -53,8 +50,7 @@ def update_profile(request):
         form = UpdateForm(instance=request.user)
     context = {
         'form': form,
-        'the_year': THIS_YEARE,
-        'monitor_session_age': True,
+        'default': default(request),
     }
     return render(request, 'account/update_profile.html', context)
 
@@ -73,8 +69,7 @@ def change_password(request):
         else:
             context = {
                 'form': form,
-                'the_year': THIS_YEARE,
-                'monitor_session_age': True,
+                'default': default(request),
             }
             return render(request, 'account/change_password.html', context)
     return False
@@ -182,6 +177,6 @@ def update_passcode(request):
         pass_form = PassCodeForm_1(instance=request.user.passcode)
     context = {
         'pass_form': pass_form,
-        'monitor_session_age': True,
+        'default': default(request),
     }
     return render(request, 'account/update_passcode.html', context)
