@@ -3,7 +3,7 @@ from datetime import datetime
 from secureapp.models import SecureItemInfo
 
 
-def default(request):
+def general_context(request):
     """
     It is mainly created so that it can be use (access) in any page,
     for example the year that will show in the footer

@@ -1,61 +1,68 @@
-from django.urls import reverse
-from django.shortcuts import render, redirect
+from django.shortcuts import (
+    render,
+    redirect
+)
 from django.contrib.auth import get_user_model
-from django.contrib import messages as flash_msg
-from django.contrib.auth.decorators import login_required
 from toolkit import passcode_required
-from .default import default
+from account.default import general_context
 
 
 User = get_user_model()
 
 
 def landing(request):
-    """landing page view"""
+    """Landing page view"""
+
     if request.user.is_authenticated:
         return redirect('auth:dashboard')
+    
     context = {
-        'default': default(request),
+        'general_context': general_context(request),
     }
     return render(request, 'account/landing.html', context)
 
 
 @passcode_required
 def dashboard(request):
-    """dashboard page view"""
+    """Dashboard page view"""
+
     context = {
-        'default': default(request),
+        'general_context': general_context(request),
     }
     return render(request, 'account/dashboard.html', context)
 
 
 def about(request):
-    """about page view"""
+    """About page view"""
+
     context = {
-        'default': default(request),
+        'general_context': general_context(request),
     }
     return render(request, 'account/about.html', context)
 
 
 def privacy(request):
-    """privacy page view"""
+    """Privacy page view"""
+
     context = {
-        'default': default(request),
+        'general_context': general_context(request),
     }
     return render(request, 'account/privacy.html', context)
 
 
 def contact_us(request):
-    """cantact page view"""
+    """Contact page view"""
+
     context = {
-        'default': default(request),
+        'general_context': general_context(request),
     }
     return render(request, 'account/contact_us.html', context)
 
 
 def help_page(request):
-    """help page view"""
+    """Help page view"""
+    
     context = {
-        'default': default(request),
+        'general_context': general_context(request),
     }
     return render(request, 'account/help.html', context)

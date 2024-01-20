@@ -1,11 +1,14 @@
 {% extends 'base_2.html' %}
 {% load static %}
+
 {% block head %}
   <link rel="stylesheet" href="{% static 'css/auth.css' %}">
   <link rel="stylesheet" href="{% static 'css/login.css' %}">
-  <script src="{% static 'js/val_x.js' %}"></script>
-  <title>PassAccess | validate passcode</title>
 {% endblock head %}
+
+{% block title %}
+  validate passcode
+{% endblock title %}
 
 
 {% block form %}
@@ -42,13 +45,16 @@
     <p class="auth_process">Authenticating . . .</p>
 
     {% if request.user.passcode.count_passcode_trial >= 5 %}
-      <p>Multi-factor authentication (MFA) must be provided, in other to get access!</p>
+      <p class="p_multi">Multi-factor authentication (MFA) must be provided, in other to get access!</p>
       <input type="number" name="lucky_number" placeholder="Enter your lucky number" class="input" autocomplete="off" autofocus required>
       <input type="text" name="childhood_name" placeholder="Enter your childhood name" class="input" autocomplete="off" required>
+      <!-- passcode -->
+      <input type="password" name="passcode" placeholder="Enter master passcode" minlength="8" class="input" autocomplete="off" autocomplete="off" autofocus required>
+      <button type="submit" onclick="show_val_progress(this, 'lucky_number,childhood_name,passcode')" class="btn">Authenticate</button>
+    {% else %}
+      <!-- passcode -->
+      <input type="password" name="passcode" placeholder="Enter master passcode" minlength="8" class="input" autocomplete="off" autocomplete="off" autofocus required>
+      <button type="submit" onclick="show_val_progress(this, 'passcode')" class="btn">Authenticate</button>
     {% endif %}
-    
-    <!-- passcode -->
-    <input type="password" name="passcode" placeholder="Enter master passcode" minlength="8" class="input" autocomplete="off" autocomplete="off" autofocus required>
-    <button type="submit" onclick="show_val_progress()" class="btn">Authenticate</button>
   </form>
 {% endblock form %}

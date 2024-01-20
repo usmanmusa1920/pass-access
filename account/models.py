@@ -2,7 +2,10 @@ from django.db import models
 from django.conf import settings
 from django.utils import timezone
 from django_countries.fields import CountryField
-from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
+from django.contrib.auth.models import (
+    AbstractBaseUser,
+    BaseUserManager
+)
 from phonenumber_field.modelfields import PhoneNumberField
 
 
@@ -12,12 +15,13 @@ User = settings.AUTH_USER_MODEL
 class UserAccountManager(BaseUserManager):
     def create_user(self, first_name, last_name, username, email, phone_number, password=None, **kwargs):
         """
-        we provide `**kwargs` to accept other keyword argument, even though it is not in this way in the django default create_user method of user class.
+        We provide `**kwargs` to accept other keyword argument, even though it is not in this way in the django default create_user method of user class.
         
         It help if you want to make a user not to be active when creating him, by making the `is_activ=False`:
             e.g:
                 User.objects.create_user(first_name='Ali', is_active=False)
         """
+
         if not first_name:
             raise ValueError('Your first name is required')
         if not last_name:
@@ -46,12 +50,13 @@ class UserAccountManager(BaseUserManager):
     
     def create_superuser(self, first_name, last_name, username, email, phone_number, password=None, **kwargs):
         """
-        we provide `**kwargs` to accept other keyword argument, even though it is not in this way in the django default create_superuser method of user class.
+        We provide `**kwargs` to accept other keyword argument, even though it is not in this way in the django default create_superuser method of user class.
 
         It help if you want to make a user not to be active when creating him, by making the `is_activ=False`:
             e.g:
                 User.objects.create_superuser(first_name='Ali', is_active=False)
         """
+
         user = self.create_user(
             first_name=first_name,
             last_name=last_name,
@@ -82,7 +87,7 @@ class UserAccount(AbstractBaseUser):
     date_joined = models.DateTimeField(default=timezone.now) # date_joined (not editable)
     last_modified = models.DateTimeField(auto_now=True) # last modified (not editable)
 
-    # """
+
     # `date_joined` above is not editable, also
     # `last_modified` above is not editable too! but,
     
@@ -90,8 +95,8 @@ class UserAccount(AbstractBaseUser):
     # the `pub_date` below is editable
     
     # pub_date = models.DateTimeField(default=timezone.now) # (editable)
-    # """
-    
+
+
     # user passcode hash
     passcode_hash = models.TextField(blank=True, null=True)
     
@@ -123,7 +128,8 @@ class UserAccount(AbstractBaseUser):
     
 
 class PassCode(models.Model):
-    """passcode table for storing users passcode"""
+    """Passcode table for storing users passcode"""
+
     owner = models.OneToOneField(User, on_delete=models.CASCADE)
     date_modified = models.DateTimeField(auto_now=True)
     passcode_ingredient = models.TextField(blank=True, null=True)
@@ -144,7 +150,8 @@ class PassCode(models.Model):
     
 
 class PasswordGenerator(models.Model):
-    """password generator table"""
+    """Password generator table"""
+    
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
     label = models.CharField(max_length=255, blank=False, null=False, unique=True)
     generated_password = models.TextField(blank=False, null=False)

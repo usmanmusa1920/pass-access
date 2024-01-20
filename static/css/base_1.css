@@ -1,24 +1,22 @@
-* {
+*{
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  --head-bg: rgb(3, 3, 45);
 }
 
 html, body, div, span, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
-abbr, address, cite, code,
-del, dfn, em, img, ins, kbd, q, samp,
-small, strong, sub, sup, var,
-b, i,
-dl, dt, dd, ol, ul, li,
-fieldset, form, label, legend,
-table, caption, tbody, tfoot, thead, tr, th, td,
+abbr, address, cite, code, del, dfn, em, img,
+ins, kbd, q, samp, small, strong, sub, sup, var,
+b, i, dl, dt, dd, ol, ul, li, fieldset, form, label,
+legend, table, caption, tbody, tfoot, thead, tr, th, td,
 article, aside, canvas, details, figcaption, figure, 
 footer, header, hgroup, menu, nav, section, summary,
-time, mark, audio, video {
-  outline:0;
-  vertical-align:baseline;
-  background:transparent;
+time, mark, audio, video{
+  outline: 0;
+  vertical-align: baseline;
+  background: transparent;
 }
 
 /* user session age */
@@ -96,6 +94,8 @@ body{
 
 .search_form button{
   border: none;
+  outline: none;
+  cursor: pointer;
   background: grey;
   color: white;
   height: 30px;
@@ -189,7 +189,6 @@ body{
   height: 100vh;
   overflow: hidden;
   display: block;
-  z-index: 30;
 }
 
 @media only screen and (max-width: 700px){
@@ -199,7 +198,7 @@ body{
 }
 
 .header{
-  background: rgb(3, 3, 45);
+  background: var(--head-bg);
   position: fixed;
   top: 0;
   height: 10vh;
@@ -229,6 +228,7 @@ body{
   height: 25px;
   margin-right: 5px;
   background: white;
+  cursor: pointer;
 }
 
 #hide_menu{
@@ -304,6 +304,8 @@ body{
 
 .t_s form button{
   border: none;
+  outline: none;
+  cursor: pointer;
   background: grey;
   color: white;
   height: 20px;
@@ -332,6 +334,8 @@ body{
 
 .box_head button{
   border: none;
+  outline: none;
+  cursor: pointer;
   background: grey;
   color: white;
   height: 30px;
@@ -467,6 +471,8 @@ body{
   background: green;
   color: white;
   border: none;
+  outline: none;
+  cursor: pointer;
   height: 30px;
   padding: 0 20px;
   margin: 5px;
@@ -486,7 +492,7 @@ body{
   padding: 0 5px;
 }
 
-/* 
+/*
   Here we hide all the platforms div(s) of new_item_1.html page,
   we hide the `selected_platform_span` that will display the platform we select,
   we hide the error span of validating `selected_category_error` value,
@@ -496,7 +502,7 @@ body{
   we hide the error span of validating `selected_passcode_error` value.
   we hide the error span of validating `selected_passcode_success` value,
   we hide the custome platform field `custom_platform_span`.
- */
+*/
 #plat_social, #plat_cloud, #plat_card, #plat_other, #hidden_field, .selected_platform_span, .selected_category_error, .selected_platform_error, .selected_passcode_error, .selected_passcode_success, .custom_platform_span{
   display: none;
 }

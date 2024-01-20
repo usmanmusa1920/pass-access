@@ -1,9 +1,13 @@
 {% extends 'base_2.html' %}
 {% load static %}
+
 {% block head %}
   <link rel="stylesheet" href="{% static 'css/auth.css' %}">
-  <title>PassAccess | signup</title>
 {% endblock head %}
+
+{% block title %}
+  signup
+{% endblock title %}
 
 {% block link %}
   <a href="{% url 'auth:login' %}" class="h_link">Login</a>
@@ -67,13 +71,13 @@
     {{form.country}}
 
     <!-- password -->
-    <input type="password" name="password1" placeholder="Password" minlength="8" class="input" autocomplete="off" required>
+    <input type="password" name="password1" placeholder="Password" class="input" autocomplete="off" required>
     {% if form.password1.errors %}
       <div class="err_danger">
         <small>{{form.password1.errors}}</small>
       </div>
     {% endif %}
-    <input type="password" name="password2" placeholder="Password again" minlength="8" class="input" autocomplete="off" required>
+    <input type="password" name="password2" placeholder="Password again" class="input" autocomplete="off" required>
     {% if form.password2.errors %}
       <div class="err_danger">
         <small>{{form.password2.errors}}</small>
@@ -84,7 +88,7 @@
         </small>
       </div>
     {% endif %}
-    <button type="submit">Sign Up</button>
+    <button type="submit" onclick="val_required_fields(this, 'first_name,last_name,gender,date_of_birth,username,email,phone_number,password1,password2,radio,agree', agree=true)">Sign Up</button>
     <p>Already have an account? <a href="{% url 'auth:login' %}">Login</a></p>
   </form>
 {% endblock form %}

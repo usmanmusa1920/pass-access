@@ -9,14 +9,11 @@
   <link rel="stylesheet" href="{% static 'css/base_1.css' %}">
   <script src="{% static 'js/base.js' %}"></script>
   <title>
-    PassAccess | 
-    {% block title %}
-      <!-- inheritance -->
-    {% endblock title %}
+    PassAccess | {% block title %} <!-- title --> {% endblock title %}
   </title>
 </head>
 <body>
-  {% if default.monitor_session_age == True and request.user.passcode.monitor_session_age == True %}
+  {% if general_context.monitor_session_age == True and request.user.passcode.monitor_session_age == True %}
     <!-- these two span tags won`t be visible (they are hidden in the base_1.css file). The first one will count number of seconds of in active, while the second one is the logged in user session age value -->
 
     <!-- The ('monitor_session_age': True) within the default view's context dictionary (mostly in view that are decorated with `@passcode_required` and have page to render), enable the (security_secs, and security_user_sess_age) span tags to display in the html page. Note these two tags are only place at the top of this `base_1.html` where as some other pages are in herited from it(mostly those required passcode authentication). The javascript function for it is below the file, within the script (<script></script>) tag. All what am trying to say is, by the use of such, if a user take 30 seconds without doing nothing `(onload, onmousemove, onmousedown, ontouchstart, onclick, or onkeypress)` the screen page will be dim (dark navy in color).
@@ -25,13 +22,14 @@
     <span class="security_secs"></span>
     <span class="security_user_sess_age">{{request.user.passcode.session_age}}</span>
   {% endif %}
+  {% include 'validator.html' %}
   
   <div class="container">
     <div class="nav_panel">
       <form class="search_form">
         <input type="search" name="" placeholder="Search here">
         <button type="submit">search</button>
-        <img src="{% static 'img/hide_menu.png' %}" id="hide_menu_t" alt="" onclick="hideMenu()">
+        <img src="{% static 'img/hide_menu.png' %}" id="hide_menu_t" alt="" onclick="hide_menu()">
       </form>
       
       <div class="side">
@@ -44,8 +42,8 @@
             <!-- pass -->
           {% else %}
             <br>
-            <p><a>Number of items</a> <span>{{default.user_items.count}}</span></P>
-            <p><a>Trusted users</a><span>{{default.t_users}}</span></P>
+            <p><a>Number of items</a> <span>{{general_context.user_items.count}}</span></P>
+            <p><a>Trusted users</a><span>{{general_context.t_users}}</span></P>
           {% endif %}
         </div>
         <br>
@@ -57,9 +55,9 @@
           {% if request.user.passcode.passcode_ingredient == None or request.user.passcode.passcode_ingredient == '' %}
             <!-- pass -->
           {% else %}
-            {% if default.user_items %}
+            {% if general_context.user_items %}
               <h1>My items</h1>
-              {% for item in default.user_items %}
+              {% for item in general_context.user_items %}
                 <p><a href="{% url 'secureapp:item_info' item.id %}">{{item.i_label}}</a></P>
               {% endfor %}
             {% endif %}
@@ -98,7 +96,7 @@
           <small>Get 
             <a href="{% url 'auth:help' %}">help</a> from PassAccess community or start live <a href="{% url 'auth:contact_us' %}">chat</a> with us via <a href="mailto:usmanmusa1920@gmail.com">email</a>.
           </small>
-          <p>PassAcces &copy; 2022 - {{default.the_year}}</p>
+          <p>PassAcces &copy; 2022 - {{general_context.the_year}}</p>
         </div>
       </div>
     </div>
@@ -106,8 +104,8 @@
     <div class="main">
       <div class="header">
         <div class="l_header">
-          <img src="{% static 'img/show_menu.png' %}" id="show_menu" alt="" onclick="showMenu()">
-          <img src="{% static 'img/show_menu.png' %}" id="hide_menu" alt="" onclick="hideMenu()">
+          <img src="{% static 'img/show_menu.png' %}" id="show_menu" alt="" onclick="show_menu()">
+          <img src="{% static 'img/show_menu.png' %}" id="hide_menu" alt="" onclick="hide_menu()">
           <a href="{% url 'auth:landing' %}"><h1>PassAccess</h1></a>
         </div>
         
@@ -151,10 +149,13 @@
 			// Hide the timer text
 			document.querySelector('body').style.display = 'block';
       document.querySelector('html').style.background = 'white';
+
 			// Clear the previous interval
 			clearInterval(timer);
+
 			// Reset the seconds of the timer
 			currSeconds = 0;
+
 			// Set a new interval
       // NOTE: 1 second = 1000 milliseconds
 			timer = setInterval(startIdleTimer, 1000);
@@ -171,11 +172,13 @@
 		function startIdleTimer() {
 			// Increment the timer seconds
 			currSeconds++;
+
       // if (secsCount == userSessionAge / 2 || secsCount === userSessionAge / 2){
       if (secsCount == 30 || secsCount === 30){
         document.querySelector('body').style.display = 'none';
         document.querySelector('html').style.background = 'rgb(3, 3, 45)';
       }
+      
 			// Set the timer text to the new value
 			secsCount = currSeconds;
 		}

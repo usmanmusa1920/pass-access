@@ -7,11 +7,12 @@ from toolkit.utils import NextUrl
 
 
 def check_user_passcode_set(**kwargs_1):
-    """decorator for checking if the user has setup his/her secure passcode"""
+    """Decorator for checking if the user has setup his/her secure passcode"""
+
     def decorator(view):
         @login_required
         def wrapper(request, *args, **kwargs):
-            """decorator wrapper"""
+            """Decorator wrapper"""
             
             if request.user.passcode.passcode_ingredient == '' or request.user.passcode.passcode_ingredient == None or request.user.passcode_hash == '' or request.user.passcode_hash == None:
                 if kwargs_1['flash_for'] == 'item':
@@ -27,10 +28,11 @@ def check_user_passcode_set(**kwargs_1):
 
 
 def passcode_required(view):
-    """decorator for checking if the user passcode is real"""
+    """Decorator for checking if the user passcode is real"""
+
     @login_required
     def wrapper(request, *args, **kwargs):
-        """decorator wrapper"""
+        """Decorator wrapper"""
         
         next_url = NextUrl.foward(request)
         
@@ -46,5 +48,6 @@ def passcode_required(view):
 
 
 def trusted_user(request):
-    """only trusted user will pass"""
+    """Only trusted user will pass"""
+    
     pass

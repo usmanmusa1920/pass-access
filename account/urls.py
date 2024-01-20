@@ -1,9 +1,30 @@
 # -*- coding: utf-8 -*-
 from django.urls import path
-from .auth import signup, LoginCustom, validate_passcode, LogoutCustom, set_passcode
-from .generate import password_generator, generated_password, strong_password
-from .update import update_profile, change_password, update_passcode
-from .views import landing, dashboard, about, privacy, contact_us, help_page
+from .auth import (
+    signup,
+    validate_passcode,
+    set_passcode,
+    login_view,
+    logout_view,
+)
+from .generate import (
+    password_generator,
+    generated_password,
+    strong_password
+)
+from .update import (
+    update_profile,
+    change_password,
+    update_passcode
+)
+from .views import (
+    landing,
+    dashboard,
+    about,
+    privacy,
+    contact_us,
+    help_page
+)
 
 
 app_name = 'auth'
@@ -13,11 +34,11 @@ urlpatterns = [
     path(
         'signup/', signup, name='signup'),
     path(
-        'login/', LoginCustom.as_view(template_name='account/login.html'), name='login'),
+        'login/', login_view, name='login'),
     path(
         'validate/passcode/?next=/<str:next_url>/', validate_passcode, name='validate_passcode'),
     path(
-        'logout/', LogoutCustom.as_view(template_name='account/logout.html'), name='logout'),
+        'logout/', logout_view, name='logout'),
     path(
         'set/passcode/', set_passcode, name='set_passcode'),
         

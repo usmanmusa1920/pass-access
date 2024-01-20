@@ -1,23 +1,25 @@
 # -*- coding: utf-8 -*-
 from django.shortcuts import render
 from django.contrib.auth import get_user_model
-from account.default import default
+from account.default import general_context
 
 
 User = get_user_model()
 
 
 def update_item(request):
-    """update item page view"""
+    """Update item page view"""
+
     context = {
-        'default': default(request),
+        'general_context': general_context(request),
     }
     return render(request, 'secureapp/update_item.html', context)
 
 
 def update_item_salt(request):
-    """update item salt page view"""
+    """Update item salt page view"""
+    
     context = {
-        'default': default(request),
+        'general_context': general_context(request),
     }
     return render(request, 'secureapp/update_item_salt.html', context)

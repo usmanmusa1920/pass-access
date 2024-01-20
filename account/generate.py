@@ -1,12 +1,18 @@
 # -*- coding: utf-8 -*-
 import random
 import secrets
-from django.shortcuts import render, redirect
+from django.shortcuts import (
+    render,
+    redirect
+)
 from django.contrib.auth import get_user_model
 from django.contrib import messages as flash_msg
 from .models import PasswordGenerator
-from .default import default
-from toolkit import PasscodeSecurity, passcode_required
+from account.default import general_context
+from toolkit import (
+    PasscodeSecurity,
+    passcode_required
+)
 
 
 User = get_user_model()
@@ -14,9 +20,11 @@ User = get_user_model()
 
 @passcode_required
 def password_generator(request):
-    """password generator view"""
+    """Password generator view"""
+
     if request.method == 'POST':
         pwd_length = int(request.POST['pwd_length'])
+
         if pwd_length < 32 or pwd_length > 1000:
             flash_msg.warning(request, f'Minimum length is 32 and a maximum of 1000')
             return redirect('auth:password_generator')
@@ -31,28 +39,34 @@ def password_generator(request):
         p_token_generate = ''.join(p_token_list)
 
         pwd_value = p_token_generate[:pwd_length]
+
         context = {
             'pwd_value': pwd_value,
-            'default': default(request),
+            'general_context': general_context(request),
         }
         return render(request, 'account/generated_password.html', context)
+    
     context = {
-        'default': default(request),
+        'general_context': general_context(request),
     }
     return render(request, 'account/password_generator.html', context)
 
 
 @passcode_required
 def generated_password(request):
-    """generated password view"""
+    """Generated password view"""
+
     if request.method == 'POST':
         pwd_label = request.POST['label']
+
         if PasswordGenerator.objects.filter(label=pwd_label).first():
             flash_msg.warning(request, f'You already have password with this label `{pwd_label}`')
             return redirect('auth:password_generator')
+        
         new_gen_pwd = PasswordGenerator(
             owner=request.user, label=pwd_label, generated_password=request.POST['pwd_value'])
         new_gen_pwd.save()
+
         flash_msg.success(request, f'Your generated password successfully saved!')
         return redirect('auth:strong_password', pwd_id=new_gen_pwd.id)
     return redirect('auth:password_generator')
@@ -60,10 +74,12 @@ def generated_password(request):
 
 @passcode_required
 def strong_password(request, pwd_id):
-    """generated password page"""
+    """Generated password page"""
+    
     my_pwd = PasswordGenerator.objects.filter(owner=request.user, id=pwd_id).first()
+
     context = {
         'my_pwd': my_pwd,
-        'default': default(request),
+        'general_context': general_context(request),
     }
     return render(request, 'account/strong_password.html', context)

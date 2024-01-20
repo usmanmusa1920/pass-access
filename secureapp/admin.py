@@ -1,6 +1,10 @@
 from django.contrib import admin
 from .models import (
-    Category, Platform, SecureItemInfo, ItemSecretIngredient, ItemSecret
+    Category,
+    Platform,
+    SecureItemInfo,
+    ItemSecretIngredient,
+    ItemSecret
 )
 
 

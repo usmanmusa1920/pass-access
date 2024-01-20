@@ -1,7 +1,18 @@
 # -*- coding: utf-8 -*-
-from .signer import get_token, verify_token
-from .decorators import check_user_passcode_set, passcode_required
-from .base import PasscodeSecurity, InformationSecurity, MixinTrick, SliceDetector
+from .signer import (
+  get_token,
+  verify_token
+)
+from .decorators import (
+    check_user_passcode_set,
+    passcode_required
+)
+from .base import (
+    PasscodeSecurity,
+    InformationSecurity,
+    MixinTrick,
+    SliceDetector
+)
 from .utils import NextUrl
 
 

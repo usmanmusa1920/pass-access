@@ -35,7 +35,7 @@
         <input type="password" name="passcode_ingredient" class="passcode_ingredient" placeholder="Enter passcode" minlength="8" autocomplete="off" required>
         <br>
         <br>
-        <input type="password" name="verify_passcode" placeholder="Verify passcode" minlength="8" oninput="validatePasscodeValue(this)" autocomplete="off" required>
+        <input type="password" name="verify_passcode" placeholder="Verify passcode" minlength="8" oninput="validate_passcode_value(this)" autocomplete="off" required>
         <br>
         <small class="selected_passcode_error">Two passcode fields mis-match</small>
         <small class="selected_passcode_success">Your two passcode fields match</small>
@@ -53,12 +53,12 @@
       
       <p class="alert_warning">
         <span class="center_span">
-          <input type="checkbox"> &nbsp; Make sure to remember your passcode for frequently use. Also you can change your passcode later.
+          <input type="checkbox" name="agree" required> &nbsp; Make sure to remember your passcode for frequently use. Also you can change your passcode later.
         </span>
       </p>
       <br>
       <div>
-        <button type="submit">Set passcode</button>
+        <button type="submit" onclick="val_required_fields(this, 'verify_email,passcode_ingredient,verify_passcode,lucky_number,childhood_name,agree', agree=true)">Set passcode</button>
       </div>
       <br>
     </div>

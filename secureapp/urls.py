@@ -1,8 +1,18 @@
 # -*- coding: utf-8 -*-
 from django.urls import path
-from .update import update_item, update_item_salt
+from .update import (
+    update_item,
+    update_item_salt
+)
 from .views import (
-    new_item, new_item_fields, item_info, search_trusted_user, add_trusted_user, remove_trusted_user, remove_all_trusted_user, delete_item
+    new_item,
+    new_item_fields,
+    item_info,
+    search_trusted_user,
+    add_trusted_user,
+    remove_trusted_user,
+    remove_all_trusted_user,
+    delete_item,
 )
 
 

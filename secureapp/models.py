@@ -27,7 +27,7 @@ class Platform(models.Model):
     
 
 class SecureItemInfo(models.Model):
-    """items table for storing users item information"""
+    """Items table for storing users item information"""
 
     category = models.CharField(max_length=100)
     platform = models.CharField(max_length=100)
@@ -79,7 +79,7 @@ class SecureItemInfo(models.Model):
 
 class ItemSecretIngredient(models.Model):
     """
-    rely_on is just like the (owner), in which it belongs to,
+    `rely_on` is just like the (owner), in which it belongs to,
 
     ingredient models
     """
@@ -94,10 +94,11 @@ class ItemSecretIngredient(models.Model):
     
 class ItemSecret(models.Model):
     """
-    rely_on is just like the (owner), in which it belongs to,
+    `rely_on` is just like the (owner), in which it belongs to,
 
     the_hash
     """
+    
     rely_on = models.OneToOneField(SecureItemInfo, on_delete=models.CASCADE)
     the_hash = models.TextField(blank=True, null=True)
     the_private = models.TextField(blank=True, null=True)

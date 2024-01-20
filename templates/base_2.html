@@ -7,12 +7,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="shortcut icon" href="{% static 'img/favicon.ico' %}" type="image/x-icon">
   <link rel="stylesheet" href="{% static 'css/base_2.css' %}">
-  {% block head %}
-    <!-- content tags -->
-  {% endblock head %}
-  <title>PassAccess</title>
+  <script src="{% static 'js/base.js' %}"></script>
+  {% block head %} <!-- head --> {% endblock head %}
+  <title>PassAccess | {% block title %} <!-- title --> {% endblock title %}</title>
 </head>
 <body>
+  {% include 'validator.html' %}
   <div class="container">
 
     <div class="header">
@@ -71,7 +71,7 @@
       <li><a href="{% url 'auth:help' %}">Help</a></li>
       <li><a href="{% url 'auth:contact_us' %}">Contact Us</a></li>
       <br>
-      <p>Alright reserved PassAcces &copy; 2022 - {{default.the_year}}</p>
+      <p>Alright reserved PassAcces &copy; 2022 - {{general_context.the_year}}</p>
     </div>
   </div>
 </body>

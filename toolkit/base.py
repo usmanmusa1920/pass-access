@@ -45,12 +45,13 @@ class PasscodeSecurity:
     @property
     def passcode_salt(self):
         """
-        salting our passcode with this class method
+        Salting our passcode with this class method
 
         By using the random sample method, where we make:
             population = self.token_generate
             k = random.randint(32, 64)
         """
+
         salt = ''.join(random.sample(self.token_generate, random.randint(32, 64)))
         return salt # return type is string
     
@@ -71,8 +72,9 @@ class PasscodeSecurity:
     
     def get_hash(self, salt: str, itter: int, passwd: str) -> str:
         """
-        generating our key using this class method, and also the return type of the key is bytes
+        Generating our key using this class method, and also the return type of the key is bytes
         """
+
         if type(passwd) == str:
             # for hashing user passcode
             key = hashlib.pbkdf2_hmac(
@@ -145,7 +147,7 @@ class InformationSecurity(PasscodeSecurity):
         self.f_cls = f_cls
         
     def encrypt_info(self, info_tion, info_f_cls):
-        """encrypting information"""
+        """Encrypting information"""
 
         # encoding data from text to byte
         data_byte = info_tion.encode('utf-8')
@@ -153,7 +155,8 @@ class InformationSecurity(PasscodeSecurity):
         return token_public # return type is <class 'bytes'>
     
     def decrypt_info(self, info_data, key):
-        """for decryption"""
+        """For decryption"""
+
         t_base_ = Fernet(key)
 
         token_public = t_base_.decrypt(info_data)
@@ -163,12 +166,13 @@ class InformationSecurity(PasscodeSecurity):
     
     def the_key(self):
         """
-        the (self.token_generate) is times by 3, (total length is 372),
+        The (self.token_generate) is times by 3, (total length is 372),
         so that we will randomly select from it without any restriction,
         since we make the minimum length of the key to be 205 and the maximum to be 357,
         and also it will randomly select from that range of (205 - 357),
         with a stepping of (7)
         """
+
         the_pass = self.token_generate * 3
         the_list = list(the_pass)
         random.shuffle(the_list) # shuffling the list
@@ -195,6 +199,7 @@ class InformationSecurity(PasscodeSecurity):
             max of 360, and 
             stepping of 7
         """
+        
         itter = random.randrange(111, 360, 7)
         return itter # return type is integer
     
@@ -261,7 +266,7 @@ class MixinTrick:
     
 
 class SliceDetector:
-    """ it slice old pass """
+    """It slice old pass"""
 
     def __init__(self, request):
         self.request = request
@@ -287,20 +292,24 @@ class SliceDetector:
         
     @property
     def _hash(self):
-        """hash value"""
+        """Hash value"""
+
         return self.slice_hash
     
     @property
     def _ingre(self):
-        """ingredient value"""
+        """Ingredient value"""
+
         return self.slice_ingre
     
     @property
     def _salt(self):
-        """salt value"""
+        """Salt value"""
+
         return self.slice_salt
     
     @property
     def _iter(self):
-        """iteration value"""
+        """Iteration value"""
+
         return self.slice_iter

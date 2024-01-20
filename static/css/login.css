@@ -25,8 +25,8 @@
   display: none;
 }
 @keyframes authentic_animation{
-  from {background-color: grey}
-  to {background-color: rgb(3, 3, 60)}
+  from{background-color: grey}
+  to{background-color: rgb(3, 3, 60)}
 }
 
 @media only screen and (max-width: 700px){
@@ -36,7 +36,7 @@
   }
 }
 
-.cntr {
+.cntr{
   display: flex;
   align-items: center;
   justify-content: center;
@@ -47,7 +47,7 @@
   transform: scale(1);
 }
 
-.circle {
+.circle{
   background-color: #010f1c;
   height: 100%;
   width: 100%;
@@ -62,7 +62,7 @@
   color: white;
 }
 
-.pointer-cntr {
+.pointer-cntr{
   position: absolute;
   background-color: red;
   top: -40px;
@@ -76,7 +76,7 @@
   align-items: center;
 }
 
-.pointer {
+.pointer{
   background-color: #fff;
   border-radius: 50%;
   height: 20px;
@@ -87,7 +87,7 @@
   align-items: center;
 }
 
-.gradient-circle {
+.gradient-circle{
   background: conic-gradient(
     #903c56 0%,
     pink 50%,
@@ -103,12 +103,12 @@
   left: -10px;
 }
 
-@keyframes rotate {
-  from {
+@keyframes rotate{
+  from{
     transform: rotate(0deg);
   }
 
-  to {
+  to{
     transform: rotate(360deg);
   }
 }

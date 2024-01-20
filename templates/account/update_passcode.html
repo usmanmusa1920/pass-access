@@ -39,23 +39,22 @@
         <input type="password" name="passcode_ingredient" class="passcode_ingredient" placeholder="Enter new passcode" minlength="8" autocomplete="off" required>
         <br>
         <br>
-        <input type="password" name="verify_passcode" placeholder="Verify new passcode" minlength="8" oninput="validatePasscodeValue(this)" autocomplete="off" required>
+        <input type="password" name="verify_passcode" placeholder="Verify new passcode" minlength="8" oninput="validate_passcode_value(this)" autocomplete="off" required>
         <br>
         <small class="selected_passcode_error">Two passcode fields mis-match</small>
         <small class="selected_passcode_success">Your two passcode fields match</small>
         <br>
-        {{form.errors}}
       </div>
       <br>
       
       <p class="alert_warning">
         <span class="center_span">
-          <input type="checkbox" required> &nbsp; Are you sure to change your passcode?
+          <input type="checkbox" name="agree" required> &nbsp; Are you sure to change your passcode?
         </span>
       </p>
       <br>
       <div>
-        <button type="submit">Change</button>
+        <button type="submit" onclick="val_required_fields(this, 'verify_email,old_passcode,passcode_ingredient,verify_passcode,agree', agree=true)">Change</button>
       </div>
       <br>
     </div>

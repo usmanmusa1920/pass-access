@@ -14,6 +14,8 @@ SECRET_KEY = config['SECRET_KEY']
 
 
 def get_token(expires_sec=1):
+    """Get toten function"""
+
     s = Serializer(SECRET_KEY, expires_sec * 60)
     # s = Serializer(SECRET_KEY) #(itsdangerous==2.1.2)
     mysecret = PasscodeSecurity().passcode_salt
@@ -23,6 +25,8 @@ def get_token(expires_sec=1):
 
 
 def verify_token(token):
+    """Verify token function"""
+    
     s = Serializer(SECRET_KEY)
     try:
         load_token = s.loads(token)

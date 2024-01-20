@@ -3,14 +3,31 @@ from django.db.models import Q
 from django.urls import reverse
 from django.utils import timezone
 from django.core.paginator import Paginator
-from django.shortcuts import render, redirect
+from django.shortcuts import (
+    render,
+    redirect
+)
 from django.contrib.auth import get_user_model
 from django.contrib import messages as flash_msg
-from .models import Platform, Category, SecureItemInfo, ItemSecretIngredient, ItemSecret
-from .forms import SecureItemInfoForm_1, SecureItemInfoForm_2
+from .models import (
+    Platform,
+    Category,
+    SecureItemInfo,
+    ItemSecretIngredient,
+    ItemSecret
+)
+from .forms import (
+    SecureItemInfoForm_1,
+    SecureItemInfoForm_2
+)
 from account.models import PassCode
-from account.default import default
-from toolkit import check_user_passcode_set, passcode_required, InformationSecurity, MixinTrick
+from account.default import general_context
+from toolkit import (
+    check_user_passcode_set,
+    passcode_required,
+    InformationSecurity,
+    MixinTrick
+)
 
 
 User = get_user_model()
@@ -20,25 +37,22 @@ User = get_user_model()
 @passcode_required
 def new_item(request):
     """First page for saving new item"""
+
     site_platform = Platform.objects.all()
     site_categories = Category.objects.all()
     
-    # """
     # making list of platform, by using list comprehension. By default it will
     # return a tuples of (id, timestamp, platform_key, platform_value, category_id),
     # so we slice the fourth index `i[4]` which is the platform_value
-    # """
     # l_platform = [i[4] for i in Platform.objects.values_list()]
     l_platform = [i['platform_value'] for i in Platform.objects.values_list().all().values()]
     
     # appending `custom`` in the `l_platform` list, because we did not added it directly into our database, to avoid being categorize into a category. Which will make us do alot if we add it there
     l_platform.append('custom')
     
-    # """
     # making list of category, by using list comprehension. By default it will
     # return a tuples of (id, timestamp, category_key, category_value),
     # so we slice the third index `i[3]` which is the category_value
-    # """
     # l_category = [i[3] for i in Category.objects.values_list()]
     l_category = [i['category_value'] for i in Category.objects.values_list().all().values()]
     
@@ -72,10 +86,10 @@ def new_item(request):
                 
                 'site_categories': site_categories,
                 'site_platform': site_platform,
-                'default': default(request),
+                'general_context': general_context(request),
             }
             
-            # """Checking for whether if a user edited the hidden fields by inspecting the page"""
+            # Checking for whether if a user edited the hidden fields by inspecting the page
             if item_visibility not in l_visibility:
                 context = {
                     'form': form,
@@ -83,7 +97,7 @@ def new_item(request):
                     'site_platform': site_platform,
                     'l_platform': l_platform,
                     'l_category': l_category,
-                    'default': default(request),
+                    'general_context': general_context(request),
                 }
                 flash_msg.warning(
                     request, f'May be you edited your visibility field(s), thats why we redirect you back')
@@ -96,7 +110,7 @@ def new_item(request):
                     'site_platform': site_platform,
                     'l_platform': l_platform,
                     'l_category': l_category,
-                    'default': default(request),
+                    'general_context': general_context(request),
                 }
                 flash_msg.warning(
                     request, f'May be you edited your category field(s), thats why we redirect you back')
@@ -109,7 +123,7 @@ def new_item(request):
                     'site_platform': site_platform,
                     'l_platform': l_platform,
                     'l_category': l_category,
-                    'default': default(request),
+                    'general_context': general_context(request),
                 }
                 flash_msg.warning(
                     request, f'May be you edited your platform field(s), thats why we redirect you back')
@@ -117,13 +131,14 @@ def new_item(request):
             return render(request, 'secureapp/new_item_2.html', context)
     else:
         form = SecureItemInfoForm_1()
+
     context = {
         'form': form,
         'site_categories': site_categories,
         'site_platform': site_platform,
         'l_platform': l_platform,
         'l_category': l_category,
-        'default': default(request),
+        'general_context': general_context(request),
     }
     return render(request, 'secureapp/new_item_1.html', context)
 
@@ -132,24 +147,21 @@ def new_item(request):
 @passcode_required
 def new_item_fields(request):
     """Second page for saving new item"""
+
     the_i_owner = PassCode.objects.get(id=request.user.passcode.id)
     
-    # """
     # making list of platform, by using list comprehension. By default it will
     # return a tuples of (id, timestamp, platform_key, platform_value, category_id),
     # so we slice the fourth index `i[4]` which is the platform_value
-    # """
     # l_platform = [i[4] for i in Platform.objects.values_list()]
     l_platform = [i['platform_value'] for i in Platform.objects.values_list().all().values()]
     
     # appending `custom`` in the `l_platform` list, because we did not added it directly into our database, to avoid being categorize into a category. Which will make us do alot if we add it there
     l_platform.append('custom')
     
-    # """
     # making list of category, by using list comprehension. By default it will
     # return a tuples of (id, timestamp, category_key, category_value),
     # so we slice the third index `i[3]` which is the category_value
-    # """
     # l_category = [i[3] for i in Category.objects.values_list()]
     l_category = [i['category_value'] for i in Category.objects.values_list().all().values()]
     
@@ -158,37 +170,38 @@ def new_item_fields(request):
     
     if request.method == 'POST':
         form = SecureItemInfoForm_2(request.POST)
+
         if form.is_valid():
-            """Items values from html template"""
+            # Items values from html template
             i_label = form.cleaned_data.get('i_label')
             i_category = form.cleaned_data.get("category")
             i_platform = form.cleaned_data.get("platform")
             i_custom_platform = form.cleaned_data.get("custom_platform")
             visibility = form.cleaned_data.get("visibility")
             
-            # """
             # Checking for whether if a user edited the hidden fields by inspecting the page
-            # """
             if visibility not in l_visibility:
                 context = {
                     'form': form,
-                    'default': default(request),
+                    'general_context': general_context(request),
                 }
                 flash_msg.warning(
                     request, f'May be you edited your visibility field(s), thats why we redirect you back')
                 return render(request, 'secureapp/new_item_1.html', context)
+            
             if i_category not in l_category:
                 context = {
                     'form': form,
-                    'default': default(request),
+                    'general_context': general_context(request),
                 }
                 flash_msg.warning(
                     request, f'May be you edited your category field(s), thats why we redirect you back')
                 return render(request, 'secureapp/new_item_1.html', context)
+            
             if i_platform not in l_platform:
                 context = {
                     'form': form,
-                    'default': default(request),
+                    'general_context': general_context(request),
                 }
                 flash_msg.warning(
                     request, f'May be you edited your platform field(s), thats why we redirect you back')
@@ -217,7 +230,7 @@ def new_item_fields(request):
                 form = SecureItemInfoForm_2()
                 context = {
                     'form': form,
-                    'default': default(request),
+                    'general_context': general_context(request),
                 }
                 flash_msg.warning(
                     request, f'All fields can\'t be empty, try again')
@@ -230,10 +243,8 @@ def new_item_fields(request):
             # randomly generated salt for pbkdf2_hmac hashing
             _salt_generation_ = _BASE_.the_key()
             
-            # """
             # These are items public keys, and we are by passing them,
             # if an item is an empty space `''` or is `None`, else we will encrypt it
-            # """
             if i_username != '' and i_username != None:
                 i_username_encrypt_info = _BASE_.encrypt_info(i_username, fernet_cls)
             if i_phone != '' and i_phone != None:
@@ -291,11 +302,9 @@ def new_item_fields(request):
                 instance.custom_platform = i_platform.lower()
             instance.visibility = visibility
             
-            # """
             # checking to see if whether an item is not an empty space `''` or is `None`,
             # before we decode it and assign it to the instance of the field of which we
             # will save in a database
-            # """
             if i_username != '' and i_username != None:
                 instance.i_username = i_username_encrypt_info.decode()
             if i_phone != '' and i_phone != None:
@@ -335,20 +344,23 @@ def new_item_fields(request):
             return redirect(reverse('secureapp:item_info', kwargs={'item_id': instance.id}))
     else:
         form = SecureItemInfoForm_2()
+
     context = {
         'form': form,
-        'default': default(request),
+        'general_context': general_context(request),
     }
     return render(request, 'secureapp/new_item_2.html', context)
 
 
 @passcode_required
 def item_info(request, item_id):
-    """item infomation view"""
+    """Item infomation view"""
 
     item_unveil_info = SecureItemInfo.objects.get(id=item_id)  # the item info
+
     # stored previous last review in other to render in template
     last_review = item_unveil_info.last_review
+
     # saving current time as last review
     item_unveil_info.last_review = timezone.now
     item_unveil_info.save()
@@ -392,12 +404,10 @@ def item_info(request, item_id):
     # calling our encryption class
     _BASE_ = InformationSecurity()
     
-    # """
     # in the following `i_<item_field>_pub` fields we check for the field
     # of each to see if it is not empty or it is not None, and if it is not
     # None and it is not empty we decrypt it by using the item field (for each field)
     # public key and the item private key (which is for all fields)
-    # """
     # for username
     if i_username_pub != '' and i_username_pub != None:
         decrypt_i_username = _BASE_.decrypt_info(
@@ -486,14 +496,14 @@ def item_info(request, item_id):
         'decrypt_i_card_valid_range': decrypt_i_card_valid_range,
         'decrypt_i_card_ccv': decrypt_i_card_ccv,
         'decrypt_i_card_pin': decrypt_i_card_pin,
-        'default': default(request),
+        'general_context': general_context(request),
     }
     return render(request, 'secureapp/item_info.html', context)
 
 
 @passcode_required
 def search_trusted_user(request, item_id):
-    """search trusted user"""
+    """Search trusted user"""
 
     # This search_panel variable is the name attribute of search input field of this view template, and also it is a variable name included when paginating
     search_panel = request.GET.get('search_trusted_user')
@@ -515,17 +525,19 @@ def search_trusted_user(request, item_id):
     paginator = Paginator(search_result, 30)
     page = request.GET.get('page')
     searches = paginator.get_page(page)
+
     context = {
         'item': item,
         'searches': searches,
-        'default': default(request),
+        'general_context': general_context(request),
     }
     return render(request, 'secureapp/add_trusted_user.html', context)
 
 
 @passcode_required
 def add_trusted_user(request, item_id, user_id):
-    """add trusted user view"""
+    """Add trusted user view"""
+
     trusted_user = User.objects.get(id=user_id)
     item = SecureItemInfo.objects.get(id=item_id)
     item.trusted_user.add(trusted_user)
@@ -537,7 +549,8 @@ def add_trusted_user(request, item_id, user_id):
 
 @passcode_required
 def remove_trusted_user(request, item_id, user_id):
-    """remove trusted user view"""
+    """Remove trusted user view"""
+
     trusted_user = User.objects.get(id=user_id)
     item = SecureItemInfo.objects.get(id=item_id)
     item.trusted_user.remove(trusted_user)
@@ -549,7 +562,8 @@ def remove_trusted_user(request, item_id, user_id):
 
 @passcode_required
 def remove_all_trusted_user(request, item_id):
-    """remove all trusted user view"""
+    """Remove all trusted user view"""
+
     item = SecureItemInfo.objects.get(id=item_id)
 
     if request.method == 'POST':
@@ -558,24 +572,26 @@ def remove_all_trusted_user(request, item_id):
         flash_msg.warning(
             request, f'You remove all trusted user in your item ({item.custom_platform})')
         return redirect(reverse('secureapp:item_info', kwargs={'item_id': item_id}))
+    
     context = {
         'item': item,
-        'default': default(request),
+        'general_context': general_context(request),
     }
     return render(request, 'secureapp/remove_all_trusted_user.html', context)
 
 
 @passcode_required
 def delete_item(request, item_id):
-    """delete item view"""
+    """Delete item view"""
     
     item = SecureItemInfo.objects.get(id=item_id)
     if request.method == 'POST':
         item.delete()
         flash_msg.success(request, f'You successfully deleted `{item.i_label}` item')
         return redirect('auth:landing')
+    
     context = {
         'item': item,
-        'default': default(request),
+        'general_context': general_context(request),
     }
     return render(request, 'secureapp/delete_item.html', context)

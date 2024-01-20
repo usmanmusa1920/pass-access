@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 import os
 import json
 from pathlib import Path
+# import dj_database_url
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -31,9 +32,9 @@ SECRET_KEY = config['SECRET_KEY']
 # DEBUG = True
 DEBUG = config['DEBUG']
 
-ALLOWED_HOSTS = ['passaccess.onrender.com']
-CSRF_TRUSTED_ORIGINS = ['https://passaccess.onrender.com']
-# ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
+# ALLOWED_HOSTS = ['passaccess.onrender.com']
+# CSRF_TRUSTED_ORIGINS = ['https://passaccess.onrender.com']
 
 
 # Application definition
@@ -92,6 +93,13 @@ DATABASES = {
     }
 }
 
+# database settings for production
+# DATABASES['default'] = dj_database_url.config(
+#     conn_max_age = 600,
+#     conn_health_checks = True,
+#     default = config['DB_EXTERNAL_URL_FOR_RENDER'],
+# )
+
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
@@ -130,9 +138,13 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 STATIC_URL = 'static/'
-STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
+# STATIC_ROOT = os.path.join(BASE_DIR, 'static') # for production (server)
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')] # for deployment (local)
 
+# `LOGIN_URL` is the url path that a user will be directed when he/she is about to go to a route that required user to be logged-in, but at that moment the user is not logged-in.
 LOGIN_URL = 'auth:login'
+
+# `LOGIN_REDIRECT_URL` is the path that a user will be redirected once he is logged-in.
 LOGIN_REDIRECT_URL = 'auth:landing'
 
 # Default primary key field type
