@@ -16,6 +16,7 @@ time, mark, audio, video{
   outline: 0;
   vertical-align: baseline;
   background: transparent;
+  font-family: 'Times New Roman', Times, serif;
 }
 
 body{
@@ -23,7 +24,7 @@ body{
   overflow-x: hidden;
   overflow-y: auto;
   font-size: 15px;
-  font-family: "Roboto","Lucida Grande","DejaVu Sans","Bitstream Vera Sans", Times 'Segoe UI', Tahoma, Verdana, sans-serif, serif,Verdana,Arial,sans-serif;
+  /* font-family: "Roboto","Lucida Grande","DejaVu Sans","Bitstream Vera Sans", Times 'Segoe UI', Tahoma, Verdana, sans-serif, serif,Verdana,Arial,sans-serif; */
 }
 
 .container, .header{
