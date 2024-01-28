@@ -15,35 +15,22 @@
   <form method="post">
     {% csrf_token %}
     <img src="{% static 'css/img/vault.png' %}" class="vault" alt="">
-    <p class="p_auth_1">Enter master passcode, to unlock next page!</p>
+    <p>Enter master passcode, to unlock next page!</p>
 
     {% if next_url.url|length >= 12 %}
-      <p class="p_auth_2">
+      <p class="next_p">
         <a href="{{next_url.url}}">
           <small>{{next_url.host}}{{next_url.url|truncatechars:10}}</small>
         </a>
       </p>
     {% else %}
-      <p class="p_auth_2">
+      <p class="next_p">
         <a href="{{next_url.url}}">
           <small>{{next_url.host}}{{next_url.url}}</small>
         </a>
       </p>
     {% endif %}
     
-    <!-- authentication illustration -->
-    <div class="authentic">
-      <div class="cntr">
-        <div class="circle"></div>
-        <p class="scan">running</p>
-        <div class="pointer-cntr">
-          <span class="pointer">O</span>
-        </div>
-        <div class="gradient-circle"></div>
-      </div>
-    </div>
-    <p class="auth_process">Authenticating . . .</p>
-
     {% if request.user.passcode.count_passcode_trial >= 5 %}
       <p class="p_multi">Multi-factor authentication (MFA) must be provided, in other to get access!</p>
       <input type="number" name="lucky_number" placeholder="Enter your lucky number" class="input" autocomplete="off" autofocus required>

@@ -335,15 +335,11 @@ function show_val_progress(e, field){
 
         // validator function
         val_required_fields(e, field);
-
-        // displaying authentication illustration
-        document.querySelector('.authentic').style.display = 'flex';
-        document.querySelector('.auth_process').style.display = 'flex';
-
-        // hiding
-        document.querySelector('.vault').style.display = 'none';
-        document.querySelector('.p_auth_1').style.display = 'none';
-        document.querySelector('.p_auth_2').style.display = 'none';
+        
+        // hiding alert
+        document.querySelectorAll('.alert_info, .alert_success, .alert_warning').forEach( e => {
+            e.style.display = 'none';
+        });
 
         try{
             document.querySelector('.p_multi').style.display = 'none';
@@ -351,10 +347,11 @@ function show_val_progress(e, field){
         catch(err){
             // pass
             // alert(err.message)
-        }
+        };
         
         // hiding button
         document.querySelector('.btn').style.display = 'none';
+        document.querySelector('.next_p').style.display = 'none';
         document.querySelectorAll('.input').forEach(e => {
             e.style.display = 'none';
         })
