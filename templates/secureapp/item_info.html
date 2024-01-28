@@ -81,27 +81,33 @@
         {% if item_unveil_info.i_username != None %}
           {% if item_unveil_info.i_username != "" %}
             <p>Username:</p>
-            <input type="text" name="" placeholder="Refresh the page to see username" value="{{item_unveil_info.i_username|slice:'12:'}}">
-            <input type="text" name="" placeholder="Refresh the page to see username" value="{{decrypt_i_username}}">
-            <button type="button">Show</button>
+            <span>
+              <!-- <input type="password" name="" placeholder="Refresh the page to see username" value="{{item_unveil_info.i_username|slice:'12:'}}"> -->
+              <input type="password" name="" placeholder="Refresh the page to see username" value="{{decrypt_i_username}}">
+              <button type="button" onclick="show_sensitive_value(this)">Show</button>
+            </span>
           {% endif %}
         {% endif %}
 
         {% if item_unveil_info.i_email != None %}
           {% if item_unveil_info.i_email != "" %}
             <p>Email:</p>
-            <input type="email" name="" placeholder="Refresh the page to see email" value="{{item_unveil_info.i_email|slice:'12:'}}">
-            <input type="text" name="" placeholder="Refresh the page to see username" value="{{decrypt_i_email}}">
-            <button type="button">Show</button>
+            <span>
+              <!-- <input type="password" name="" placeholder="Refresh the page to see email" value="{{item_unveil_info.i_email|slice:'12:'}}"> -->
+              <input type="password" name="" placeholder="Refresh the page to see username" value="{{decrypt_i_email}}">
+              <button type="button" onclick="show_sensitive_value(this)">Show</button>
+            </span>
           {% endif %}
         {% endif %}
 
         {% if item_unveil_info.i_password != None %}
           {% if item_unveil_info.i_password != "" %}
             <p>Password:</p>
-            <input type="text" name="" placeholder="Refresh the page to see password" value="{{item_unveil_info.i_password|slice:'12:'}}">
-            <input type="text" name="" placeholder="Refresh the page to see username" value="{{decrypt_i_password}}">
-            <button type="button">Show</button>
+            <span>
+              <!-- <input type="password" name="" placeholder="Refresh the page to see password" value="{{item_unveil_info.i_password|slice:'12:'}}"> -->
+              <input type="password" name="" placeholder="Refresh the page to see username" value="{{decrypt_i_password}}">
+              <button type="button" onclick="show_sensitive_value(this)">Show</button>
+            </span>
           {% endif %}
         {% endif %}
       </div>
@@ -115,18 +121,22 @@
         {% if item_unveil_info.i_card_no != None %}
           {% if item_unveil_info.i_card_no != "" %}
             <p>Card number:</p>
-            <input type="tel" name="" placeholder="Refresh the page to see card number" value="{{item_unveil_info.i_card_no|slice:'12:'}}">
-            <input type="text" name="" placeholder="Refresh the page to see username" value="{{decrypt_i_card_no}}">
-            <button type="button">Show</button>
+            <span>
+              <!-- <input type="password" name="" placeholder="Refresh the page to see card number" value="{{item_unveil_info.i_card_no|slice:'12:'}}"> -->
+              <input type="password" name="" placeholder="Refresh the page to see username" value="{{decrypt_i_card_no}}">
+              <button type="button" onclick="show_sensitive_value(this)">Show</button>
+            </span>
           {% endif %}
         {% endif %}
 
         {% if item_unveil_info.i_card_valid_range != None %}
           {% if item_unveil_info.i_card_valid_range != "" %}
             <p>Valid date:</p>
-            <input type="text" name="" placeholder="Refresh the page to see valid date" value="{{item_unveil_info.i_card_valid_range|slice:'12:'}}">
-            <input type="text" name="" placeholder="Refresh the page to see username" value="{{decrypt_i_card_valid_range}}">
-            <button type="button">Show</button>
+            <span>
+              <!-- <input type="password" name="" placeholder="Refresh the page to see valid date" value="{{item_unveil_info.i_card_valid_range|slice:'12:'}}"> -->
+              <input type="password" name="" placeholder="Refresh the page to see username" value="{{decrypt_i_card_valid_range}}">
+              <button type="button" onclick="show_sensitive_value(this)">Show</button>
+            </span>
             <br>
           {% endif %}
         {% endif %}
@@ -134,9 +144,11 @@
         {% if item_unveil_info.i_card_ccv != None %}
           {% if item_unveil_info.i_card_ccv != "" %}
             <p>cvv:</p>
-            <input type="text" name="" placeholder="Refresh the page to see ccv" value="{{item_unveil_info.i_card_ccv|slice:'12:'}}">
-            <input type="text" name="" placeholder="Refresh the page to see username" value="{{decrypt_i_card_ccv}}">
-            <button type="button">Show</button>
+            <span>
+              <!-- <input type="password" name="" placeholder="Refresh the page to see ccv" value="{{item_unveil_info.i_card_ccv|slice:'12:'}}"> -->
+              <input type="password" name="" placeholder="Refresh the page to see username" value="{{decrypt_i_card_ccv}}">
+              <button type="button" onclick="show_sensitive_value(this)">Show</button>
+            </span>
             <br>
           {% endif %}
         {% endif %}
@@ -144,9 +156,11 @@
         {% if item_unveil_info.i_card_pin != None %}
           {% if item_unveil_info.i_card_pin != "" %}
             <p>Pin:</p>
-            <input type="text" name="" placeholder="Refresh the page to see pin" value="{{item_unveil_info.i_card_pin|slice:'12:'}}">
-            <input type="text" name="" placeholder="Refresh the page to see username" value="{{decrypt_i_card_pin}}">
-            <button type="button">Show</button>
+            <span>
+              <!-- <input type="password" name="" placeholder="Refresh the page to see pin" value="{{item_unveil_info.i_card_pin|slice:'12:'}}"> -->
+              <input type="password" name="" placeholder="Refresh the page to see username" value="{{decrypt_i_card_pin}}">
+              <button type="button" onclick="show_sensitive_value(this)">Show</button>
+            </span>
           {% endif %}
         {% endif %}
       </div>
@@ -160,8 +174,12 @@
         {% if item_unveil_info.i_ssh_key_pub != None %}
           {% if item_unveil_info.i_ssh_key_pub != "" %}
             <p>ssh key public:</p>
-            <textarea name="" placeholder="Refresh the page to see ssh public key" cols="40" rows="5">{{item_unveil_info.i_ssh_key_pub|slice:'12:'}}</textarea>
-            <input type="text" name="" placeholder="Refresh the page to see passphrase" value="{{decrypt_i_ssh_key_pub}}">
+            <span>
+              <!-- <textarea name="" placeholder="Refresh the page to see ssh public key" cols="40" rows="5">{{item_unveil_info.i_ssh_key_pub|slice:'12:'}}</textarea> -->
+              <input type="password" name="" placeholder="Refresh the page to see passphrase" value="{{decrypt_i_ssh_key_pub}}">
+              <button type="button" onclick="show_sensitive_value(this)">Show</button>
+            </span>
+            <br>
             <br>
             <hr>
           {% endif %}
@@ -170,8 +188,12 @@
         {% if item_unveil_info.i_ssh_key_prt != None %}
           {% if item_unveil_info.i_ssh_key_prt != "" %}
             <p>ssh key private:</p>
-            <textarea name="" placeholder="Refresh the page to see ssh private key" cols="40" rows="5">{{item_unveil_info.i_ssh_key_prt|slice:'12:'}}</textarea>
-            <input type="text" name="" placeholder="Refresh the page to see passphrase" value="{{decrypt_i_ssh_key_prt}}">
+            <span>
+              <!-- <textarea name="" placeholder="Refresh the page to see ssh private key" cols="40" rows="5">{{item_unveil_info.i_ssh_key_prt|slice:'12:'}}</textarea> -->
+              <input type="password" name="" placeholder="Refresh the page to see passphrase" value="{{decrypt_i_ssh_key_prt}}">
+              <button type="button" onclick="show_sensitive_value(this)">Show</button>
+            </span>
+            <br>
             <br>
             <hr>
           {% endif %}
@@ -180,8 +202,12 @@
         {% if item_unveil_info.i_passphrase != None %}
           {% if item_unveil_info.i_passphrase != "" %}
             <p>Passphrase:</p>
-            <textarea name="" placeholder="Refresh the page to see passphrase" cols="40" rows="5">{{item_unveil_info.i_passphrase|slice:'12:'}}</textarea>
-            <input type="text" name="" placeholder="Refresh the page to see passphrase" value="{{decrypt_i_passphrase}}">
+            <span>
+              <!-- <textarea name="" placeholder="Refresh the page to see passphrase" cols="40" rows="5">{{item_unveil_info.i_passphrase|slice:'12:'}}</textarea> -->
+              <input type="password" name="" placeholder="Refresh the page to see passphrase" value="{{decrypt_i_passphrase}}">
+              <button type="button" onclick="show_sensitive_value(this)">Show</button>
+            </span>
+            <br>
             <br>
             <hr>
           {% endif %}
@@ -192,8 +218,11 @@
             <p>API token:</p>
             <small class="">The API might be for example github, twitter api and other platform api's</small>
             <br>
-            <textarea name="" placeholder="Refresh the page to see api token" cols="40" rows="5">{{item_unveil_info.i_api|slice:'12:'}}</textarea>
-            <input type="text" name="" placeholder="Refresh the page to see passphrase" value="{{decrypt_i_api}}">
+            <span>
+              <!-- <textarea name="" placeholder="Refresh the page to see api token" cols="40" rows="5">{{item_unveil_info.i_api|slice:'12:'}}</textarea> -->
+              <input type="password" name="" placeholder="Refresh the page to see passphrase" value="{{decrypt_i_api}}">
+              <button type="button" onclick="show_sensitive_value(this)">Show</button>
+            </span>
           {% endif %}
         {% endif %}
       </div>

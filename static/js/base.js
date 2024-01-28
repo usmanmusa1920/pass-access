@@ -365,3 +365,28 @@ function show_val_progress(e, field){
         document.querySelector('.alert_warning').style.display = 'none';
     };
 }
+
+
+function hide_sensitive(){
+    /** Hide sensitive information function */
+
+    document.querySelectorAll('.box_inn input').forEach(e => {
+        e.type = 'password';
+        e.style.border = 'none';
+    });
+}
+
+
+function show_sensitive_value(e){
+    /** Show a single sensitive information value */
+
+    // hide all previous open sensitive information
+    hide_sensitive();
+    
+    p = e.parentElement;
+    p.firstElementChild.type = 'text';
+    // p.children[0].type = 'text';
+
+    // hide the current open sensitive information after 7 seconds
+    setTimeout(hide_sensitive, 7000);
+}
