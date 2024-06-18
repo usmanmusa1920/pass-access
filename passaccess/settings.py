@@ -32,9 +32,11 @@ SECRET_KEY = config['SECRET_KEY']
 # DEBUG = True
 DEBUG = config['DEBUG']
 
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
-# ALLOWED_HOSTS = ['passaccess.onrender.com']
-# CSRF_TRUSTED_ORIGINS = ['https://passaccess.onrender.com']
+if os.getenv('USER') and os.getenv('USER') == 'usman':
+    ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
+else:
+    ALLOWED_HOSTS = ['passaccess.onrender.com']
+    CSRF_TRUSTED_ORIGINS = ['https://passaccess.onrender.com']
 
 
 # Application definition

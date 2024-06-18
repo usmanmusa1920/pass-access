@@ -34,8 +34,8 @@
   </div>
   <div class="feedback-container">
     <h2>Send your feedback!</h2>
-    <form action="mailto:usmanmusa1920@gmail.com" method="post">
-    <!-- <form action="mailto:passaccess0@gmail.com" method="post"> -->
+    <form method="post">
+      {% csrf_token %}
       <label for="name">Name:</label>
       <input type="text" id="name" name="name" placeholder="Enter your name" required>
 
@@ -45,7 +45,7 @@
       <label for="feedback">Feedback:</label>
       <textarea id="feedback" name="feedback" placeholder="Enter your feedback" required></textarea>
 
-      <input type="submit" value="Send">
+      <input type="submit" value="Send" onclick="val_required_fields(this, 'name,email,feedback')">
     </form>
   </div>
 {% endblock main %}
