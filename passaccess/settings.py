@@ -35,8 +35,8 @@ DEBUG = config['DEBUG']
 if os.getenv('USER') and os.getenv('USER') == 'usman':
     ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
 else:
-    ALLOWED_HOSTS = ['passaccess.onrender.com']
-    CSRF_TRUSTED_ORIGINS = ['https://passaccess.onrender.com']
+    ALLOWED_HOSTS = ['pass-access.onrender.com']
+    CSRF_TRUSTED_ORIGINS = ['https://pass-access.onrender.com']
 
 
 # Application definition

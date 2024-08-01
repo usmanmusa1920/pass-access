@@ -32,6 +32,12 @@
       <br>
       <p class="pp"><b>PassAccess</b> is a password and sensitive information manager, that encrypt and save sensitive informations for a user, which can be decrypt by the user when ever need to be, using a good methodological algorithm.</p>
       <br>
+      <p class="pp">In this application once you signup, you will be redirected to login page. For ease of testing, you can login using the pre-registered user credentials, which are available in the <a href="{% url 'auth:help' %}" class="alert_col_info">help page</a> of the application.</p>
+      <br>
+      <p class="pp">Once you login for the first time it will ask you to create a <b>passcode</b> along-side with <b>lucky number</b> and <b>childhood name</b> as <b>MFA (Multi Factor Authenticator)</b>. After every <b>1 minute</b> the passcode will be required, but you can increase the timeout from the default `1 minute` up-to `30 minutes` in the profile update page.</p>
+      <br>
+      <p class="pp">The <b>MFA (Multi Factor Authenticator)</b> which are <b>lucky number</b> and <b>childhood name</b> will be use after trying 5 invalid <b>passcode</b> for security reason.</p>
+      <br>
       <br>
       <br>
       <div class="two">

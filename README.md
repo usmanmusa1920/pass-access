@@ -2,6 +2,22 @@
 
 Password and sensitive information manager, that encrypt and save them for a user, which can be decrypt by the user when ever need to be! it is a security application that secure sensitive informations.
 
+## Intro
+
+Good day, I`m Usman Musa 3MTT fellow under software development. My Fellow ID is FE/24/7682377911
+
+Here is my knowledge showcase project, which is called **PassAccess** a security application, of password and sensitive information manager, that encrypt and save data for a user, which can be decrypt by the user when ever need to be! using a good cryptographical hashing algorithm.
+
+In this application once you signup, you will be redirected to login page. For ease of testing, you can login using the pre-registered user credentials, which are available in the `help page` of the application.
+
+Once you login for the first time it will ask you to create a `passcode` along-side with `lucky number` and `childhood name` as `MFA (Multi Factor Authenticator)`. After every `1 minute` the passcode will be required, but you can increase the timeout from the default `1 minute` up-to `30 minutes` in the profile update page.
+
+The `MFA (Multi Factor Authenticator)` which are `lucky number` and `childhood name` will be use after trying 5 invalid `passcode` for security reason.
+
+Now let create an item and see
+
+Thank you!
+
 ## What it is?
 
 In this application once you signup, you will be redirected to login page in other to log in.
@@ -21,7 +37,7 @@ In the application there is a sleep mode (dim), this will make the window of the
 First clone the repository
 
 ```sh
-git clone https://github.com/usmanmusa1920/pass-access
+git clone https://github.com/cheapvtudata@gmail.com/pass-access
 ```
 
 Enter into the directory
@@ -56,7 +72,7 @@ python manage.py runserver
 
 Visit the url address `http://localhost:8000`, use any of the below users credential to login!
 
-**Email:** usmanmusa1920@gmail.com **Password:** passwd123
+**Email:** usmanmt@mail.com **Password:** passwd123
 
 **Email:** aliyumuhammad@mail.com **Password:** passwd123
 

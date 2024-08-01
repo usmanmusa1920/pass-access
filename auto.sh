@@ -23,7 +23,7 @@ User = get_user_model()
 
 
 user_no_1 = User.objects.create_superuser(
-    first_name='Usman', last_name='Musa', username='usmanmusa1920', email='usmanmusa1920@gmail.com', phone_number='+2348123456789', password='passwd123')
+    first_name='Usman', last_name='MT', username='usmanmt', email='usmanmt@mail.com', phone_number='+2348123456789', password='passwd123')
 user_no_2 = User.objects.create_user(
     first_name='Aliyu', last_name='Muhammad', username='aliyumuhammad', email='aliyumuhammad@mail.com', phone_number='+2348123456789', password='passwd123')
 user_no_3 = User.objects.create_user(

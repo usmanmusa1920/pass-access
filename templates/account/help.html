@@ -30,14 +30,56 @@
       <br>
       <p class="pp"><b>PassAccess</b> help me!</p>
       <br>
-      <p class="pp">Help could be found on the readme file of the project, over it official github repository. <a href="https://github.com/usmanmusa1920/pass-access" class="alert_col_info">PassAccess official repository</a> or <a href="mailto:usmanmusa1920@gmail.com" class="alert_col_info">email</a> us.</p>
+      <p class="pp">Use any of the below users credential to login!</p>
+      <pre>
+
+<b>Email:</b> usmanmt@mail.com
+<b>Password:</b> passwd123
+<hr>
+
+<b>Email:</b> aliyumuhammad@mail.com
+<b>Password:</b> passwd123
+<hr>
+
+<b>Email:</b> fatimasani@mail.com
+<b>Password:</b> passwd123
+<hr>
+
+<b>Email:</b> ahmadaminu@mail.com
+<b>Password:</b> passwd123
+<hr>
+
+<b>Email:</b> johnchristain@mail.com
+<b>Password:</b> passwd123
+<hr>
+
+<b>Email:</b> nuraali@mail.com
+<b>Password:</b> passwd123
+<hr>
+
+<b>Email:</b> zainabmusa@mail.com
+<b>Password:</b> passwd123
+<hr>
+
+<b>Email:</b> adamunmusa@mail.com
+<b>Password:</b> passwd123
+<hr>
+
+<b>Email:</b> maryamyusuf@mail.com
+<b>Password:</b> passwd123
+<hr>
+
+<b>Email:</b> joshuaandy@mail.com
+<b>Password:</b> passwd123
+<hr>
+      </pre>
       <br>
     </div>
   </div>
   <div class="feedback-container">
     <h2>Send your feedback!</h2>
-    <form action="mailto:usmanmusa1920@gmail.com" method="post">
-    <!-- <form action="mailto:passaccess0@gmail.com" method="post"> -->
+    <form method="post">
+      {% csrf_token %}
       <label for="name">Name:</label>
       <input type="text" id="name" name="name" placeholder="Enter your name" required>
 
@@ -47,7 +89,7 @@
       <label for="feedback">Feedback:</label>
       <textarea id="feedback" name="feedback" placeholder="Enter your feedback" required></textarea>
 
-      <input type="submit" value="Send">
+      <input type="submit" value="Send" onclick="val_required_fields(this, 'name,email,feedback')">
     </form>
   </div>
 {% endblock main %}
