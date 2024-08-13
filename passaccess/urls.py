@@ -18,6 +18,13 @@ from django.contrib import admin
 from django.urls import path, include
 
 
+# There are 4 already defined handler methods in `django.urls` functions.
+handler400 = 'account.views.error_400'
+handler403 = 'account.views.error_403'
+handler404 = 'account.views.error_404'
+handler500 = 'account.views.error_500'
+
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('account.urls')),

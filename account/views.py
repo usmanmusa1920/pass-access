@@ -120,3 +120,31 @@ def help_page(request):
         'general_context': general_context(request),
     }
     return render(request, 'account/help.html', context)
+
+
+def error_400(request, exception):
+	"""This view handle 400 (bad request) error"""
+    
+	err_msg = {"code": 400, "status": "bad request"}
+	return render(request, 'account/error_page.html', context={'general_context': general_context(request), 'err_msg': err_msg})
+
+
+def error_403(request, exception):
+	"""This view handle 403 (forbidden (permission denied)) error"""
+    
+	err_msg = {"code": 403, "status": "forbidden (permission denied)"}
+	return render(request, 'account/error_page.html', context={'general_context': general_context(request), 'err_msg': err_msg})
+
+
+def error_404(request, exception):
+	"""This view handle 404 (not found) error"""
+    
+	err_msg = {"code": 404, "status": "not found"}
+	return render(request, 'account/error_page.html', context={'general_context': general_context(request), 'err_msg': err_msg})
+
+
+def error_500(request):
+	"""This view handle 500 (internal server) error"""
+    
+	err_msg = {"code": 500, "status": "internal server"}
+	return render(request, 'account/error_page.html', context={'general_context': general_context(request), 'err_msg': err_msg})
